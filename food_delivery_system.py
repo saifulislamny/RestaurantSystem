@@ -1,4 +1,4 @@
 import math
 
 print("Another test")
-print("Last one 1")
+print("Last one")
