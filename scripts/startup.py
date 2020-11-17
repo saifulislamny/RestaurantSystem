@@ -1,6 +1,11 @@
+# This file is used to handle what happens at application startup
+
 import tkinter as tk
 
-def login_screen(root):
+def verify_login_details(username, password): # TODO: implement this function
+    ''' Ensures login information is registered on the system ''' 
+
+def login_screen(root): # TODO: implement this function
     canvas = tk.Canvas(root)
     canvas.pack()
     frame = tk.Frame(root, bg='#F5F5F5')

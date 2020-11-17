@@ -1,3 +1,5 @@
+# This file is the central part of the entire system
+
 import tkinter as tk
 from startup import login_screen
 
