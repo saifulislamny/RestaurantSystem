@@ -11,3 +11,5 @@ def startup():
 
 if __name__ == '__main__':
     startup()
+
+# TODO: at the end of the project, insert 2 chefs, 2 delivery people, and 1 mananger
