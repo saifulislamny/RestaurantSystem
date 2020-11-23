@@ -2,7 +2,7 @@
 
 import tkinter as tk
 
-def verify_login_details(username, password): # TODO: implement this function
+def verify_login_details(username, password): # TODO: Daniel, implement this function
     ''' Returns true/false if the login information is registered on the system by checking Accounts table ''' 
 
 def login_screen(root): # TODO: implement this function

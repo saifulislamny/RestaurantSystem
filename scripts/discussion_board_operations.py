@@ -1,2 +1,2 @@
-def view_discussion_boards():
-    ''' Shows all rows in DiscussionBoardForDishes, DiscussionBoardChefs, and DiscussionBoardForDelivery '''
+def view_discussion_boards(): # TODO: Daniel, implement this function
+    ''' Shows all rows in DiscussionBoardForDishes, DiscussionBoardForChefs, and DiscussionBoardForDelivery '''

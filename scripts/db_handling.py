@@ -2,7 +2,7 @@
 
 import mysql.connector
 
-def connect_to_db(): # TODO: implement this function
+def connect_to_db(): # TODO: Daniel, implement this function
     cnx = mysql.connector.connect(host = '104.198.229.87', user = 'root', password = '322f20TuTh', database = 'project322') 
     # TODO: name db to "FDS", or "FoodDeliverySystem", etc. instead of "project322"
     # TODO: need to find out how to hide DB info (host, user, and password) through environmental variables (not so important, can be done when there's nothing else to do)
@@ -12,10 +12,11 @@ def get_cursor():
     cur = connect_to_db.cursor()
     return cur
 
-def create_tables(): # TODO: implement this function
+def create_tables(): # TODO: Daniel, implement all TODOs in this function
     # TODO: delete ALL the tables you already have on the DB and add all of the ones shown below
     ''' Creates all tables used in this application '''
     cur = get_cursor()
+    # i deleted the code you had here before but look at the email you sent me if you want to look at it again
     
     # TODO: create table Accounts which stores the account information for everyone on the system 
     # the table has columns which specify their username (primary key), password, full name, and the type of user they are
@@ -33,7 +34,7 @@ def create_tables(): # TODO: implement this function
     # the table has columns which specify their username (primary key), type of employee (C, D, M), their pay, and the number of warnings they have (set to 0 by default)
     # take the 5 users you added for C, D, and M from Accounts and add it to this table as well
 
-    # TODO: create table Menu which stores the information for items on the menu for all customers
+    # TODO: create table Menu which stores the information for items on the menu for all customers to view
     # this table has columns which specify the name of the item (primary key, limit to 50 characters), image of the item, chef username who made the menu item, description of the item (limit to 150 characters), and price of the item
     # add 2 random rows (that match C username from Accounts and EmployeeAccounts tables)
 
@@ -62,10 +63,10 @@ def create_tables(): # TODO: implement this function
     # the table has columns which specify the username (primary key), password, and deposit information of username (how much they set for deposit)
 
     # TODO: create table ChefComplaintsAndCompliments which stores the compliments and complaints made by customers for chefs
-    # the table has columns which specify the username of the chef who received the feedback, the username of the customer who made the feedback, and the compliment/complaint itself (limit to 150 characters)
+    # the table has columns which specify the username of the chef who received the feedback, the username of the customer who made the feedback, type of feedback (compliment or complaint), and the compliment/complaint itself (limit to 150 characters)
 
     # TODO: create table DeliveryComplaintsAndCompliments which stores the compliments and complaints made by customers for delivery people
-    # the table has columns which specify the username of the delivery person who received the feedback, the username of the customer made the feedback, and the compliment/complaint itself (limit to 150 characters)
+    # the table has columns which specify the username of the delivery person who received the feedback, the username of the customer made the feedback, type of feedback (compliment or complaint), and the compliment/complaint itself (limit to 150 characters)
 
     # TODO: create table DiscussionBoardForChefs which stores the discussion topics for all chefs
     # the table has columns which specify the discussion topic number (primary key), the customer who made the discussion topic, the chef who the discussion topic is about, and the message in the discussion topic (limit to 150 characters)
