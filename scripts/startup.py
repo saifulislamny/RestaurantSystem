@@ -4,6 +4,23 @@ import tkinter as tk
 
 def verify_login_details(username, password): # TODO: Daniel, implement this function
     ''' Returns true/false if the login information is registered on the system by checking Accounts table ''' 
+        cnx = connect_to_db()
+    cur = get_cursor(cnx)
+    cur.execute("SELECT username, password WHERE username = %s and password = %s", (username, password))
+    login = cur.fetchall()
+    close_db(cur,cnx)
+    if(len(login) == 0):
+        return False
+    else:
+        return True
+
+def find_user_type(username):
+    #SQL Statement that gets the type, set to a variable and return that variable
+    cnx = connect_to_db()
+    cur = get_cursor(cnx)
+    cur.execute("SELECT type FROM Accounts WHERE username = '%s'" %username)
+    usrType = cur.fetchone()[0]
+    return usrType
 
 def login_screen(root): # TODO: implement this function
     canvas = tk.Canvas(root)
