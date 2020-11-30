@@ -4,7 +4,7 @@ import tkinter as tk
 
 def verify_login_details(username, password): # TODO: Daniel, implement this function
     ''' Returns true/false if the login information is registered on the system by checking Accounts table ''' 
-        cnx = connect_to_db()
+    cnx = connect_to_db()
     cur = get_cursor(cnx)
     cur.execute("SELECT username, password WHERE username = %s and password = %s", (username, password))
     login = cur.fetchall()
