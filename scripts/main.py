@@ -2,10 +2,13 @@
 
 import tkinter as tk
 from startup import login_screen
+from animation_at_startup import startUpAnimation
 
 def startup():
     root = tk.Tk()
-    login_screen(root)
+    startUpAnimation(root)
+    # Play time for animation screen transition into login screen
+    root.after(3000, lambda: login_screen(root))
     root.mainloop()
     pass
 
