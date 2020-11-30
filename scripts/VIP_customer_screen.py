@@ -17,9 +17,9 @@ from scripts.sign_out_screen import signOutWindow
 
 def main():
     root = tk.Tk()
-    app = Window_Registered_Customer_Screen(root)
+    app = Window_VIP_Customer_Screen(root)
 
-class Window_Registered_Customer_Screen:
+class Window_VIP_Customer_Screen:
     def __init__(self,master):
         self.root=master
         canvas = tk.Canvas(self.root, height=700, width = 800)

@@ -3,9 +3,9 @@ from tkinter import font
 
 def main():
     root = tk.Tk()
-    app = Window_Surfer_Screen(root)
+    app = Window_Top3_Screen(root)
 
-class Window_Surfer_Screen:
+class Window_Top3_Screen:
     def __init__(self,master):
         self.root=master
         canvas = tk.Canvas(self.root, height=700, width = 800)

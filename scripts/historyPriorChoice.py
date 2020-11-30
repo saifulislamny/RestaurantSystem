@@ -6,9 +6,9 @@ from scripts.sign_out_screen import signOutWindow
 
 def main():
     root = tk.Tk()
-    app = Window_VIP_Cust_Screen(root)
+    app = Window_History_Prior_Screen(root)
 
-class Window_VIP_Cust_Screen:
+class Window_History_Prior_Screen:
     def __init__(self,master):
         self.root=master
 
