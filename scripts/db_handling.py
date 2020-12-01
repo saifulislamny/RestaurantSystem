@@ -1,8 +1,15 @@
 # This file is used to handle main functionalities of the DB
-#Daniel - get the insert photos working
 import mysql.connector
 import io
 from PIL import Image, ImageTk
+
+#Daniel - get the insert photos working
+# TODO: Daniel, specify that you and I worked on this file in the header (you had it when you gave me your first ever code, which I should have kept, my mistake)
+# TODO: Daniel, if you have already checked to see that these functions work properly, then ignore this comment. Otherwise, check to see if these functions work properly through a separate file on your machine.
+# TODO: Daniel, use proper naming conventions (I think everything in Python is snake_case except for classes (Pascal), exceptions (Pascal), constants (CAPS_WITH_UNDER), global constants (CAPS_WITH_UNDER))
+# TODO: Daniel, check these errors that I get with VSCode
+# TODO: Daniel, make sure your indentations are correct
+# TODO: Daniel, remove TODOs that you have already completed (leave them if you haven't completed yet)
 
 def connect_to_db():
     cnx = mysql.connector.connect(host = '35.193.212.231', user = 'root', password = '322f20TuTh', database = 'fooddeliverysystem')
@@ -21,14 +28,14 @@ def save_db_changes(cur, cnx):
     cnx.commit()
     cur.close()
     cnx.close()
-    return'Saved Changes'
+    return'Saved Changes' # TODO: Daniel, is this return statement necessary?
 
 def byte_to_imageFile(bytes):
     imageStream = io.BytesIO(pic)
     imageFile = Image.open(imageStream)
 
 
-def create_tables():
+def create_tables(): # TODO: Daniel, the code for creating the tables should be here (this function isn't going to be called but may need to in the future if somehow all tables get deleted)
     ''' Creates all tables used in this application '''
     cnx = connect_to_db()
     cur = get_cursor(cnx)
@@ -39,7 +46,7 @@ def convertToBinaryData(filename):
         binaryData = file.read()
     return binaryData
 
-def insertBLOB(item_name, photo, chef_username, item_desc, price):
+def insertBLOB(item_name, photo, chef_username, item_desc, price): # TODO: Daniel, what is this function supposed to do? Was this your test file?
     print("Inserting BLOB into Menu table")
     try:
         cnx = mysql.connector.connect(host = '35.193.212.231', user = 'root',
@@ -66,6 +73,8 @@ def insertBLOB(item_name, photo, chef_username, item_desc, price):
             cnx.close()
             print("MySQL connection is closed")
 
+    # TODO: Daniel, put the code for creating tables into the create_tables function (could be needed for use in the future)
+    # TODO: Daniel, put the code for creating entries in the table into a function called insert_random_table_entries that you make (could be needed for use in the future)
 
     # create table Accounts which stores the account information for everyone on the system
     # the table has columns which specify their username (primary key), password, full name, and the type of user they are

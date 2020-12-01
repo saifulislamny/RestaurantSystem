@@ -1,5 +1,13 @@
 # This file is used to create, find, and delete accounts in the system
 
+# TODO: Daniel, specify that you and I worked on this file in the header (you had it when you gave me your first ever code, which I should have kept, my mistake)
+# TODO: Daniel, you forgot to import the functions from db_handling
+# TODO: Daniel, if you have already checked to see that these functions work properly, then ignore this comment. Otherwise, check to see if these functions work properly through a separate file on your machine.
+# TODO: Daniel, use proper naming conventions (I think everything in Python is snake_case except for classes (Pascal), exceptions (Pascal), constants (CAPS_WITH_UNDER), global constants (CAPS_WITH_UNDER))
+# TODO: Daniel, check these errors that I get with VSCode
+# TODO: Daniel, make sure your indentations are correct
+# TODO: Daniel, remove TODOs that you have already completed (leave them if you haven't completed yet)
+
 def create_account(username, password, type_of_user):
     '''
     username: username of user (not guaranteed to meet conditions)
@@ -26,7 +34,7 @@ def create_account(username, password, type_of_user):
     # if username already exists in table, return false
     cur.execute("Select username FROM Accounts WHERE username = '%s'" %username)
     usr = cur.fetchall()
-    if(len(usr)>0):
+    if(len(usr)>0): 
         return False
     # for your own understanding: type_of_user can only be one of the following things: 'RC' (registered customer), 'VC' (VIP customer), 'C' (chef), 'D' (delivery person), 'M' (manager)
 
@@ -35,7 +43,6 @@ def create_account(username, password, type_of_user):
         return False
     cur.execute("INSERT INTO Accounts(username, password, type) VALUES (%s,%s,%s)",(username,password,type_of_user))
     save_db_changes(cur,cnx)
-
 
 
 def delete_account_as_customer(username, password):

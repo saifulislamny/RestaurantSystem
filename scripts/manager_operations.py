@@ -2,6 +2,13 @@
 
 from account_management import delete_account_as_manager
 
+# TODO: Daniel, specify that you and I worked on this file in the header (you had it when you gave me your first ever code, which I should have kept, my mistake)
+# TODO: Daniel, you forgot to import functions here as well
+# TODO: Daniel, if you have already checked to see that these functions work properly, then ignore this comment. Otherwise, check to see if these functions work properly through a separate file on your machine.
+# TODO: Daniel, use proper naming conventions (I think everything in Python is snake_case except for classes (Pascal), exceptions (Pascal), constants (CAPS_WITH_UNDER), global constants (CAPS_WITH_UNDER))
+# TODO: Daniel, check these errors that I get with VSCode
+# TODO: Daniel, make sure your indentations are correct
+
 def accept_customer_registrations(username):
     '''
     username: username of a customer registration (not guaranteed to meet conditions)
