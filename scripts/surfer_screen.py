@@ -13,6 +13,12 @@ from tkinter import font
 
 from scripts.sign_out_screen import signOutWindow
 
+# TODO: Dante, specify that you and I worked on this file in the header (look at Daniel's code in db_handling.py when he adds the header)
+# TODO: Dante, if you have already checked to see that these functions work properly, then ignore this comment. Otherwise, check to see if these functions work properly through a separate file on your machine.
+# TODO: Dante, use proper naming conventions (I think everything in Python is snake_case except for classes (Pascal), exceptions (Pascal), constants (CAPS_WITH_UNDER), global constants (CAPS_WITH_UNDER))
+# TODO: Dante, check these errors that I get with VSCode
+# TODO: Dante, remove TODOs that you have already completed (leave them if you haven't completed yet)
+# TODO: Dante, add in-line documentation to show what each class/function does where it may not be immediately understood
 
 def main():
     root = tk.Tk()

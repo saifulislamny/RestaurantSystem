@@ -1,5 +1,7 @@
 # This file is the central part of the entire system
 
+# TODO: Saiful, specify that you worked on this file in the header (look at Daniel's code in db_handling.py when he adds the header)
+
 import tkinter as tk
 from startup import login_screen
 from animation_at_startup import startUpAnimation
@@ -14,5 +16,3 @@ def startup():
 
 if __name__ == '__main__':
     startup()
-
-# TODO: at the end of the project, insert 2 chefs, 2 delivery people, and 1 mananger
