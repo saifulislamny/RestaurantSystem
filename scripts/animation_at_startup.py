@@ -4,8 +4,6 @@
 # this screen can stand alone for now and later we can think about how we will sync this with the login screen
 import tkinter as tk
 from tkinter import font
-
-from scripts.sign_out_screen import signOutWindow
 from startup import login_screen
 
 
