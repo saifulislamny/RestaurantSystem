@@ -1,3 +1,4 @@
-For the surfer_screen, there should be button that says "View top 3 most popular dishes" and another button that says "View top 3 highest dishes." There should be button that says "View ratings" and another that says "Apply to be a registered customer."
+For the surfer_screen, there should be button that says "View top 3 most popular dishes" and another button that says "View top 3 highest dishes." 
+There should be another button that says "View ratings" and another button that says "Apply to be a registered customer."
 
 For the delivery_screen, there should be a button that says "File complaint" since delivery person can also file complaints about customers
