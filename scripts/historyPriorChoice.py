@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import font
 
-from scripts.sign_out_screen import signOutWindow
+from sign_out_screen import signOutWindow # Dante, the errors mostly generated from this line, instead of having "scripts.sign_out_screen" I replaced it with "sign_out_screen"
 
 # TODO: Dante, specify that you worked on this file in the header (look at Daniel's code in db_handling.py when he adds the header)
 # TODO: Dante, if you have already checked to see that these functions work properly, then ignore this comment. Otherwise, check to see if these functions work properly through a separate file on your machine.

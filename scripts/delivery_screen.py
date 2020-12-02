@@ -10,7 +10,7 @@
 import tkinter as tk
 from tkinter import font
 
-from scripts.sign_out_screen import signOutWindow
+from sign_out_screen import signOutWindow
 
 # TODO: Dante, specify that you and I worked on this file in the header (look at Daniel's code in db_handling.py when he adds the header)
 # TODO: Dante, if you have already checked to see that these functions work properly, then ignore this comment. Otherwise, check to see if these functions work properly through a separate file on your machine.
@@ -68,6 +68,9 @@ class findCustomerWindow:
 
         findCustomerLabel = tk.Label(frame, text="You chose to find customer!", font=('Times New Roman', 20), bg="#e6e6e6")
         findCustomerLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
+
+        # TODO: Dante, "Find Customer" is not a feature. Did you mean "View Deliveries In Progress" or something similar? If so, use complete_delivery() and view_deliveries() from delivery_operations.py to fulfill this window (if they are already implemented)
+
 class viewOwnRatingsWindow:
     def __init__(self, master):
         self.root = master
@@ -79,5 +82,12 @@ class viewOwnRatingsWindow:
 
         checkOwnRatingsLabel = tk.Label(frame, text="You chose to view own ratings!", font=('Times New Roman', 20), bg="#e6e6e6")
         checkOwnRatingsLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
+
+        # TODO: Dante, fulfill this window by using view_ratings_of_delivery_person() from delivery_operations.py (if it is already implemented)
+    
+# TODO: Hafsa,
+# look through the specifications.docx (in the repo) from start to end, and identify all the buttons that Dante missed out on for the Delivery Person screen
+# let him know what buttons he has to add by specifying in the hafsa_comments_for_dante.txt file (in the repo, comments/hafsa_comments_for_dante.txt).
+# you can run the Delivery Person screen by running $ python3 delivery_screen.py
 
 main()

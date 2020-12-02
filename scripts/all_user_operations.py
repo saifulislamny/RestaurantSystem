@@ -12,7 +12,7 @@ def search_menu(keywords): # TODO: implement this function later (don't worry ab
     ''' Returns a string of name, image (using Tkinter syntax to include images), chef name, description, and price for all menu items on system that match keywords '''
     # essentially: visually show all rows in the Menu DB where the keywords are a substring of the menu item name
 
-def view_menu(): 
+def view_menu(): # TODO: Daniel, implement this function
     ''' Returns a string of name, image (using Tkinter syntax to include images), chef name, description, and price for all menu items in Menu table '''
     cnx = connect_to_db()
     cur = get_cursor(cnx)
@@ -23,4 +23,6 @@ def view_menu():
     for x in menu:
         imageFile = byte_to_imageFile(x[1])
         menuList.append([x[0],imageFile], x[2], x[3], x[4])
-    #all images are ready to be outputted using tkinter, their values are in x[1]
+    #all images are ready to be outputted using tkinter, their values are in x[1] 
+    
+    # TODO: Daniel, you didn't return anything here

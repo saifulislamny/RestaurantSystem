@@ -11,7 +11,7 @@
 import tkinter as tk
 from tkinter import font
 
-from scripts.sign_out_screen import signOutWindow
+from sign_out_screen import signOutWindow
 
 # TODO: Dante, specify that you and I worked on this file in the header (look at Daniel's code in db_handling.py when he adds the header)
 # TODO: Dante, if you have already checked to see that these functions work properly, then ignore this comment. Otherwise, check to see if these functions work properly through a separate file on your machine.
@@ -75,6 +75,9 @@ class topDishWindow:
 
         topDishLabel = tk.Label(frame, text="You chose to view top dishes!", font=('Times New Roman', 20), bg="#e6e6e6")
         topDishLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
+
+        # TODO: Dante, you already made a similar window for this, remember? Maybe that info help can be helpful so that you don't have to recreate things.
+        # TODO: Saiful, include comment for how to fulfill this window
 class menuWindow:
     def __init__(self, master):
         self.root = master
@@ -86,6 +89,8 @@ class menuWindow:
 
         menuLabel = tk.Label(frame, text="You chose to open to view menu!", font=('Times New Roman', 20), bg="#e6e6e6")
         menuLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
+
+        # TODO: Dante, fulfill this window by using view_menu() from all_user_operations.py (if it's already implemented)
 class signUpWindow:
     def __init__(self, master):
         self.root = master
@@ -98,4 +103,11 @@ class signUpWindow:
         signUpLabel = tk.Label(frame, text="You chose to sign up!", font=('Times New Roman', 20), bg="#e6e6e6")
         signUpLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
 
+        # TODO: Dante, fulfill this window by using surfer_apply_for_registered_customer() from surfer_operations.py (if it's already implemented)
+
 main()
+
+# TODO: Hafsa,
+# look through the specifications.docx (in the repo) from start to end, and identify all the buttons that Dante missed out on for the Surfer screen
+# let him know what buttons he has to add by specifying in the hafsa_comments_for_dante.txt file (in the repo, comments/hafsa_comments_for_dante.txt).
+# you can run the Surfer screen by running $ python3 surfer_screen.py

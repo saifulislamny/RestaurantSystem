@@ -7,6 +7,7 @@
 # TODO: Daniel, check these errors that I get with VSCode
 # TODO: Daniel, make sure your indentations are correct
 # TODO: Daniel, remove TODOs that you have already completed (leave them if you haven't completed yet)
+# TODO: Daniel, I get an error when I run python3 on this file
 
 def add_to_cart(username, menu_item):
     '''
@@ -155,7 +156,8 @@ def delete_cart_item(username, menu_item):
     # if menu_item is not in cart, then return false
     # otherwise perform actions and return true
 
-def make_order(username, delivery_or_pickup, address): # TODO: Daniel, implement this function
+def make_order(username, delivery_or_pickup, address): # TODO: Daniel, implement this function (you left this comment here from before)
+    # TODO: Daniel, we forgot to reduce the deposit after the order by the cart total! (probably do this somewhere at the end or anywhere you modify CustomerAccounts table)
     '''
     username: username of customer (guaranteed to match conditions)
     delivery_or_pickup: has either of two values: "deliver" or "pickup" (guaranteed to match conditions)
@@ -228,6 +230,13 @@ def view_cart(username):
         return cartList
     else:
         return False
+
+def view_deposit(username): # TODO: Daniel, implement this function
+    ''' 
+    username: username of customer (guaranteed to match conditions)
+    Output: Returns the deposit amount for username
+    '''
+    # use CustomerAccounts table
 
 def vote_menu_item(username, menu_item, vote):
     '''

@@ -10,7 +10,7 @@
 import tkinter as tk
 from tkinter import font
 
-from scripts.sign_out_screen import signOutWindow
+from sign_out_screen import signOutWindow
 
 # TODO: Dante, specify that you and I worked on this file in the header (look at Daniel's code in db_handling.py when he adds the header)
 # TODO: Dante, if you have already checked to see that these functions work properly, then ignore this comment. Otherwise, check to see if these functions work properly through a separate file on your machine.
@@ -74,6 +74,8 @@ class dishRatingWindow:
 
         dishRatingLabel = tk.Label(frame, text="You chose to view dish ratings!", font=('Times New Roman', 20), bg="#e6e6e6")
         dishRatingLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
+
+        # TODO: Dante, fulfill this window by using view_menu_ratings_of_chef() from chef_operations.py (if it's already implemented)
 class menuWindow:
     def __init__(self, master):
         self.root = master
@@ -85,6 +87,8 @@ class menuWindow:
 
         menuLabel = tk.Label(frame, text="You chose to open to view menu!", font=('Times New Roman', 20), bg="#e6e6e6")
         menuLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
+
+        # TODO: Dante, fulfill this window by using view_menu() from all_user_operations.py (if it's already implemented)
 class addDescWindow:
     def __init__(self, master):
         self.root = master
@@ -96,5 +100,13 @@ class addDescWindow:
 
         addDescLabel = tk.Label(frame, text="You chose to add \ndescription/keyword!", font=('Times New Roman', 20), bg="#e6e6e6")
         addDescLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
+
+        # TODO: Dante, this is part of a feature where chefs create menu items. Create menu items should be the box, not what you have right now.
+        # TODO: Dante, fulfill this window by using create_menu_item(), delete_menu_item(), update_menu_item() from chef_operations.py (if they are already implemented)
+
+# TODO: Hafsa,
+# look through the specifications.docx (in the repo) from start to end, and identify all the buttons that Dante missed out on for the Chef screen
+# let him know what buttons he has to add by specifying in the hafsa_comments_for_dante.txt file (in the repo, comments/hafsa_comments_for_dante.txt).
+# you can run the chef screen by running $ python3 chef_screen.py
 
 main()

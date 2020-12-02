@@ -30,6 +30,9 @@ class Window_Animation_Startup_Screen:
 class start_up_page:
     def __init__(self, frame, root):
 
+        # TODO: Dante, nice foundation for the animation. It would be better to make it more of an animation by having each letter pop up one at a time. 
+        # Warning: Try not to change anything in main.py as Daniel will be working there.
+
         TitleLabel = tk.Label(frame, text="Food Delivery System", font=('Times New Roman', 24), bg="white")
         TitleLabel.place(relx=0.2, rely=0.25, relwidth=0.6, relheight=0.1)
 

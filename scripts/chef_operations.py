@@ -8,6 +8,8 @@
 # TODO: Daniel, get rid of TODOs that you already have completed, if you have not finished them yet, it's okay to keep
 # TODO: Daniel, make sure your indentations are correct
 # TODO: Daniel, remove TODOs that you have already completed (leave them if you haven't completed yet)
+# TODO: Daniel, there's an error when I run python3 on this file
+
 
 def create_menu_item(item_name, item_image, username_of_chef, description, price): # TODO: Daniel, implement this function
     '''
@@ -42,6 +44,24 @@ def create_menu_item(item_name, item_image, username_of_chef, description, price
     # if price cannot be converted to a float or error arises when converting to float, return false
     # otherwise create the menu item and return true
     insertBLOB(item_name, item_image, username_of_chef, description, price)
+
+def delete_menu_item(item_name): # TODO: Daniel, implement this function
+    '''
+    item_name: name of menu item (not guaranteed to match conditions)
+    Output: Returns true/false if item on the menu is deleted
+    '''
+    cnx = connect_to_db()
+    cur = get_cursor(cnx)
+    cur.execute("SELECT item_name FROM Menu WHERE item_name = '%s'" %item_name)
+    menu = cur.fetchall()
+    if(len(menu)==0):
+        return False
+    else:
+        cur.execute("DELETE FROM Menu WHERE item_name = '%s'" %item_name)
+        save_db_changes(cur,cnx)
+        return True
+    # if item_name does not exist on the menu, then return false
+    # otherwise delete the menu item and return true
 
 def update_menu_item(item_name, new_item_name, new_item_image, new_username_of_chef, new_description, new_price): # TODO: Daniel, implement this function
     '''
@@ -79,21 +99,9 @@ def update_menu_item(item_name, new_item_name, new_item_image, new_username_of_c
     cur.execute("Update Menu SET item_name = %s, chef_username = %s, item_desc = %s, new_price = %s WHERE item_name = %s", (new_item_name, new_username_of_chef, new_description, new_price, item_name))
     save_db_changes(cur,cnx)
 
-
-def delete_menu_item(item_name): # TODO: Daniel, implement this function
+def view_menu_ratings_of_chef(username): # TODO: Daniel, implement this function
     '''
-    item_name: name of menu item (not guaranteed to match conditions)
-    Output: Returns true/false if item on the menu is deleted
+    username: username of chef who created the menu items (guaranteed to match conditions)
+    Output: Returns string of the average rating for each menu item made by username_of_chef
     '''
-    cnx = connect_to_db()
-    cur = get_cursor(cnx)
-    cur.execute("SELECT item_name FROM Menu WHERE item_name = '%s'" %item_name)
-    menu = cur.fetchall()
-    if(len(menu)==0):
-        return False
-    else:
-        cur.execute("DELETE FROM Menu WHERE item_name = '%s'" %item_name)
-        save_db_changes(cur,cnx)
-        return True
-    # if item_name does not exist on the menu, then return false
-    # otherwise delete the menu item and return true
+    # use MenuVotes and Menu tables 

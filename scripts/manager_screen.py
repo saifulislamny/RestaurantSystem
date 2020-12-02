@@ -11,7 +11,7 @@
 import tkinter as tk
 from tkinter import font
 
-from scripts.sign_out_screen import signOutWindow
+from sign_out_screen import signOutWindow
 
 # TODO: Dante, specify that you and I worked on this file in the header (look at Daniel's code in db_handling.py when he adds the header)
 # TODO: Dante, if you have already checked to see that these functions work properly, then ignore this comment. Otherwise, check to see if these functions work properly through a separate file on your machine.
@@ -57,6 +57,7 @@ class Window_Manager_Screen:
         manageStaffButton = tk.Button(privilegesFrame, text="Manage Staffs", bg="white", font=('Times New Roman', 12), command=self.manageStaffWindow)
         manageStaffButton.place(relx=0.1, rely=0.85, relwidth=0.8, relheight=0.1)
 
+        # TODO: Dante, have the taboo list as a button that would open to a new window
         tabooListFrame = tk.Frame(frame, bg='#cccccc')
         tabooListFrame.place(relx=0.4, rely=0.25, relwidth=0.3, relheight=0.6)
 
@@ -97,6 +98,8 @@ class checkReviewsWindow:
 
         checkReviewsLabel = tk.Label(frame, text="You chose to check reviews!", font=('Times New Roman', 20), bg="#e6e6e6")
         checkReviewsLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
+
+        # TODO: Dante, fulfill this window by using view_chef_complaints_and_compliments() and view_delivery_complaints_and_compliments() from manager_operations.py (if it's already implemented)
 class registerSurferWindow:
     def __init__(self, master):
         self.root = master
@@ -108,6 +111,7 @@ class registerSurferWindow:
 
         registerSurferLabel = tk.Label(frame, text="You chose to view registrations!", font=('Times New Roman', 20), bg="#e6e6e6")
         registerSurferLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
+        # TODO: Dante, fulfill this window by using view_customer_registrations(), accept_customer_registrations(), and decline_customer_registrations() from manager_operations.py (if it's already implemented)
 class manageCustWindow:
     def __init__(self, master):
         self.root = master
@@ -119,6 +123,7 @@ class manageCustWindow:
 
         manageCustLabel = tk.Label(frame, text="You chose to manage customers!", font=('Times New Roman', 14), bg="#e6e6e6")
         manageCustLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
+        # TODO: Dante, fulfill this window by using close_customer_accounts() from manager_operations.py (if it's already implemented)
 class manageStaffWindow:
     def __init__(self, master):
         self.root = master
@@ -130,5 +135,12 @@ class manageStaffWindow:
 
         manageStaffLabel = tk.Label(frame, text="You chose to manage staffs!", font=('Times New Roman', 14), bg="#e6e6e6")
         manageStaffLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
+
+        # TODO: Dante, fulfill this window by using close_employee_account(), cut_employee_pay(), and raise_employee_pay() from manager_operations.py (if it's already implemented)
+
+# TODO: Tanzil,
+# look through the specifications.docx (in the repo) from start to end, and identify all the buttons that Dante missed out on for the Manager screen
+# let him know what buttons he has to add by specifying in the tanzil_comments_for_dante.txt file (in the repo, comments/tanzil_comments_for_dante.txt).
+# you can run the Manager screen by running $ python3 manager_screen.py
 
 main()

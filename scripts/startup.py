@@ -20,7 +20,7 @@ def verify_login_details(username, password): # TODO: Daniel, implement this fun
     else:
         return True
 
-def find_user_type(username):
+def find_user_type(username): # TODO: Daniel, use the docstring format I used (''') so that the others would be able to understand the I/O
     #SQL Statement that gets the type, set to a variable and return that variable
     cnx = connect_to_db()
     cur = get_cursor(cnx)
@@ -28,7 +28,7 @@ def find_user_type(username):
     usrType = cur.fetchone()[0]
     return usrType
 
-def login_screen(root): # TODO: implement this function
+def login_screen(root): 
     canvas = tk.Canvas(root)
     canvas.pack()
     frame = tk.Frame(root, bg='#F5F5F5')
@@ -41,10 +41,10 @@ def login_screen(root): # TODO: implement this function
     password_label.pack()
     password_entry = tk.Entry(frame)
     password_entry.pack()
-    login_button = tk.Button(frame, text="login", bg='white')
+    login_button = tk.Button(frame, text="Login", bg='white')
     login_button.pack()
-    register_button = tk.Button(frame, text="register here", bg='white')
-    register_button.pack()
+    surfer_button = tk.Button(frame, text="View as Surfer", bg='white') # TODO (for later): Dante, link this button the Surfer Screen
+    surfer_button.pack()
     
     # TODO: organize elements above
     pass

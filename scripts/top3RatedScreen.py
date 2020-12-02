@@ -11,7 +11,7 @@ def main():
     root = tk.Tk()
     app = Window_Top3_Screen(root)
 
-class Window_Top3_Screen:
+class Window_Top3_Screen: # TODO: Dante, link the buttons on Registered Customers and VIP Customers screens to this window
     def __init__(self,master):
         self.root=master
         canvas = tk.Canvas(self.root, height=700, width = 800)

@@ -8,6 +8,7 @@ from account_management import delete_account_as_manager
 # TODO: Daniel, use proper naming conventions (I think everything in Python is snake_case except for classes (Pascal), exceptions (Pascal), constants (CAPS_WITH_UNDER), global constants (CAPS_WITH_UNDER))
 # TODO: Daniel, check these errors that I get with VSCode
 # TODO: Daniel, make sure your indentations are correct
+# TODO: Daniel, I get an error when I run python3 on this file
 
 def accept_customer_registrations(username):
     '''
@@ -163,6 +164,12 @@ def raise_employee_pay(username, increment):
             return True
     else:
         return False
+
+def view_chef_complaints_and_compliments(): # TODO: Daniel, implement this function
+    ''' Output: Returns a string of all entries in the ChefComplaintsAndCompliments table '''
+
+def view_delivery_complaints_and_compliments(): # TODO, Daniel, implement this function
+    ''' Output: Returns a string of all entries in the DeliveryComplaintsAndCompliments table '''
 
 def view_customer_registrations():
     ''' Output: Returns a string of all usernames and deposit information in the CustomerRegistrations table '''

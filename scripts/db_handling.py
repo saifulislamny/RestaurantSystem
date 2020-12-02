@@ -171,6 +171,9 @@ def insertBLOB(item_name, photo, chef_username, item_desc, price): # TODO: Danie
 
     # create table DeliveryVotes which stores the customer's votes for the deliveries they received
     # the table has columns which specify the delivery order number and the rating the customer gave out of 5
+    # TODO: Daniel, modify this table to include a column which specifies the delivery person who fulfilled the order (immediately after delivery_order_num column would be a good idea), which cannot be NULL
+    # TODO: Daniel, the delivery_order_num cannot be NULL and is the primary key for this table
+    # TODO: Daniel, modify the entries/values in the table to fit the new changes made to the table
     cur.execute("CREATE TABLE DeliveryVotes(delivery_order_num INT, rating TINYINT NOT NULL, foreign key(rating) REFERENCES AllowedVotes(vote_range))")
 
     #sample data

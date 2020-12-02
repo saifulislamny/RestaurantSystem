@@ -12,7 +12,7 @@
 import tkinter as tk
 from tkinter import font
 
-from scripts.sign_out_screen import signOutWindow
+from sign_out_screen import signOutWindow
 
 # TODO: Dante, specify that you and I worked on this file in the header (look at Daniel's code in db_handling.py when he adds the header)
 # TODO: Dante, if you have already checked to see that these functions work properly, then ignore this comment. Otherwise, check to see if these functions work properly through a separate file on your machine.
@@ -100,6 +100,7 @@ class Window_Registered_Customer_Screen:
         self.openAccBalWindow = tk.Toplevel(self.root)
         self.app = accBalWindow(self.openAccBalWindow)
 
+# TODO: Dante, the "Options" should be its own window for the button "Make Order for Delivery/Pickup"
 
 class eatThereWindow:
     def __init__(self, master):
@@ -145,6 +146,8 @@ class topDishWindow:
 
         topDishLabel = tk.Label(frame, text="You chose to view top dishes!", font=('Times New Roman', 20), bg="#e6e6e6")
         topDishLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
+        # TODO: Dante, you already made a similar window for this, remember? Maybe that info help can be helpful so that you don't have to recreate things.
+        # TODO: Saiful, include comment for how to fulfill this window
 class menuWindow:
     def __init__(self, master):
         self.root = master
@@ -156,6 +159,7 @@ class menuWindow:
 
         menuLabel = tk.Label(frame, text="You chose to open to view menu!", font=('Times New Roman', 20), bg="#e6e6e6")
         menuLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
+    # TODO: Dante, fulfill this window by using view_menu() from all_user_operations.py (if it's already implemented)
 class fileCompWindow:
     def __init__(self, master):
         self.root = master
@@ -167,6 +171,7 @@ class fileCompWindow:
 
         fileCompLabel = tk.Label(frame, text="You chose to file a complaint!", font=('Times New Roman', 20), bg="#e6e6e6")
         fileCompLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
+        # TODO: Dante, fulfill this window by using feedback_for_chef() and feedback_for_delivery() from customer_operations.py (if it's already implemented)
 class checkWarnWindow:
     def __init__(self, master):
         self.root = master
@@ -178,6 +183,7 @@ class checkWarnWindow:
 
         checkWarnLabel = tk.Label(frame, text="You chose to check warnings!", font=('Times New Roman', 20), bg="#e6e6e6")
         checkWarnLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
+    # TODO (for later):
 class accBalWindow:
     def __init__(self, master):
         self.root = master
@@ -189,6 +195,11 @@ class accBalWindow:
 
         accBalLabel = tk.Label(frame, text="You chose to check account balance!", font=('Times New Roman', 18), bg="#e6e6e6")
         accBalLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
+    # TODO (for later): Dante, fulfill this window by using view_deposit() from customer_operations.py
 
+# TODO: Tanzil,
+# look through the specifications.docx (in the repo) from start to end, and identify all the buttons that Dante missed out on for the Registered Customer screen
+# let him know what buttons he has to add by specifying in the tanzil_comments_for_dante.txt file (in the repo, comments/tanzil_comments_for_dante.txt).
+# you can run the Registered Customer screen by running $ python3 registered_customer_screen.py
 
 main()

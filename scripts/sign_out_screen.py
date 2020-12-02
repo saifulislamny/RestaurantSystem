@@ -6,6 +6,7 @@ from tkinter import font
 # TODO: Dante, use proper naming conventions (I think everything in Python is snake_case except for classes (Pascal), exceptions (Pascal), constants (CAPS_WITH_UNDER), global constants (CAPS_WITH_UNDER))
 # TODO: Dante, check these errors that I get with VSCode
 # TODO: Dante, add in-line documentation to show what each class/function does where it may not be immediately understood
+# TODO: Dante, the sign out button is supposed to close all windows of Tkinter and open the login screen again
 
 class signOutWindow:
     def __init__(self, master):
