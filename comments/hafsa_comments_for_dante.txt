@@ -1,0 +1,1 @@
+For the surfer_screen, there should be button that says "View top 3 most popular dishes" and another button that says "View top 3 highest dishes" 
