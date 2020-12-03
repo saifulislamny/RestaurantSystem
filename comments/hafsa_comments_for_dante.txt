@@ -1,13 +1,17 @@
 For the surfer_screen:
--there should be button that says "View top 3 most popular dishes" and another button that says "View top 3 highest dishes." 
--here should be another button that says "View ratings" and another button that says "Apply to be a registered customer."
+-Change the name "Guest/Surfer" to "New customer/Surfer"
+-There should be button that says "View top 3 most popular dishes" and another button that says "View top 3 highest dishes." 
+for 1. on the project requirements doc, it says "For new customers or surfers, the top3 most popular (ordered most) dishes and top 3 highest rated dishesare listed"
+-There here should be another button that says "View ratings" 
+-Sign up button looks good because it basicslly means the surfer/new customer can sign up to become a registered customer. 
+
 
 
 For the chef screen:
 -I would add a button that reads "View compliments/complaints." For example, say a customer gives a compliment on the dish, "This dish was great!" or 
 makes a complaint saying "This dish was not great!" The chef should be able to view these compliments/complaints
 (on the requirements, number 4. says this stuff) 
--The "View personal ratings" button is good because say we have a customer and they rate the chef's dish a 5/5, the chef should be able to view that rating.
+-The "View personal dish ratings" button is good because say we have a customer and they rate the chef's dish a 5/5, the chef should be able to view that rating.
 
 
 For the delivery_screen:
