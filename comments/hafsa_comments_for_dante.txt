@@ -7,4 +7,7 @@ there should be a button that says "File complaint" since delivery person can al
 
 
 For the chef screen:
--all the buttons that have been provided look good! Do not need to add more stuff for the chefs according to the project requirements doc 
+-I would add two more buttons that read "View complaints" and "View compliments". For example, say a customer gives a compliment on the dish, "This dish was great!" or 
+makes a complaint saying "This dish was not great!" The chef should be able to view these compliments/complaints. 
+The "View personal ratings" button is good because say we have a customer and they rate the chef's dish a 5/5, the chef should be able to view that rating.
+
