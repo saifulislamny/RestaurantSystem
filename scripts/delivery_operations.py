@@ -39,7 +39,7 @@ def view_deliveries():
     for x in deliv:
         deliv_list.append(x)
     for x in deliv_list:
-        deliv_str += x
+        deliv_str += (str(x[0])+" "+x[1]+" "+x[2]+" "+x[3]+"\n")
     cur.close()
     cnx.close()
     return deliv_str
@@ -61,5 +61,5 @@ def view_ratings_of_delivery_person(username):
     for x in deliv_rating:
         deliv_list.append(x)
     for x in deliv_list:
-        deliv_str += x
+        deliv_str += (x[0]+" "+str(x[1])+"\n")
     return deliv_str
