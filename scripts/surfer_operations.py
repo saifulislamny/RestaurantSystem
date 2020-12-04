@@ -1,9 +1,8 @@
-# TODO: Daniel, specify that you and I worked on this file in the header (you had it when you gave me your first ever code, which I should have kept, my mistake)
-# TODO: Daniel, you forgot to import functions here as well
+''' @authors: daniellichter, saifulislam '''
+from db_handling import connect_to_db, get_cursor, save_db_changes, close_db
 # TODO: Daniel, if you have already checked to see that these functions work properly, then ignore this comment. Otherwise, check to see if these functions work properly through a separate file on your machine.
-# TODO: Daniel, remove TODOs that you have already completed (leave them if you haven't completed yet)
 
-def surfer_apply_for_registered_customer(username, password, deposit): # TODO: Daniel, implement this function
+def surfer_apply_for_registered_customer(username, password, deposit):
     '''
     username: username that surfer requests to have (not guaranteed to meet conditions)
     password: password that surfer requests to have (not guaranteed to meet conditions)
