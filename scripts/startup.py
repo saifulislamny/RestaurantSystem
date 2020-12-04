@@ -8,7 +8,7 @@ def verify_login_details(username, password):
     ''' Returns true/false if the login information is registered on the system by checking Accounts table ''' 
     cnx = connect_to_db()
     cur = get_cursor(cnx)
-    cur.execute("SELECT username, password WHERE username = %s and password = %s", (username, password))
+    cur.execute("SELECT username, password FROM Accounts WHERE username = %s and password = %s", (username, password))
     login = cur.fetchall()
     close_db(cur,cnx)
     if(len(login) == 0):
