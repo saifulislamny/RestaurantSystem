@@ -163,8 +163,6 @@ def raise_employee_pay(username, increment):
 
 def view_chef_complaints_and_compliments(): 
     ''' Output: Returns a string of all entries in the ChefComplaintsAndCompliments table '''
-    if(len(username)>15 or len(username)==0):
-        return False
     cnx = connect_to_db()
     cur = get_cursor(cnx)
     cur.execute("SELECT * FROM ChefComplaintsandCompliments")
@@ -173,14 +171,12 @@ def view_chef_complaints_and_compliments():
     cc_str = ''
     for x in chef_complaints:
         cc_list.append(x)
-    for x in mr_list:
+    for x in cc_list:
         cc_str += x
     return cc_str
 
 def view_delivery_complaints_and_compliments(): 
     ''' Output: Returns a string of all entries in the DeliveryComplaintsAndCompliments table '''
-    if(len(username)>15 or len(username)==0):
-        return False
     cnx = connect_to_db()
     cur = get_cursor(cnx)
     cur.execute("SELECT * FROM DeliveryComplaintsandCompliments")
@@ -189,7 +185,7 @@ def view_delivery_complaints_and_compliments():
     dc_str = ''
     for x in delivery_complaints:
         dc_list.append(x)
-    for x in mr_list:
+    for x in dc_list:
         dc_str += x
     return dc_str
 
