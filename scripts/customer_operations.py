@@ -1,7 +1,7 @@
 # This file is used to handle operations which registered and VIP customers are allowed to do
+''' @authors: daniellichter, saifulislam '''
 
-# TODO: Daniel, specify that you and I worked on this file in the header (you had it when you gave me your first ever code, which I should have kept, my mistake)
-# TODO: Daniel, you forgot to import the functions here as well
+from db_handling import connect_to_db, get_cursor, save_db_changes, close_db
 # TODO: Daniel, if you have already checked to see that these functions work properly, then ignore this comment. Otherwise, check to see if these functions work properly through a separate file on your machine.
 # TODO: Daniel, use proper naming conventions (I think everything in Python is snake_case except for classes (Pascal), exceptions (Pascal), constants (CAPS_WITH_UNDER), global constants (CAPS_WITH_UNDER))
 # TODO: Daniel, check these errors that I get with VSCode
@@ -25,8 +25,6 @@ def add_to_cart(username, menu_item):
         menu.append(x)
     if(menu_item not in menu):
         return False
-
-
     # if menu_item does not exist in the username's cart, then insert as new row in CartItems table
     cur.execute("SELECT item_name FROM CartItems WHERE cust_username = '%s'" %username)
     cart = cur.fetchall()
@@ -38,8 +36,8 @@ def add_to_cart(username, menu_item):
     # if menu_item already exists in the username's cart, then update the value in the column that stores the quantity of the item (by incrementing it by 1), and return true
     else:
         cur.execute("UPDATE CartItems Set quantity = quantity + 1 WHERE cust_username = %s and item_name = %s",(username, menu_item))
-    save_db_changes()
-    return True
+        save_db_changes(cur,cnx)
+        return True
 
 def cart_total_price(username):
     '''
@@ -68,10 +66,10 @@ def cart_total_price(username):
                 if(x[0] == y[0]):
                     total_cart+=(y[1]*.9*x[1])
     else:
-                for x in cartList:
-                    for y in menuList:
-                        if(x == y[0]):
-                            total_cart+=(y[1]*x[1])
+        for x in cartList:
+            for y in menuList:
+                if(x == y[0]):
+                    total_cart+=(y[1]*x[1])
     close_db(cur,cnx)
     return total_cart
     # otherwise apply no discount
@@ -92,7 +90,7 @@ def feedback_for_chef(username_of_customer, username_of_chef, complaint_or_compl
         return False
     if(len(username_of_chef)>15):
         return False
-    cur.execute("SELECT username FROM Accounts WHERE type = 'C' AND username = '%s'" %username)
+    cur.execute("SELECT username FROM Accounts WHERE type = 'C' AND username = '%s'" %username_of_chef)
     chef = cur.fetchall()
     if(len(chef)==0):
         return False
@@ -120,7 +118,7 @@ def feedback_for_delivery(username_of_customer, username_of_delivery, complaint_
         return False
     if(len(username_of_delivery)>15):
         return False
-    cur.execute("SELECT username FROM Accounts WHERE type = 'D' AND username = '%s'" %username)
+    cur.execute("SELECT username FROM Accounts WHERE type = 'D' AND username = '%s'" %username_of_delivery)
     chef = cur.fetchall()
     if(len(chef)==0):
         return False
@@ -141,7 +139,8 @@ def delete_cart_item(username, menu_item):
     menu_item: name of menu item that is in cart (not guaranteed to match conditions)
     Output: Returns true/false if row that matches username and menu_item is deleted successfully in CartItems table
     '''
-    cur = get_cursor()
+    cnx = connect_to_db()
+    cur = get_cursor(cnx)
     cur.execute("SELECT item_name FROM CartItems WHERE cust_username = '%s'" %username)
     cart = cur.fetchall()
     user_cart = []
@@ -149,14 +148,14 @@ def delete_cart_item(username, menu_item):
         user_cart.append(x)
     if(menu_item in user_cart):
         cur.execute("DELETE FROM CartItems WHERE cust_username = %s AND item_name = %s", (username, menu_item))
-        save_db_changes()
+        save_db_changes(cur,cnx)
         return True
     else:
         return False
     # if menu_item is not in cart, then return false
     # otherwise perform actions and return true
 
-def make_order(username, delivery_or_pickup, address): # TODO: Daniel, implement this function (you left this comment here from before)
+def make_order(username, delivery_or_pickup, address): 
     # TODO: Daniel, we forgot to reduce the deposit after the order by the cart total! (probably do this somewhere at the end or anywhere you modify CustomerAccounts table)
     '''
     username: username of customer (guaranteed to match conditions)
@@ -176,24 +175,22 @@ def make_order(username, delivery_or_pickup, address): # TODO: Daniel, implement
     # if delivery_or_pickup is "pickup", add a row to Pickups table: look at db_handling.py to see how a row in Pickups table looks like and use the information from CartItems to make the row
     cur.execute("SELECT item_name FROM OrderedItems WHERE cust_username = '%s'" %username)
     ordered = cur.fetchall()
-    ordList = []
+    ord_list = []
     for [x] in ordered:
-        ordList.append(x)
+        ord_list.append(x)
     cur.execute("SELECT item_name, quantity FROM CartItems WHERE cust_username = '%s'" %username)
-        cart = cur.fetchall()
-        user_cart = []
-        for x in cart:
-            user_cart.append([x[0],x[1]])
+    cart = cur.fetchall()
+    user_cart = []
+    for x in cart:
+        user_cart.append([x[0],x[1]])
     if(delivery_or_pickup.equals("delivery")):
         cur.execute("INSERT INTO Deliveries(cust_username, delivery_addr, items_ordered) VALUES (%s,%s,JSON_ARRAY())", (username, address))
         for x in user_cart:
             cur.execute("Update Deliveries SET items_ordered = JSON_ARRAY_APPEND(items_ordered, '$', JSON_ARRAY(%s,%s))", (x[0],x[1]))
-
-
     # to add/modify rows in OrderedItems: look at db_handling.py to see how a row in OrderedItems table looks like and use the information from CartItems to make the row
     # for each of username's cart items in CartItems: if the item has never been ordered before by username, insert it as a new row in OrderedItems
     for x in user_cart:
-        if(x not in ordList):
+        if(x not in ord_list):
             cur.execute("INSERT INTO OrderedItems(cust_username, item_name, quanity) VALUES (%s,%s,%s)", (username, x[0],x[1]))
         else:
             cur.execute("UPDATE OrderedItems SET quanity = quantity + %s WHERE cust_username = %s", (x[1], username))
@@ -231,12 +228,21 @@ def view_cart(username):
     else:
         return False
 
-def view_deposit(username): # TODO: Daniel, implement this function
+def view_deposit(username):
     ''' 
     username: username of customer (guaranteed to match conditions)
     Output: Returns the deposit amount for username
     '''
     # use CustomerAccounts table
+    cnx = connect_to_db()
+    cur = get_cursor(cnx)
+    if(len(username)>15):
+        return False
+    else:
+        cur.execute("SELECT amt_of_deposit FROM CustomerAccounts WHERE username = '%s'" %username)
+        dep = cur.fetchone()[0]
+        return dep
+        
 
 def vote_menu_item(username, menu_item, vote):
     '''
@@ -261,10 +267,10 @@ def vote_menu_item(username, menu_item, vote):
     # if the username has never ordered the item before, then return false (check by looking at OrderedItems table)
     cur.execute("SELECT item_name FROM OrderedItems WHERE cust_username = '%s'" %username)
     order = cur.fetchall()
-    orderList = []
+    order_list = []
     for x in order:
         orderList.append(x)
-    if(menu_item not in orderList):
+    if(menu_item not in order_list):
         return False
     # otherwise perform operations and return true
     cur.execute("INSERT INTO MenuVotes(item_name, username, rating) VALUES (%s,%s,%s)", (menu_item, username, vote))
