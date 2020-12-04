@@ -38,7 +38,7 @@ def create_tables():
     cur.execute("CREATE TABLE Accounts(username VARCHAR(15) PRIMARY KEY, password VARCHAR(15), full_name varchar(64), type CHAR(2))")
     cur.execute("CREATE TABLE CustomerAccounts(username VARCHAR(15) PRIMARY KEY, amt_of_deposit INT(9), num_of_warnings INT(3) DEFAULT 0, total_spents CHAR(5) DEFAULT 0, total_num_orders INT(5) DEFAULT 0)")
     cur.execute("CREATE TABLE EmployeeAccounts(username VARCHAR(15) PRIMARY KEY, emp_type CHAR(2), pay INT(10), num_of_warnings CHAR(5) DEFAULT 0)")
-    cur.execute("CREATE TABLE Menu(item_name VARCHAR(50) PRIMARY KEY, image BLOB NOT NULL, chef_username VARCHAR(15), item_desc VARCHAR(150), price REAL)")
+    cur.execute("CREATE TABLE Menu(item_name VARCHAR(50) PRIMARY KEY, image BLOB, chef_username VARCHAR(15), item_desc VARCHAR(150), price REAL)")
     cur.execute("CREATE TABLE AllowedVotes(vote_range TINYINT NOT NULL, PRIMARY KEY(vote_range))")
     cur.execute("INSERT INTO AllowedVotes VALUES (0),(1),(2),(3),(4),(5)")
     cur.execute("CREATE TABLE MenuVotes(item_name VARCHAR(50), cust_username VARCHAR(15), rating TINYINT NOT NULL, foreign key(rating) REFERENCES AllowedVotes(vote_range))")
@@ -124,10 +124,3 @@ def insertBLOB(item_name, photo, chef_username, item_desc, price): # TODO: Danie
     insert_blob_tuple = (item_name, emp_picture, chef_username, item_desc, price)
     cur.execute(sql_insert_blob_query, insert_blob_tuple)
     save_db_changes(cur,cnx)
-
-
-    # add 2 random rows (that match C username from Accounts and EmployeeAccounts tables)
-#    cur.execute("INSERT INTO Menu(item_name, image, chef_username, item_desc, price) VALUES ('Bacon Avocado Burger',"INSERT PICTURE", 'byrdeman', 'Burger topped with Avocado, Crispy Bacon, Sauteed Mushrooms and Garlic Mayo.', 13.99)")
-#    cur.execute("INSERT INTO Menu(item_name, image, chef_username, item_desc, price) VALUES ('Fettuccine Alfredo',"INSERT PICTURE", 'piedpiper', 'Bechamel, roast garlic, parmesan.', 12.99)")
-#    cur.execute("INSERT INTO Menu(item_name, image, chef_username, item_desc, price) VALUES ('NY Style Cheese Pizza Slice', "INSERT PICTURE", 'piedpiper', 'Thin crust, topped with our homemade tomato sauce and imported finest grande mozzarella.', 2.50)")
-#    cur.execute("INSERT INTO Menu(item_name, image, chef_username, item_desc, price) VALUES ('Cappuccino', "INSERT PICTURE", 'byrdeman', 'Dark, rich espresso under a layer of thick milk foam.', 3.59)")
