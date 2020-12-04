@@ -1,8 +1,7 @@
 # This file is used to handle operations which delivery people are allowed to do
 ''' @authors: daniellichter, saifulislam '''
 from db_handling import connect_to_db, get_cursor, save_db_changes, close_db
-# TODO: Daniel, if you have already checked to see that these functions work properly, then ignore this comment. Otherwise, check to see if these functions work properly through a separate file on your machine.
-# TODO: Daniel, use proper naming conventions (I think everything in Python is snake_case except for classes (Pascal), exceptions (Pascal), constants (CAPS_WITH_UNDER), global constants (CAPS_WITH_UNDER))
+
 
 
 
