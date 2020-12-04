@@ -1,14 +1,10 @@
 # This file is used to handle what happens at application startup
-
+''' @authors: daniellichter, saifulislam '''
 import tkinter as tk
-
-# TODO: Daniel, specify that you and I worked on this file in the header (you had it when you gave me your first ever code, which I should have kept, my mistake)
-# TODO: Daniel, you forgot to import functions here as well
+from db_handling import connect_to_db, get_cursor, save_db_changes, close_db
 # TODO: Daniel, if you have already checked to see that these functions work properly, then ignore this comment. Otherwise, check to see if these functions work properly through a separate file on your machine.
-# TODO: Daniel, check these errors that I get with VSCode
-# TODO: Daniel, remove TODOs that you have already completed (leave them if you haven't completed yet)
 
-def verify_login_details(username, password): # TODO: Daniel, implement this function
+def verify_login_details(username, password): 
     ''' Returns true/false if the login information is registered on the system by checking Accounts table ''' 
     cnx = connect_to_db()
     cur = get_cursor(cnx)
@@ -20,7 +16,8 @@ def verify_login_details(username, password): # TODO: Daniel, implement this fun
     else:
         return True
 
-def find_user_type(username): # TODO: Daniel, use the docstring format I used (''') so that the others would be able to understand the I/O
+def find_user_type(username): 
+    '''Returns the type of the user from the Accounts table'''
     #SQL Statement that gets the type, set to a variable and return that variable
     cnx = connect_to_db()
     cur = get_cursor(cnx)
