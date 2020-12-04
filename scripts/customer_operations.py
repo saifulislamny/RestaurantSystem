@@ -3,11 +3,8 @@
 
 from db_handling import connect_to_db, get_cursor, save_db_changes, close_db
 # TODO: Daniel, if you have already checked to see that these functions work properly, then ignore this comment. Otherwise, check to see if these functions work properly through a separate file on your machine.
-# TODO: Daniel, use proper naming conventions (I think everything in Python is snake_case except for classes (Pascal), exceptions (Pascal), constants (CAPS_WITH_UNDER), global constants (CAPS_WITH_UNDER))
-# TODO: Daniel, check these errors that I get with VSCode
-# TODO: Daniel, make sure your indentations are correct
 # TODO: Daniel, remove TODOs that you have already completed (leave them if you haven't completed yet)
-# TODO: Daniel, I get an error when I run python3 on this file
+
 
 def add_to_cart(username, menu_item):
     '''
