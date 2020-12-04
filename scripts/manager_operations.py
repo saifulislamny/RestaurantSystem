@@ -14,7 +14,7 @@ def accept_customer_registrations(username):
     # if username is not in CustomerRegistrations table, return false
     cnx = connect_to_db()
     cur = get_cursor(cnx)
-    if(len(username <=15)):
+    if(len(username)<=15):
         cur.execute("SELECT cust_username FROM CustomerRegistrations")
         cust_reg = cur.fetchall()
         cr_list = []
@@ -33,7 +33,7 @@ def accept_customer_registrations(username):
     # add username, amount of deposit, number of warnings (set to 0 since a new account) to CustomerAccounts table by taking info from CustomerRegistrations table
         cur.execute("INSERT INTO CustomerAccounts(username, amt_of_deposit) VALUES (%s,%s)", (username, ci_list[0][1]))
     # delete row from CustomerRegistrations table that matches username
-        cur.execute("DELETE FROM CustomerRegistrations WHERE cust_username = %s" %username)
+        cur.execute("DELETE FROM CustomerRegistrations WHERE cust_username = '%s'" %username)
         save_db_changes(cur,cnx)
         return True
     else:
@@ -47,7 +47,7 @@ def close_customer_account(username):
     '''
     cnx = connect_to_db()
     cur = get_cursor(cnx)
-    if(len(username <= 15)):
+    if(len(username) <= 15):
 
     # for this function you only have to check if the username exists in the Accounts table AS A CUSTOMER and return false if not, everything else should be fine
         cur.execute("SELECT username FROM Accounts WHERE username = '%s' AND type in ('RC','VC')" %username)
@@ -70,7 +70,7 @@ def close_employee_account(username):
     # if username does not exist as a chef or delivery person, then return false
     cnx = connect_to_db()
     cur = get_cursor(cnx)
-    if(len(username <= 15)):
+    if(len(username) <= 15):
             cur.execute("SELECT username FROM Accounts WHERE username = '%s' AND type in ('C','D')" %username)
             acc = cur.fetchall()
             if(len(acc)==0):
@@ -93,7 +93,7 @@ def cut_employee_pay(username, decrement):
     # make sure that username exists as a chef or delivery person (if not, return false)
     cnx = connect_to_db()
     cur = get_cursor(cnx)
-    if(len(username <= 15)):
+    if(len(username) <= 15):
         cur.execute("SELECT username FROM Accounts WHERE username = '%s' AND type in ('C','D')" %username)
         acc = cur.fetchall()
         if(len(acc)==0):
@@ -103,7 +103,7 @@ def cut_employee_pay(username, decrement):
         if(decrement < 0 or decrement > pay):
             return False
         else:
-            cur.execute("UPDATE Employee Set pay = pay - %s WHERE cust_username = %s",(pay, username))
+            cur.execute("UPDATE EmployeeAccounts Set pay = pay - %s WHERE username = %s",(decrement, username))
             save_db_changes(cur,cnx)
             return True
     else:
@@ -119,13 +119,13 @@ def decline_customer_registrations(username):
     # if username does not exist in the CustomerRegistrations table, return false
     cnx = connect_to_db()
     cur = get_cursor(cnx)
-    if(len(username <= 15)):
+    if(len(username) <= 15):
         cur.execute("SELECT cust_username FROM CustomerRegistrations WHERE cust_username = '%s'" %username)
         acc = cur.fetchall()
         if(len(acc)==0):
             return False
         else:
-            cur.execute("DELETE FROM CustomerRegistrations WHERE cust_username = %s" %username)
+            cur.execute("DELETE FROM CustomerRegistrations WHERE cust_username = '%s'" %username)
             save_db_changes(cur,cnx)
             return True
     else:
@@ -145,17 +145,15 @@ def raise_employee_pay(username, increment):
     # otherwise change row in EmployeeAccounts and return true
     cnx = connect_to_db()
     cur = get_cursor(cnx)
-    if(len(username <= 15)):
+    if(len(username) <= 15):
         cur.execute("SELECT username FROM Accounts WHERE username = '%s' AND type in ('C','D')" %username)
         acc = cur.fetchall()
         if(len(acc)==0):
             return False
-        cur.execute("SELECT pay FROM EmployeeAccounts WHERE username = '%s'" %username)
-        pay = cur.fetchone()[0]
         if(increment < 0):
             return False
         else:
-            cur.execute("UPDATE Employee Set pay = pay + %s WHERE cust_username = %s",(pay, username))
+            cur.execute("UPDATE EmployeeAccounts Set pay = pay + %s WHERE username = %s",(increment, username))
             save_db_changes(cur,cnx)
             return True
     else:
@@ -165,28 +163,28 @@ def view_chef_complaints_and_compliments():
     ''' Output: Returns a string of all entries in the ChefComplaintsAndCompliments table '''
     cnx = connect_to_db()
     cur = get_cursor(cnx)
-    cur.execute("SELECT * FROM ChefComplaintsandCompliments")
+    cur.execute("SELECT * FROM ChefComplaintsAndCompliments")
     chef_complaints = cur.fetchall()
     cc_list = []
     cc_str = ''
     for x in chef_complaints:
         cc_list.append(x)
     for x in cc_list:
-        cc_str += x
+        cc_str += (x[0]+" "+x[1]+" "+x[2]+" "+x[3]+"\n")
     return cc_str
 
 def view_delivery_complaints_and_compliments(): 
     ''' Output: Returns a string of all entries in the DeliveryComplaintsAndCompliments table '''
     cnx = connect_to_db()
     cur = get_cursor(cnx)
-    cur.execute("SELECT * FROM DeliveryComplaintsandCompliments")
+    cur.execute("SELECT * FROM DeliveryComplaintsAndCompliments")
     delivery_complaints = cur.fetchall()
     dc_list = []
     dc_str = ''
     for x in delivery_complaints:
         dc_list.append(x)
     for x in dc_list:
-        dc_str += x
+        dc_str += (x[0]+" "+x[1]+" "+x[2]+" "+x[3]+"\n")
     return dc_str
 
 def view_customer_registrations():
@@ -197,6 +195,7 @@ def view_customer_registrations():
     cust_reg = cur.fetchall()
     cr_str = ''
     for x in cust_reg:
-        cr_str += x
+        cr_str += (x[0]+" "+str(x[1])+"\n")
     return cr_str
-        
+
+print(view_customer_registrations())
