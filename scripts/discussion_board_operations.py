@@ -1,6 +1,5 @@
 ''' @authors: daniellichter, saifulislam '''
 from db_handling import connect_to_db, get_cursor, save_db_changes, close_db
-# TODO: Daniel, if you have already checked to see that these functions work properly, then ignore this comment. Otherwise, check to see if these functions work properly through a separate file on your machine.
 
 def view_discussion_boards(): 
     ''' Shows all rows in DiscussionBoardForDishes, DiscussionBoardForChefs, and DiscussionBoardForDelivery '''
@@ -15,13 +14,14 @@ def view_discussion_boards():
     dscb_str = ''
     print("Dishes Discussion Board:")
     for x in dbfd:
-        dscb_str += x
+        dscb_str += (str(x[0])+" "+x[1]+" "+x[2]+" "+x[3]+"\n")
     print("Chefs Discussion Board:")
     for x in dbfc:
-        dscb_str += x
+        dscb_str += (str(x[0])+" "+x[1]+" "+x[2]+" "+x[3]+"\n")
     print("Delivery Discussion Board:")
     for x in dbfdl:
-        dscb_str += x
+        dscb_str += (str(x[0])+" "+x[1]+" "+x[2]+" "+x[3]+"\n")
     cur.close()
     cnx.close()
     return dscb_str
+
