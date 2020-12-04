@@ -1,5 +1,5 @@
-# TODO: Daniel, specify that you and I worked on this file in the header (you had it when you gave me your first ever code, which I should have kept, my mistake)
-# TODO: Daniel, you forgot to import functions here as well
+''' @authors: daniellichter, saifulislam '''
+from db_handling import connect_to_db, get_cursor, save_db_changes, close_db
 # TODO: Daniel, if you have already checked to see that these functions work properly, then ignore this comment. Otherwise, check to see if these functions work properly through a separate file on your machine.
 
 def view_discussion_boards(): 
@@ -12,14 +12,16 @@ def view_discussion_boards():
     dbfc = cur.fetchall()
     cur.execute("SELECT * FROM DiscussionBoardForDelivery")
     dbfdl = cur.fetchall()
+    dscb_str = ''
     print("Dishes Discussion Board:")
     for x in dbfd:
-        print(x)
+        dscb_str += x
     print("Chefs Discussion Board:")
     for x in dbfc:
-        print(x)
+        dscb_str += x
     print("Delivery Discussion Board:")
     for x in dbfdl:
-        print(x)
+        dscb_str += x
     cur.close()
     cnx.close()
+    return dscb_str
