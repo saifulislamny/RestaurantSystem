@@ -57,9 +57,11 @@ def view_ratings_of_delivery_person(username):
     cur.execute("SELECT delivery_username, rating FROM DeliveryVotes")
     deliv_rating = cur.fetchall()
     deliv_list = []
-    deliv_str = ''
+    avg = 0
     for x in deliv_rating:
         deliv_list.append(x)
     for x in deliv_list:
-        deliv_str += (x[0]+" "+str(x[1])+"\n")
-    return deliv_str
+        avg+= x[1]
+    avg/=len(deliv_list)
+    return avg
+print(view_ratings_of_delivery_person('littleCub18'))
