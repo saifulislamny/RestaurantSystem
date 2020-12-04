@@ -1,17 +1,11 @@
 # This file is used to handle operations which chefs are allowed to do
-
-# TODO: Daniel, specify that you and I worked on this file in the header (you had it when you gave me your first ever code, which I should have kept, my mistake)
-# TODO: Daniel, you forgot to import the functions here as well
+''' @authors: daniellichter, saifulislam '''
+from db_handling import connect_to_db, get_cursor, save_db_changes, close_db, insertBLOB
 # TODO: Daniel, if you have already checked to see that these functions work properly, then ignore this comment. Otherwise, check to see if these functions work properly through a separate file on your machine.
-# TODO: Daniel, use proper naming conventions (I think everything in Python is snake_case except for classes (Pascal), exceptions (Pascal), constants (CAPS_WITH_UNDER), global constants (CAPS_WITH_UNDER))
-# TODO: Daniel, check these errors that I get with VSCode
-# TODO: Daniel, get rid of TODOs that you already have completed, if you have not finished them yet, it's okay to keep
-# TODO: Daniel, make sure your indentations are correct
 # TODO: Daniel, remove TODOs that you have already completed (leave them if you haven't completed yet)
-# TODO: Daniel, there's an error when I run python3 on this file
 
 
-def create_menu_item(item_name, item_image, username_of_chef, description, price): # TODO: Daniel, implement this function
+def create_menu_item(item_name, item_image, username_of_chef, description, price): 
     '''
     item_name: name of menu item (not guaranteed to match conditions)
     item_image: image associated with menu item
@@ -29,13 +23,13 @@ def create_menu_item(item_name, item_image, username_of_chef, description, price
     if(len(item)>0):
         return False
     # if item_name is 0 characters, return false (0 < len(item_name) <= 50)
-    if((len(item_name) == 0) or (len(item_name)>50):
+    if((len(item_name) == 0) or (len(item_name)>50)):
         return (False,'(0 < len(item_name) <= 50)')
     # if item_name is more than 50 characters, return false (0 < len(item_name) <= 50)
     # if username_of_chef does not exist in the Accounts table, return false
     cur.execute("SELECT username, type FROM Accounts WHERE username = '%s' and type = 'C'" %username_of_chef)
     usr = cur.fetchall()
-    if(len(user)==0):
+    if(len(usr)==0):
         return False
     # if username_of_chef exists in the Account table, but not as a chef, return false
     # if description is more than 150 characters, return false
@@ -44,8 +38,10 @@ def create_menu_item(item_name, item_image, username_of_chef, description, price
     # if price cannot be converted to a float or error arises when converting to float, return false
     # otherwise create the menu item and return true
     insertBLOB(item_name, item_image, username_of_chef, description, price)
+    save_db_changes(cur,cnx)
+    return True
 
-def delete_menu_item(item_name): # TODO: Daniel, implement this function
+def delete_menu_item(item_name): 
     '''
     item_name: name of menu item (not guaranteed to match conditions)
     Output: Returns true/false if item on the menu is deleted
@@ -89,7 +85,7 @@ def update_menu_item(item_name, new_item_name, new_item_image, new_username_of_c
     # if new_username_of_chef exists in the Account table, but not as a chef, return false
     cur.execute("SELECT username, type FROM Accounts WHERE username = '%s' and type = 'C'" %new_username_of_chef)
     usr = cur.fetchall()
-    if(len(user)==0):
+    if(len(usr)==0):
         return False
     # if new_description is more than 150 characters, return false
     if(len(new_description)>150):
@@ -98,10 +94,24 @@ def update_menu_item(item_name, new_item_name, new_item_image, new_username_of_c
     # otherwise update the menu item and return true
     cur.execute("Update Menu SET item_name = %s, chef_username = %s, item_desc = %s, new_price = %s WHERE item_name = %s", (new_item_name, new_username_of_chef, new_description, new_price, item_name))
     save_db_changes(cur,cnx)
+    return True
 
-def view_menu_ratings_of_chef(username): # TODO: Daniel, implement this function
+def view_menu_ratings_of_chef(username):
     '''
     username: username of chef who created the menu items (guaranteed to match conditions)
     Output: Returns string of the average rating for each menu item made by username_of_chef
     '''
+    if(len(username)>15 or len(username)==0):
+        return False
+    cnx = connect_to_db()
+    cur = get_cursor(cnx)
+    cur.execute("SELECT m.item_name, mv.rating FROM Menu m JOIN MenuVotes mv ON m.item_name = mv.item_name")
+    menu_rating = cur.fetchall()
+    mr_list = []
+    mr_str = ''
+    for x in menu_rating:
+        mr_list.append(x)
+    for x in mr_list:
+        mr_str += x
+    return mr_str
     # use MenuVotes and Menu tables 
