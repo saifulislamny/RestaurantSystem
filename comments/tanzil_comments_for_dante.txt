@@ -2,7 +2,6 @@ Manager Screen -
   -All buttons are added correctly and meet the project requirements
   
 
-
 VIP Customer Screen -
   -Have a button for Discussion. In the requirment it says "...start/participate a discussion topic on cooks/dishes/deliver people."
   
