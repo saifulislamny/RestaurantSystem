@@ -193,7 +193,7 @@ def make_order(username, delivery_or_pickup, address):
     # to add/modify rows in OrderedItems: look at db_handling.py to see how a row in OrderedItems table looks like and use the information from CartItems to make the row
     # for each of username's cart items in CartItems: if the item has never been ordered before by username, insert it as a new row in OrderedItems
     for x in user_cart:
-        if(x not in ord_list):
+        if(x[0] not in ord_list):
             cur.execute("INSERT INTO OrderedItems(cust_username, item_name, quantity) VALUES (%s,%s,%s)", (username, x[0],x[1]))
         else:
             cur.execute("UPDATE OrderedItems SET quantity = quantity + %s WHERE cust_username = %s", (x[1], username))
@@ -281,3 +281,5 @@ def vote_menu_item(username, menu_item, vote):
     print('reh')
     cur.execute("INSERT INTO MenuVotes(item_name, cust_username, rating) VALUES (%s,%s,%s)", (menu_item, username, vote))
     save_db_changes(cur,cnx)
+
+make_order('biznasty','delivery','123 nbd rd.')
