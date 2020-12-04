@@ -1,9 +1,6 @@
 ''' @authors: daniellichter, saifulislam '''
 # This file is used to create, find, and delete accounts in the system
-
 from db_handling import connect_to_db, get_cursor, save_db_changes, close_db
-
-# TODO: Daniel, if you have already checked to see that these functions work properly, then ignore this comment. Otherwise, check to see if these functions work properly through a separate file on your machine.
 
 def create_account(username, password, type_of_user):
     '''
@@ -53,17 +50,17 @@ def delete_account_as_customer(username, password):
     cur = get_cursor(cnx)
     if(len(username)>0 and len(username)<=15):
     # if username and password do not match a row in the Accounts and CustomerAccounts tables, return false
-        cur.execute("SELECT username FROM Accounts WHERE username = '%s' AND password = '%'", (username,password))
+        cur.execute("SELECT username FROM Accounts WHERE username = %s AND password = %s", (username,password))
         acc_usr = cur.fetchall()
-        cur.execute("SELECT username FROM CustomerAccounts WHERE username = '%s' AND password = '%'", (username,password))
+        cur.execute("SELECT username FROM CustomerAccounts WHERE username = '%s'" %username)
         cust_acc_usr = cur.fetchall()
         if(len(acc_usr)==0 and len(cust_acc_usr)==0):
             return False
 
     # otherwise delete the rows in Accounts and CustomerAccounts table that matches username and password, and return true
         else:
-            cur.execute("DELETE FROM CustomerAccounts WHERE username = %s" %username)
-            cur.execute("DELETE FROM Accounts WHERE username = %s" %username)
+            cur.execute("DELETE FROM CustomerAccounts WHERE username = '%s'" %username)
+            cur.execute("DELETE FROM Accounts WHERE username = '%s'" %username)
             save_db_changes(cur,cnx)
             return True
     else:
@@ -86,19 +83,19 @@ def delete_account_as_manager(username): # TODO: Daniel, implement this function
     #MenuForVC, CartItems, Deliveries, Pickups, DeliveryVotes, OrderedItems, ChefComplaintsAndCompliments,
     #DeliveryComplaintsAndCompliments, DiscussionBoardForChefs, DiscussionBoardForDishes, DiscussionBoardForDeliveries)
         else:
-            cur.execute("DELETE FROM Accounts WHERE username = %s" %username)
-            cur.execute("DELETE FROM EmployeeAccounts WHERE username = %s" %username)
-            cur.execute("DELETE FROM CustomerAccounts WHERE username = %s" %username)
-            cur.execute("DELETE FROM Menu WHERE chef_username = %s" %username)
-            cur.execute("DELETE FROM MenuVotes WHERE username = %s" %username)
-            cur.execute("DELETE FROM CartItems WHERE cust_username = %s" %username)
-            cur.execute("DELETE FROM Deliveries WHERE cust_username = %s" %username)
-            cur.execute("DELETE FROM Pickups WHERE cust_username = %s" %username)
-            cur.execute("DELETE FROM OrderedItems WHERE cust_username = %s" %username)
+            cur.execute("DELETE FROM Accounts WHERE username = '%s'" %username)
+            cur.execute("DELETE FROM EmployeeAccounts WHERE username = '%s'" %username)
+            cur.execute("DELETE FROM CustomerAccounts WHERE username = '%s'" %username)
+            cur.execute("DELETE FROM Menu WHERE chef_username = '%s'" %username)
+            cur.execute("DELETE FROM MenuVotes WHERE cust_username = '%s'" %username)
+            cur.execute("DELETE FROM CartItems WHERE cust_username = '%s'" %username)
+            cur.execute("DELETE FROM Deliveries WHERE cust_username = '%s'" %username)
+            cur.execute("DELETE FROM Pickups WHERE cust_username = '%s'" %username)
+            cur.execute("DELETE FROM OrderedItems WHERE cust_username = '%s'" %username)
             cur.execute("DELETE FROM ChefComplaintsAndCompliments WHERE chef_username = %s or cust_username = %s", (username,username))
             cur.execute("DELETE FROM DeliveryComplaintsAndCompliments WHERE delivery_username = %s or cust_username = %s", (username,username))
-            cur.execute("DELETE FROM DiscussionBoardForChefs WHERE chef_username = %s or cust_username = %s", (username,username))
-            cur.execute("DELETE FROM DiscussionBoardForDishes WHERE username = %s" %username)
+            cur.execute("DELETE FROM DiscussionBoardForChefs WHERE chef_name = %s or cust_username = %s", (username,username))
+            cur.execute("DELETE FROM DiscussionBoardForDishes WHERE cust_username = '%s'" %username)
             cur.execute("DELETE FROM DiscussionBoardForDelivery WHERE delivery_username = %s or cust_username = %s", (username,username))
             save_db_changes(cur,cnx)
             #may have to do some conditions depending on SQL syntax
