@@ -1,13 +1,11 @@
 # This file is used to handle main functionalities of the DB
+''' @authors: daniellichter, saifulislam '''
 import mysql.connector
 import io
 from PIL import Image, ImageTk
 
 #Daniel - get the insert photos working
-# TODO: Daniel, specify that you and I worked on this file in the header (you had it when you gave me your first ever code, which I should have kept, my mistake)
 # TODO: Daniel, if you have already checked to see that these functions work properly, then ignore this comment. Otherwise, check to see if these functions work properly through a separate file on your machine.
-# TODO: Daniel, use proper naming conventions (I think everything in Python is snake_case except for classes (Pascal), exceptions (Pascal), constants (CAPS_WITH_UNDER), global constants (CAPS_WITH_UNDER))
-# TODO: Daniel, make sure your indentations are correct
 # TODO: Daniel, remove TODOs that you have already completed (leave them if you haven't completed yet)
 
 def connect_to_db():
@@ -28,10 +26,10 @@ def save_db_changes(cur, cnx):
     cur.close()
     cnx.close()
 
-def byte_to_imageFile(bytes):
-    imageStream = io.BytesIO(bytes)
-    imageFile = Image.open(imageStream)
-    return imageFile
+def byte_to_imagefile(bytes):
+    image_stream = io.BytesIO(bytes)
+    imagefile = Image.open(image_stream)
+    return imagefile
 
 
 def create_tables():
@@ -40,7 +38,7 @@ def create_tables():
     cur = get_cursor(cnx)
     cur.execute("CREATE TABLE Accounts(username VARCHAR(15) PRIMARY KEY, password VARCHAR(15), full_name varchar(64), type CHAR(2))")
     cur.execute('''CREATE TABLE CustomerAccounts(username VARCHAR(15) PRIMARY KEY, amt_of_deposit INT(9), num_of_warnings INT(3) DEFAULT 0, total_spents CHAR(5) DEFAULT 0, total_num_orders INT(5) DEFAULT 0)''')
-    cur.execute("CREATE TABLE EmployeeAccounts(username VARCHAR(15) PRIMARY KEY, emp_type CHAR(2), pay INT(10), nume_of_warnings CHAR(5) DEFAULT 0)")
+    cur.execute("CREATE TABLE EmployeeAccounts(username VARCHAR(15) PRIMARY KEY, emp_type CHAR(2), pay INT(10), num_of_warnings CHAR(5) DEFAULT 0)")
     cur.execute("CREATE TABLE Menu(item_name VARCHAR(50) PRIMARY KEY, image BLOB NOT NULL, chef_username VARCHAR(15), item_desc VARCHAR(150), price REAL)")
     cur.execute("CREATE TABLE AllowedVotes(vote_range TINYINT NOT NULL, PRIMARY KEY(vote_range))")
     cur.execute("INSERT INTO AllowedVotes VALUES (0),(1),(2),(3),(4),(5)")
