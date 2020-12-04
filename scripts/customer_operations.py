@@ -269,7 +269,7 @@ def vote_menu_item(username, menu_item, vote):
     order = cur.fetchall()
     order_list = []
     for x in order:
-        orderList.append(x)
+        order_list.append(x)
     if(menu_item not in order_list):
         return False
     # otherwise perform operations and return true
