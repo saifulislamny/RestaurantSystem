@@ -25,3 +25,4 @@ def surfer_apply_for_registered_customer(username, password, deposit):
         cur.execute("INSERT INTO CustomerRegistrations(cust_username, password, amt_of_deposit) VALUES (%s,%s,%s)", (username, password, deposit))
         save_db_changes(cur,cnx)
         return True
+surfer_apply_for_registered_customer('grogu','babyo',50)
