@@ -5,7 +5,7 @@ for 1. on the project requirements doc, it says "For new customers or surfers, t
 -There here should be another button that says "View ratings" because number 3. on the project requirements doc says "Surfers: who can browse the menus
 and ratings"
 -Sign up button looks good because it basicslly means the surfer/new customer can sign up to become a registered customer. 
--good job on adding these buttons
+
 
 
 
@@ -14,7 +14,7 @@ For the chef screen:
 makes a complaint saying "This dish was not great!" The chef should be able to view these compliments/complaints
 (on the requirements doc, number 4. says this stuff) 
 -The "View personal dish ratings" button is good because say we have a customer and they rate the chef's dish a 5/5, the chef should be able to view that rating.
--good job on adding these button
+
 
 For the delivery_screen:
 There should be a button that says "File complaint" since delivery person can also file complaints about customers.
@@ -22,4 +22,4 @@ There should be a button that says "File complaint" since delivery person can al
 For example, say a customer gives a compliment on the DP saying "He or she was nice!" or 
 makes a complaint saying "He or she was not nice!" Therefore, the delivery person should be able to view these compliments/complaints.  
 (on the requirements doc, number 4. says this stuff) 
--good job on adding these buttons 
+
