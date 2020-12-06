@@ -22,5 +22,5 @@ There should be a button that says "File complaint" since delivery person can al
 For example, say a customer gives a compliment on the DP saying "He or she was nice!" or 
 makes a complaint saying "He or she was not nice!" Therefore, the delivery person should be able to view these compliments/complaints.  
 (on the requirements doc, number 4. says this stuff) 
--one more thing, along with the DP filing complaints, they can also compliment the customers so combine "File complaint" button to "File complaint/compliment"
-
+-one more thing, along with the DP filing complaints, they can also compliment the customers so combine "File complaint" button to "File complaint/compliment" or make 
+a separate button that says "Write compliment" or it can say "File compliment" (whichever one sounds better).
