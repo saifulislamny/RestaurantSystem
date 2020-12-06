@@ -25,3 +25,4 @@ makes a complaint saying "He or she was not nice!" Therefore, the delivery perso
 -one more thing, along with the DP filing complaints, they can also compliment the customers so combine "File complaint" button to "File complaint/compliment" or make 
 a separate button that says "Write compliment" or it can say "File compliment" (whichever one sounds better). Maybe stick with "Write compliment" since 
 that is what both the registered customer and VIP customer screen has 
+In the projects requirements it says "Delivery person can complain/compliment customers" 
