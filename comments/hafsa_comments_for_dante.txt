@@ -4,7 +4,7 @@ For the surfer_screen:
 for 1. on the project requirements doc, it says "For new customers or surfers, the top 3 most popular (ordered most) dishes and top 3 highest rated dishes are listed"
 -There here should be another button that says "View ratings" because number 3. on the project requirements doc says "Surfers: who can browse the menus
 and ratings"
--Sign up button looks good because it basicslly means the surfer/new customer can sign up to become a registered customer. 
+-Sign up button looks good because it basically means the surfer/new customer can sign up to become a registered customer. 
 
 
 
