@@ -30,6 +30,7 @@ def login_screen(root):
     canvas.pack()
     frame = tk.Frame(root, bg='#F5F5F5')
     frame.place(relheight=0.9, relwidth=0.9, relx=0.05, rely=0.05)
+    root.geometry("500x500")
     username_label = tk.Label(frame, text="Username:")
     username_label.pack()
     username_entry = tk.Entry(frame)

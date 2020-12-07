@@ -14,9 +14,9 @@ from startup import login_screen
 # TODO: Dante, add in-line documentation to show what each class/function does where it may not be immediately understood
 
 def startUpAnimation(root):
-    app = Window_Animation_Startup_Screen(root)
+    app = AnimationStartupScreen(root)
 
-class Window_Animation_Startup_Screen:
+class AnimationStartupScreen:
     def __init__(self,master):
 
         canvas = tk.Canvas(master, height=500, width=800)

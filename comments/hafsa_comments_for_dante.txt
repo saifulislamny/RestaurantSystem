@@ -1,16 +1,18 @@
 For the surfer_screen:
 -Change the name "Guest/Surfer" to "New customer/Surfer"
 -There should be button that says "View top 3 most popular dishes" and another button that says "View top 3 highest dishes." 
-for 1. on the project requirements doc, it says "For new customers or surfers, the top3 most popular (ordered most) dishes and top 3 highest rated dishesare listed"
--There here should be another button that says "View ratings" 
--Sign up button looks good because it basicslly means the surfer/new customer can sign up to become a registered customer. 
+for 1. on the project requirements doc, it says "For new customers or surfers, the top 3 most popular (ordered most) dishes and top 3 highest rated dishes are listed"
+-There here should be another button that says "View ratings" because number 3. on the project requirements doc says "Surfers: who can browse the menus
+and ratings"
+-Sign up button looks good because it basically means the surfer/new customer can sign up to become a registered customer with the fixed amount of money. 
+
 
 
 
 For the chef screen:
 -I would add a button that reads "View compliments/complaints." For example, say a customer gives a compliment on the dish, "This dish was great!" or 
 makes a complaint saying "This dish was not great!" The chef should be able to view these compliments/complaints
-(on the requirements, number 4. says this stuff) 
+(on the requirements doc, number 4. says this stuff) 
 -The "View personal dish ratings" button is good because say we have a customer and they rate the chef's dish a 5/5, the chef should be able to view that rating.
 
 
@@ -19,4 +21,8 @@ There should be a button that says "File complaint" since delivery person can al
 -Similar to the chefs screen, there should be a button that reads " "View compliments/complaints."
 For example, say a customer gives a compliment on the DP saying "He or she was nice!" or 
 makes a complaint saying "He or she was not nice!" Therefore, the delivery person should be able to view these compliments/complaints.  
-(on the requirements, number 4. says this stuff) 
+(on the requirements doc, number 4. says this stuff) 
+-One more thing, along with the DP filing complaints, they can also compliment the customers so combine "File complaint" button to "File complaint/compliment" or make 
+a separate button that says "Write compliment" or it can say "File compliment" (whichever one sounds better). Maybe stick with "Write compliment" since 
+that is what both the registered customer and VIP customer screen has 
+In the project requirements it says "Delivery person can complain/compliment customers" 
