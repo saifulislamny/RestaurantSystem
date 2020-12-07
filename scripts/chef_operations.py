@@ -5,7 +5,7 @@ from db_handling import connect_to_db, get_cursor, save_db_changes, close_db, in
 # TODO: Daniel, remove TODOs that you have already completed (leave them if you haven't completed yet)
 
 
-def create_menu_item(item_name, item_image, username_of_chef, description, price): 
+def create_menu_item(item_name, username_of_chef, description, price): 
     '''
     item_name: name of menu item (not guaranteed to match conditions)
     item_image: image associated with menu item
@@ -37,7 +37,7 @@ def create_menu_item(item_name, item_image, username_of_chef, description, price
         return False
     # if price cannot be converted to a float or error arises when converting to float, return false
     # otherwise create the menu item and return true
-    insertBLOB(item_name, item_image, username_of_chef, description, price)
+    cur.execute("INSERT INTO Menu(item_name, chef_username, item_desc, price) VALUES (%s,%s,%s,%s)", (item_name, username_of_chef, description, price))
     save_db_changes(cur,cnx)
     return True
 
@@ -59,7 +59,7 @@ def delete_menu_item(item_name):
     # if item_name does not exist on the menu, then return false
     # otherwise delete the menu item and return true
 
-def update_menu_item(item_name, new_item_name, new_item_image, new_username_of_chef, new_description, new_price): # TODO: Daniel, implement this function
+def update_menu_item(item_name, new_item_name, new_username_of_chef, new_description, new_price): # TODO: Daniel, implement this function
     '''
     item_name: name of menu item (not guaranteed to match conditions)
     new_item_name: updated name of menu item (not guaranteed to match conditions)
@@ -92,7 +92,7 @@ def update_menu_item(item_name, new_item_name, new_item_image, new_username_of_c
         return False
     # if new_price cannot be converted to a float or error arises when converting to float, return false
     # otherwise update the menu item and return true
-    cur.execute("Update Menu SET item_name = %s, chef_username = %s, item_desc = %s, new_price = %s WHERE item_name = %s", (new_item_name, new_username_of_chef, new_description, new_price, item_name))
+    cur.execute("Update Menu SET item_name = %s, chef_username = %s, item_desc = %s, price = %s WHERE item_name = %s", (new_item_name, new_username_of_chef, new_description, new_price, item_name))
     save_db_changes(cur,cnx)
     return True
 
@@ -105,13 +105,13 @@ def view_menu_ratings_of_chef(username):
         return False
     cnx = connect_to_db()
     cur = get_cursor(cnx)
-    cur.execute("SELECT m.item_name, mv.rating FROM Menu m JOIN MenuVotes mv ON m.item_name = mv.item_name")
+    cur.execute("SELECT m.item_name, mv.rating FROM Menu m JOIN MenuVotes mv ON m.item_name = mv.item_name WHERE m.chef_username = '%s'" %username)
     menu_rating = cur.fetchall()
     mr_list = []
     mr_str = ''
     for x in menu_rating:
         mr_list.append(x)
     for x in mr_list:
-        mr_str += x
+        mr_str += (x[0]+" "+str(x[1])+"\n")
     return mr_str
     # use MenuVotes and Menu tables 
