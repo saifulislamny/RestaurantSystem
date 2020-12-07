@@ -1,8 +1,7 @@
 # This file has features which are available for most (or all) users on the system
 ''' @authors: daniellichter, saifulislam '''
 from db_handling import connect_to_db, get_cursor, save_db_changes, close_db, byte_to_imagefile
-# TODO: Daniel, if you have already checked to see that these functions work properly, then ignore this comment. Otherwise, check to see if these functions work properly through a separate file on your machine.
-# TODO: Daniel, remove TODOs that you have already completed (leave them if you haven't completed yet)
+
 
 def search_menu(keywords): # TODO: implement this function later (don't worry about it for now)
     ''' Returns a string of name, image (using Tkinter syntax to include images), chef name, description, and price for all menu items on system that match keywords '''
