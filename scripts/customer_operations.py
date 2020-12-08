@@ -74,13 +74,43 @@ def cart_total_price(username):
     # add the prices of all items in the cart by using information from CartItems and Menu
     # make sure to multiply price for each item in the cart by the quantity of each item in the cart
 
+def complaints_for_customers(complainer, complained, complaint): # TODO: Daniel, implement this function
+    ''' 
+    complainer: username of customer who made the complaint (guaranteed to match conditions)
+    complained: username of customer who the complaint was made against (not guaranteed to match conditions)
+    complaint: the complaint made by the complainer (not guaranteed to match conditions)
+    Output: Returns true/false if the complaint is successfully added to CustomerToCustomerComplaints table
+    ''' 
+
+def delete_cart_item(username, menu_item):
+    '''
+    username: username of customer (guaranteed to match conditions)
+    menu_item: name of menu item that is in cart (not guaranteed to match conditions)
+    Output: Returns true/false if row that matches username and menu_item is deleted successfully in CartItems table
+    '''
+    cnx = connect_to_db()
+    cur = get_cursor(cnx)
+    cur.execute("SELECT item_name FROM CartItems WHERE cust_username = '%s'" %username)
+    cart = cur.fetchall()
+    user_cart = []
+    for [x] in cart:
+        user_cart.append(x)
+    if(menu_item in user_cart):
+        cur.execute("DELETE FROM CartItems WHERE cust_username = %s AND item_name = %s", (username, menu_item))
+        save_db_changes(cur,cnx)
+        return True
+    else:
+        return False
+    # if menu_item is not in cart, then return false
+    # otherwise perform actions and return true
+
 def feedback_for_chef(username_of_customer, username_of_chef, complaint_or_compliment, feedback):
     '''
     username_of_customer: username of customer who makes feedback (guaranteed to match conditions)
     username_of_chef: username of chef feedback is for (not guaranteed to match conditions)
     complaint_or_compliment: has either of two values: "complaint" or "compliment" (guaranteed to match conditions)
     feedback: description customer gives for their complaint or compliment (guaranteed to match conditions)
-    Output: Returns true/false if 1 row (username_of_customer is RC) or 2 rows (username_of_customer is VC) is successfully added to ChefComplaintsAndCompliments table
+    Output: Returns true/false if 1 row (username_of_customer is RC) or 2 rows (username_of_customer is VC) is successfully added to ChefComplaintsAndCompliments table, and checks to see if the customer actually ordered one of the chef's items before by taking information from the OrderedItems and Menu tables 
     '''
     cnx = connect_to_db
     cur = get_cursor(cnx)
@@ -88,6 +118,10 @@ def feedback_for_chef(username_of_customer, username_of_chef, complaint_or_compl
         return False
     if(len(username_of_chef)>15):
         return False
+
+    # TODO: Daniel, check if the customer actually ordered one of the chef's items before by taking information from the OrderedItems and Menu tables 
+    # We don't want customers falsely voting for chefs if they never had their food before
+
     cur.execute("SELECT username FROM Accounts WHERE type = 'C' AND username = '%s'" %username_of_chef)
     chef = cur.fetchall()
     if(len(chef)==0):
@@ -131,27 +165,13 @@ def feedback_for_delivery(username_of_customer, username_of_delivery, complaint_
     # shorten feedback to fit character limit in table (150 characters)
     # otherwise perform actions and return true
 
-def delete_cart_item(username, menu_item):
+def increase_deposit(customer, increment): # TODO: Daniel, implement this function
+    ''' 
+    customer: username of customer (guaranteed to match conditions)
+    increment: addition added to current deposit (not guaranteed to match conditions)
+    Output: Returns true/false after successfully incrementing the deposit for customer by modifying row in CustomerAccounts
     '''
-    username: username of customer (guaranteed to match conditions)
-    menu_item: name of menu item that is in cart (not guaranteed to match conditions)
-    Output: Returns true/false if row that matches username and menu_item is deleted successfully in CartItems table
-    '''
-    cnx = connect_to_db()
-    cur = get_cursor(cnx)
-    cur.execute("SELECT item_name FROM CartItems WHERE cust_username = '%s'" %username)
-    cart = cur.fetchall()
-    user_cart = []
-    for [x] in cart:
-        user_cart.append(x)
-    if(menu_item in user_cart):
-        cur.execute("DELETE FROM CartItems WHERE cust_username = %s AND item_name = %s", (username, menu_item))
-        save_db_changes(cur,cnx)
-        return True
-    else:
-        return False
-    # if menu_item is not in cart, then return false
-    # otherwise perform actions and return true
+    # check to see if increment is a positive number
 
 def make_order(username, delivery_or_pickup, address): 
     # TODO: Daniel, we forgot to reduce the deposit after the order by the cart total! (probably do this somewhere at the end or anywhere you modify CustomerAccounts table)
@@ -214,6 +234,43 @@ def make_order(username, delivery_or_pickup, address):
     return True
     # return true
 
+def quit_account_as_customer(username, password): # TODO: Daniel, change of plan for this function so it requires a new implementation
+    '''
+    username: username of customer (not guaranteed to meet conditions)
+    password: password of customer (not guaranteed to meet conditions)
+    Output: Returns true/false after successfully adding row to CustomerDeregistrations table
+    '''
+    
+    cnx = connect_to_db()
+    cur = get_cursor(cnx)
+    if(len(username)>0 and len(username)<=15):
+    # if username and password do not match a row in the Accounts and CustomerAccounts tables, return false
+        cur.execute("SELECT username FROM Accounts WHERE username = %s AND password = %s", (username,password))
+        acc_usr = cur.fetchall()
+        cur.execute("SELECT username FROM CustomerAccounts WHERE username = '%s'" %username)
+        cust_acc_usr = cur.fetchall()
+
+        # TODO: Daniel, it should be OR, not AND (maybe it might be an account on the system (len(acc_user) == 1) but it is not a customer account (len(cust_acc_usr) == 0) which should return false)
+         # TODO: Daniel, I happened to see this error on accident, I don't want to give you the idea that I am going over your implementations to see if they are correct because I am not so other errors may exist
+        if(len(acc_usr)==0 and len(cust_acc_usr)==0):
+            return False
+
+
+    # TODO: Daniel, ...
+    # everything else above is fine to check if the username and pass exist as a customer 
+    # but we don't want to delete the account, instead we want to add a row to the CustomerDeregistrations table
+    # remember, this function is for them wanting to "quit" the system, which must go through authorization by manager; they can't delete account without manager's approval (I modified this function so we can't straight up delete anymore like you do below)
+
+
+    # otherwise delete the rows in Accounts and CustomerAccounts table that matches username and password, and return true
+        else:
+            cur.execute("DELETE FROM CustomerAccounts WHERE username = '%s'" %username)
+            cur.execute("DELETE FROM Accounts WHERE username = '%s'" %username)
+            save_db_changes(cur,cnx)
+            return True
+    else:
+        return False
+
 def view_cart(username):
     '''
     username: username of customer (guaranteed to match conditions)
@@ -247,13 +304,21 @@ def view_deposit(username):
         dep = cur.fetchone()[0]
         return dep
         
+def vote_delivery_order(customer, delivery_order_num, vote): # TODO: Daniel, implement this function
+    '''
+    customer: username of customer who voted (guaranteed to match conditions)
+    delivery_order_num: order number of delivery that customer is voting for (not guaranteed to match conditions)
+    vote: vote that customer made where vote is an integer such that 1 <= vote <= 5 (not guaranteed to match conditions)
+    Output: Returns true/false if the customer's vote was successfully added to the DeliveryVotes table
+    '''
 
 def vote_menu_item(username, menu_item, vote):
     '''
     username: username of customer who voted (guaranteed to match conditions)
     menu_item: name of menu item that customer voted (not guaranteed to match conditions)
     vote: vote that customer made where vote is an integer such that 1 <= vote <= 5 (not guaranteed to match conditions)
-    Output: Returns true/false if the username's vote was successfully added to the MenuVotes table '''
+    Output: Returns true/false if the username's vote was successfully added/modified to the MenuVotes table 
+    '''
     # if menu_item does not exist on menu, then return false
     cnx = connect_to_db()
     cur = get_cursor(cnx)
@@ -276,6 +341,9 @@ def vote_menu_item(username, menu_item, vote):
     print(order_list)
     if(menu_item not in order_list):
         return False
+
+    # TODO: Daniel, if username already voted for menu_item before, then update the previous vote with vote (by modifying row in MenuVotes table)
+
     # otherwise perform operations and return true
     print('reh')
     cur.execute("INSERT INTO MenuVotes(item_name, cust_username, rating) VALUES (%s,%s,%s)", (menu_item, username, vote))

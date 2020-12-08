@@ -4,7 +4,16 @@ from db_handling import connect_to_db, get_cursor, save_db_changes, close_db, in
 # TODO: Daniel, if you have already checked to see that these functions work properly, then ignore this comment. Otherwise, check to see if these functions work properly through a separate file on your machine.
 # TODO: Daniel, remove TODOs that you have already completed (leave them if you haven't completed yet)
 
-
+def add_keyword(menu_item, keyword): # TODO: Daniel, implement this function
+    ''' 
+    menu_item: menu item that keyword is going to get added to (not guaranteed to match conditions)
+    keyword: keyword to be added in the last column of menu_item (not guaranteed to match conditions)
+    Output: Returns true/false if the keyword is successfully added to the menu_item in Menu table
+    '''
+    # check if menu_item exists in the table (return false if not)
+    # check if keyword is already a keyword for menu_item (return false if so)
+    # otherwise insert keyword (return true)
+    
 def create_menu_item(item_name, username_of_chef, description, price): 
     '''
     item_name: name of menu item (not guaranteed to match conditions)

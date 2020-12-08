@@ -12,9 +12,11 @@ def surfer_apply_for_registered_customer(username, password, deposit):
     # if username does not match conditions in Accounts table, then return false
     cnx = connect_to_db()
     cur = get_cursor(cnx)
+    # TODO: Daniel, the username cannot be empty either
     if(len(username)>15):
         return False
     # if password does not match conditions in Accounts table, then return false
+    # TODO: Daniel, the username cannot be empty either
     elif(len(password)>15):
         return False
     # if deposit is not a positive number, then return false

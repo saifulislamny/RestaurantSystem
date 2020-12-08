@@ -107,7 +107,7 @@ class TopRatedDishesWindow:
         self.app = login_screen(self.root)
 
         # TODO: Dante, you already made a similar window for this, remember? Maybe that info help can be helpful so that you don't have to recreate things.
-        # TODO: Saiful, include comment for how to fulfill this window
+
 #class to show what appears after "View Menu" button pressed
 class MenuWindow:
     def __init__(self, master):

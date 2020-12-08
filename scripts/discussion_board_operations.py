@@ -2,7 +2,7 @@
 from db_handling import connect_to_db, get_cursor, save_db_changes, close_db
 
 def view_discussion_boards(): 
-    ''' Shows all rows in DiscussionBoardForDishes, DiscussionBoardForChefs, and DiscussionBoardForDelivery '''
+    ''' Returns string of all rows in DiscussionBoardForDishes, DiscussionBoardForChefs, and DiscussionBoardForDelivery '''
     cnx = connect_to_db()
     cur = get_cursor(cnx)
     cur.execute("SELECT * FROM DiscussionBoardForDishes")
