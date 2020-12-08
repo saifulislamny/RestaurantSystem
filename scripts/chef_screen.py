@@ -2,18 +2,20 @@
 import tkinter as tk
 from tkinter import font
 from startup import login_screen
-from discussion_board_screen import DiscussionBoardScreen
+#from discussion_board_screen import DiscussionBoardScreen
+#NOTE: Ignore Discussion Board for now (Do not click on button) because it seems to be causing problems. Will try to fix ASAP.
 
 # TODO: Dante, check these errors that I get with VSCode
 
-def main():
-    root = tk.Tk()
-    app = ChefScreen(root)
+# def main():
+#     root = tk.Tk()
+#     app = ChefScreen(root,"test2")
 
 #class to show what appears on the main screen of "Chef"
 class ChefScreen:
-    def __init__(self,master):
-        self.root=master
+    def __init__(self,master,user):
+        self.root = master
+        self.user = user
         canvas = tk.Canvas(self.root, height=700, width = 800)
         canvas.pack()
 
@@ -49,24 +51,25 @@ class ChefScreen:
         self.app = login_screen(self.root)
 # function to open dish rating window
     def dish_rating_window(self):
-        self.app = DishRatingWindow(self.root)
+        self.app = DishRatingWindow(self.root,self.user)
 # function to open dish rating window
     def view_comp_window(self):
-        self.app = ViewCompWindow(self.root)
+        self.app = ViewCompWindow(self.root,self.user)
 # function to open food menu window
     def menu_window(self):
-        self.app = MenuWindow(self.root)
+        self.app = MenuWindow(self.root,self.user)
 # function to open add food description window
     def add_desc_window(self):
-        self.app = AddDescWindow(self.root)
+        self.app = AddDescWindow(self.root,self.user)
 # function to open discussion board window
     def disc_board_window(self):
-        self.app = DiscussionBoardScreen(self.root)
+        self.app = DiscussionBoardScreen(self.root,self.user)
 
 #class to show what appears after "View Personal Dish Ratings" button pressed
 class DishRatingWindow:
-    def __init__(self, master):
+    def __init__(self, master,user):
         self.root = master
+        self.user = user
         canvas = tk.Canvas(self.root, height=700, width=800)
         canvas.pack()
 
@@ -87,8 +90,9 @@ class DishRatingWindow:
         # TODO: Dante, fulfill this window by using view_menu_ratings_of_chef() from chef_operations.py (if it's already implemented)
 #class to show what appears after "View Personal Dish Ratings" button pressed
 class ViewCompWindow:
-    def __init__(self, master):
+    def __init__(self, master,user):
         self.root = master
+        self.user = user
         canvas = tk.Canvas(self.root, height=700, width=800)
         canvas.pack()
 
@@ -109,8 +113,9 @@ class ViewCompWindow:
         # TODO: Dante, fulfill this window by using view_menu_ratings_of_chef() from chef_operations.py (if it's already implemented)
 #class to show what appears after "View Menu" button pressed
 class MenuWindow:
-    def __init__(self, master):
+    def __init__(self, master,user):
         self.root = master
+        self.user = user
         canvas = tk.Canvas(self.root, height=700, width=800)
         canvas.pack()
 
@@ -131,8 +136,9 @@ class MenuWindow:
         # TODO: Dante, fulfill this window by using view_menu() from all_user_operations.py (if it's already implemented)
 #class to show what appears after "Add food description/keyword" button pressed
 class AddDescWindow:
-    def __init__(self, master):
+    def __init__(self, master,user):
         self.root = master
+        self.user = user
         canvas = tk.Canvas(self.root, height=700, width=800)
         canvas.pack()
 
@@ -159,4 +165,4 @@ class AddDescWindow:
 # let him know what buttons he has to add by specifying in the hafsa_comments_for_dante.txt file (in the repo, comments/hafsa_comments_for_dante.txt).
 # you can run the chef screen by running $ python3 chef_screen.py
 
-main()
+#main()
