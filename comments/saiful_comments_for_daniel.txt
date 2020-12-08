@@ -17,3 +17,10 @@ For instance, we changed the Deliveries table columns so view_deliveries() would
 Do this similarly for other view functions that you implemented
 
 * For later (when you have nothing else to do): to the best of your ability, try to make sure your implementations are correct for each function
+
+
+################################################## customer_operations.py ##################################################
+
+def feedback_for_delivery(username_of_customer, username_of_delivery, complaint_or_compliment, feedback):
+    # TODO (for later): Daniel, make sure delivery person actually made a delivery to customer before by checking Deliveries table (return false if no delivery was made)
+    # (for now we can assume managers will approve/disapprove and they will take care of this)

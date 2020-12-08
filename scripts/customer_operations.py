@@ -119,8 +119,8 @@ def feedback_for_chef(username_of_customer, username_of_chef, complaint_or_compl
     if(len(username_of_chef)>15):
         return False
 
-    # TODO: Daniel, check if the customer actually ordered one of the chef's items before by taking information from the OrderedItems and Menu tables 
-    # We don't want customers falsely voting for chefs if they never had their food before
+    # TODO (for later): Daniel, check if the customer actually ordered one of the chef's items before by taking information from the OrderedItems and Menu tables 
+    # We don't want customers falsely voting for chefs if they never had their food before (for now we can assume managers will approve/disapprove and they will take care of this)
 
     cur.execute("SELECT username FROM Accounts WHERE type = 'C' AND username = '%s'" %username_of_chef)
     chef = cur.fetchall()
@@ -238,7 +238,7 @@ def quit_account_as_customer(username, password): # TODO: Daniel, change of plan
     '''
     username: username of customer (not guaranteed to meet conditions)
     password: password of customer (not guaranteed to meet conditions)
-    Output: Returns true/false after successfully adding row to CustomerDeregistrations table
+    Output: Returns true/false after successfully adding row to AccountDeregistrations table
     '''
     
     cnx = connect_to_db()
@@ -258,7 +258,7 @@ def quit_account_as_customer(username, password): # TODO: Daniel, change of plan
 
     # TODO: Daniel, ...
     # everything else above is fine to check if the username and pass exist as a customer 
-    # but we don't want to delete the account, instead we want to add a row to the CustomerDeregistrations table
+    # but we don't want to delete the account, instead we want to add a row to the AccountDeregistrations table
     # remember, this function is for them wanting to "quit" the system, which must go through authorization by manager; they can't delete account without manager's approval (I modified this function so we can't straight up delete anymore like you do below)
 
 

@@ -2,3 +2,5 @@
 Hence, if it returns false, write on the window something like "Not enough money in deposit, insert more money." or "Unsuccessful."
 
 * When customers (both RC and VC) login, display the number of warnings they have on the top of the screen (not as a button)
+
+* Surfer screen should not say "New Customer" it should only say "Surfer"
