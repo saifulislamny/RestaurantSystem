@@ -60,8 +60,8 @@ def create_tables():
     cur.execute("CREATE TABLE OrderedItems(cust_username VARCHAR(15), item_name VARCHAR(50), quantity INT(3) DEFAULT 1, PRIMARY KEY(cust_username, item_name))")
     cur.execute("CREATE TABLE CustomerRegistrations(cust_username VARCHAR(15) PRIMARY KEY, password VARCHAR(64), amt_of_deposit INT(9))")
 
-    # TODO: Daniel, create table CustomerDeregistrations which stores the username of the customers who applied to quit the system or got kicked out of the system, which the manager will later will review and approve
-    # the table has columns which specify the username of the customer and the reason for their deregistration (kicked or quit)
+    # TODO: Daniel, create table AccountDeregistrations which stores the username of those who applied to quit the system or got kicked out of the system, which the manager will later will review and approve
+    # the table has columns which specify the username and the reason for their deregistration (kicked or quit)
    
     cur.execute("CREATE TABLE ChefComplaintsAndCompliments(chef_username VARCHAR(15) PRIMARY KEY, cust_username VARCHAR(15), type_of_feedback VARCHAR(10), feedback VARCHAR(150))")
 

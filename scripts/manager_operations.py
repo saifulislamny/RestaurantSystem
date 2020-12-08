@@ -77,50 +77,6 @@ def delete_account_as_manager(username): # TODO: Daniel, implement this function
     # keep this comment for later: TODO: if new tables are created in the future, then deal with the table here as well
     
 
-def close_customer_account(username):
-    '''
-    username: username of customer (not guaranteed to meet conditions)
-    Output: Returns true/false if username's deposit is cleared and account is closed for a customer who gets kicked out or quits the system
-    '''
-    cnx = connect_to_db()
-    cur = get_cursor(cnx)
-    if(len(username) <= 15):
-
-    # for this function you only have to check if the username exists in the Accounts table AS A CUSTOMER and return false if not, everything else should be fine
-        cur.execute("SELECT username FROM Accounts WHERE username = '%s' AND type in ('RC','VC')" %username)
-        acc = cur.fetchone()[0]
-        if(len(acc)==0):
-            return False
-        if delete_account_as_manager(username):
-            return True
-        else:
-            return False
-    else:
-        return False
-
-def close_employee_account(username):
-    '''
-    username: username of employee (not guaranteed to meet conditions)
-    Output: Returns true/false if closing the account of a chef or delivery person is successful '''
-    # make sure that the username exists as a chef or delivery person by checking Accounts table
-    # if username does not exist as a chef or delivery person, then return false
-    cnx = connect_to_db()
-    cur = get_cursor(cnx)
-    if(len(username) <= 15):
-            cur.execute("SELECT username FROM Accounts WHERE username = '%s' AND type in ('C','D')" %username)
-            acc = cur.fetchall()
-            if(len(acc)==0):
-                return False
-            if delete_account_as_manager(username):
-                return True
-            else:
-                return False
-    else:
-        return False
-
-
-    # if username exists as a chef or delivery person, then use delete_account_as_manager to delete all rows in all tables that match the username
-
 def cut_employee_pay(username, decrement):
     '''
     username: username of employee (not guaranteed to meet conditions)
@@ -172,14 +128,14 @@ def decline_customer_registrations(username):
 
 def give_warning(username): # TODO: Daniel, implement this function
     '''
-    username: username of a registered customer, VIP customer, chef, or delivery person (guaranteed to match conditions)
-    Output: Increments number of warnings in respective CustomerAccounts or EmployeeAccounts table for username depending on what type of user they are
+    username: username of a registered customer, VIP customer, chef, or delivery person (not guaranteed to match conditions)
+    Output: Returns true/false if incrementing number of warnings is successful in respective CustomerAccounts or EmployeeAccounts table for username depending on what type of user they are
     '''
-    # use Accounts, CustomerAccounts, and EmployeeAccounts to fulfill this function's implementation
+    # use Accounts, CustomerAccounts, and EmployeeAccounts to fulfill this function's implementation (but you must check if the username exists first as an RC, VC, C, or D)
     # increment number of warnings in either CustomerAccounts or EmployeeAccounts
 
     # after incrementing, check the number of warnings they now have
-    # if username is a registered customer having 3 warnings, deregister/kick them by adding row to CustomerDeregistrations which the manager will later approve
+    # if username is a registered customer having 3 warnings, deregister/kick them by adding row to AccountrDeregistrations which the manager will later approve
     # or if the username is a VIP customer having 2 warnings, put them back to being a registered customer (with warnings set back to 0) by updating rows in Accounts and CustomerAccounts
 
 def raise_employee_pay(username, increment):
@@ -249,5 +205,8 @@ def view_customer_registrations():
     for x in cust_reg:
         cr_str += (x[0]+" "+str(x[1])+"\n")
     return cr_str
+
+def view_customer_deregistrations(): # TODO: Daniel, implement this function
+    ''' Output: Returns a string of all usernames and their reason for leaving the system in the CustomerDeregistrations table '''
 
 print(view_customer_registrations())
