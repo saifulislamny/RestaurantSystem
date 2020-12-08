@@ -1,0 +1,19 @@
+## General Notes for Daniel
+
+* More TODOs have been added 
+
+* Start with db_handling.py TODOs
+
+* Go over each function you made and see if you did what was expected by rereading the docstring. 
+For example, feedback_for_chef() in customer_operations.py is supposed to add 1 or 2 rows based on the type of customer they are but you only add 1 row always
+
+* Also, whenever I mention that arguments are "not guaranteed to match conditions", that means that you have to check if those arguments actually exist 
+For example, if a username_of_chef is not guaranteed to match conditions, then you check in the Accounts table to see if the username passed exists as a chef 
+I'm not pointing to a specific error you made, but I am giving an example so that you understand what I mean by something matching and not matching conditions. 
+I'm not sure if you made errors or not.
+
+* For every table we changed, the functions where we view those tables might need change so we need to change those view functions as well (make sure each view function doesn't miss out on columns unless specified otherwise by the docstring)
+For instance, we changed the Deliveries table columns so view_deliveries() would need modification since it would be missing a column 
+Do this similarly for other view functions that you implemented
+
+* For later (when you have nothing else to do): to the best of your ability, try to make sure your implementations are correct for each function

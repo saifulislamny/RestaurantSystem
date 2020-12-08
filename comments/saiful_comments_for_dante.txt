@@ -1,0 +1,4 @@
+* When a customer (both RC and VC) tries to make an order, and it returns false (using make_order() from customer_operations.py), that means they don't have enough money as the deposit. 
+Hence, if it returns false, write on the window something like "Not enough money in deposit, insert more money." or "Unsuccessful."
+
+* When customers (both RC and VC) login, display the number of warnings they have on the top of the screen (not as a button)
