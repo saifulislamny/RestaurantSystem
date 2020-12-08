@@ -9,25 +9,24 @@ Academic Project
 * Tanzil Baraskar (tbaraskar191999@gmail.com)
 
 ## Run application: 
+`$ cd scripts`
 `$ python3 main.py`
 
 ## File Structure: 
-[will be uploaded upon completion]
 
 ## Setup development environment:
-[will be uploaded upon completion]
 
 ## File Dependencies:
-[will be uploaded upon completion]
 
 ## Environmental Variables:
-[will be uploaded upon completion]
 
 ## Bugs and Issues:
-[will be uploaded upon completion]
 
 ## Specifications: 
-[will be uploaded upon permission from instructor]
+The specifications for this project are found in specifications.docx
+
+## Remaining Specifications:
+The remaining specifications that are yet to be completed are found in remaining_specifications.docx
 
 ## Input Parameters and Output Parameters for Each Function:
 Displayed as in-line documentation
