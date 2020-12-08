@@ -206,7 +206,7 @@ def view_customer_registrations():
         cr_str += (x[0]+" "+str(x[1])+"\n")
     return cr_str
 
-def view_customer_deregistrations(): # TODO: Daniel, implement this function
-    ''' Output: Returns a string of all usernames and their reason for leaving the system in the CustomerDeregistrations table '''
+def view_account_deregistrations(): # TODO: Daniel, implement this function
+    ''' Output: Returns a string of all usernames and their reason for leaving the system in the AccountDeregistrations table '''
 
 print(view_customer_registrations())
