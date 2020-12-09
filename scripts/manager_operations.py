@@ -1,9 +1,6 @@
 # This file is used to handle operations which managers are allowed to do
 ''' @authors: daniellichter, saifulislam '''
 from db_handling import connect_to_db, get_cursor, save_db_changes, close_db
-# TODO: Daniel, if you have already checked to see that these functions work properly, then ignore this comment. Otherwise, check to see if these functions work properly through a separate file on your machine.
-
-
 
 def accept_customer_registrations(username):
     '''
@@ -39,7 +36,7 @@ def accept_customer_registrations(username):
         return False
     # return true
 
-def delete_account_as_manager(username): # TODO: Daniel, implement this function
+def delete_account_as_manager(username): 
     '''
     username: username of account (not guaranteed to meet conditions)
     Output: Returns true/false if account is removed from the Accounts table and all other tables
@@ -57,8 +54,10 @@ def delete_account_as_manager(username): # TODO: Daniel, implement this function
     #DeliveryComplaintsAndCompliments, DiscussionBoardForChefs, DiscussionBoardForDishes, DiscussionBoardForDeliveries)
         else:
             cur.execute("DELETE FROM Accounts WHERE username = '%s'" %username)
+            cur.execute("DELETE FROM AccountsDeregistration WHERE username = '%s'" %username)
             cur.execute("DELETE FROM EmployeeAccounts WHERE username = '%s'" %username)
             cur.execute("DELETE FROM CustomerAccounts WHERE username = '%s'" %username)
+            cur.execute("DELETE FROM CustomerRegistrations WHERE cust_username = '%s'" %username)
             cur.execute("DELETE FROM Menu WHERE chef_username = '%s'" %username)
             cur.execute("DELETE FROM MenuVotes WHERE cust_username = '%s'" %username)
             cur.execute("DELETE FROM CartItems WHERE cust_username = '%s'" %username)
@@ -73,7 +72,6 @@ def delete_account_as_manager(username): # TODO: Daniel, implement this function
             save_db_changes(cur,cnx)
             #may have to do some conditions depending on SQL syntax
 
-    # TODO: Daniel, you may have missed some tables here, remember that we need to wipe out their existence from all tables and we need to check each column that have a username
     # keep this comment for later: TODO: if new tables are created in the future, then deal with the table here as well
     
 
@@ -126,13 +124,41 @@ def decline_customer_registrations(username):
 
     # if so, delete row in CustomerRegistrations and return true
 
-def give_warning(username): # TODO: Daniel, implement this function
+def give_warning(username):
     '''
     username: username of a registered customer, VIP customer, chef, or delivery person (not guaranteed to match conditions)
     Output: Returns true/false if incrementing number of warnings is successful in respective CustomerAccounts or EmployeeAccounts table for username depending on what type of user they are
     '''
     # use Accounts, CustomerAccounts, and EmployeeAccounts to fulfill this function's implementation (but you must check if the username exists first as an RC, VC, C, or D)
     # increment number of warnings in either CustomerAccounts or EmployeeAccounts
+    cnx = connect_to_db()
+    cur = get_cursor(cnx)
+    cur.execute("SELECT username, type FROM Accounts WHERE username  = '%s' AND type IN ('C','D')" %username)
+    emp = cur.fetchall()
+    cur.execute("SELECT username, type FROM Accounts WHERE username  = '%s' AND type IN ('RC','VC')" %username)
+    cust = cur.fetchall()
+    if((len(emp)== 0) and (len(cust)==0)):
+        return False
+    elif(len(emp)==0):
+        cur.execute("UPDATE CustomerAccounts Set num_of_warnings = num_of_warnings +1 WHERE username = '%s'" %username)
+        cur.execute("SELECT num_of_warnings FROM CustomerAccounts WHERE username = '%s'" %username)
+        warning = cur.fetchone()[0]
+        cust_list = []
+        for x in cust:
+            cust_list.append([x[0],x[1]])
+        if(cust_list[0][1] == 'RC'):
+            if(warning>2):
+                cur.execute("INSERT INTO AccountDeregistrations VALUES ('%s','kicked')" %username)
+        else:
+            if(warning>1):
+                cur.execute("UPDATE Accounts Set type = 'RC' WHERE username = '%s'" %username)
+        
+    else:
+        cur.execute("UPDATE EmployeeAccounts Set num_of_warnings = num_of_warnings +1 WHERE username = '%s'" %username)
+    
+    save_db_changes(cur,cnx)
+    return True
+    
 
     # after incrementing, check the number of warnings they now have
     # if username is a registered customer having 3 warnings, deregister/kick them by adding row to AccountrDeregistrations which the manager will later approve
@@ -163,8 +189,19 @@ def raise_employee_pay(username, increment):
     else:
         return False
 
-def view_customer_complaints_by_customers(): # TODO: Daniel, implement this function
+def view_customer_complaints_by_customers():
     ''' Output: Returns a string of all entries in the CustomerToCustomerComplaints table '''
+    cnx = connect_to_db()
+    cur = get_cursor(cnx)
+    cur.execute("SELECT * FROM CustomerToCustomerComplaints")
+    cust_complaints = cur.fetchall()
+    cc_list = []
+    cc_str = ''
+    for x in cust_complaints:
+        cc_list.append(x)
+    for x in cc_list:
+        cc_str += (x[0]+" "+x[1]+" "+x[2]+"\n")
+    return cc_str
 
 
 def view_chef_complaints_and_compliments(): 
@@ -206,7 +243,13 @@ def view_customer_registrations():
         cr_str += (x[0]+" "+str(x[1])+"\n")
     return cr_str
 
-def view_account_deregistrations(): # TODO: Daniel, implement this function
+def view_account_deregistrations():
     ''' Output: Returns a string of all usernames and their reason for leaving the system in the AccountDeregistrations table '''
-
-print(view_customer_registrations())
+    cnx = connect_to_db()
+    cur = get_cursor(cnx)
+    cur.execute("SELECT * FROM AccountDeregistrations")
+    acc_dereg = cur.fetchall()
+    ad_str = ''
+    for x in acc_dereg:
+        ad_str += (x[0]+" "+x[1]+"\n")
+    return ad_str
