@@ -145,11 +145,11 @@ class ManageCustWindow:
         manageCustLabel = tk.Label(frame, text="You chose to manage customers!", font=('Times New Roman', 14), bg="#e6e6e6")
         manageCustLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
 
-        customerNameField = tk.Entry(frame)
-        customerNameField.place(relx=0.15, rely=0.3, relwidth=0.45, relheight=0.05)
+        #customerNameField = tk.Entry(frame)
+        #customerNameField.place(relx=0.15, rely=0.3, relwidth=0.45, relheight=0.05)
 
-        getCustomerNameButton = tk.Button(frame, text="Close \nAccount", bg='#999999', font=('Times New Roman', 10), borderwidth=2)
-        getCustomerNameButton.place(relx=0.65, rely=0.3, relwidth=0.1, relheight=0.05)
+        #getCustomerNameButton = tk.Button(frame, text="Close \nAccount", bg='#999999', font=('Times New Roman', 10), borderwidth=2)
+        #getCustomerNameButton.place(relx=0.65, rely=0.3, relwidth=0.1, relheight=0.05)
 
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
         signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.07)
