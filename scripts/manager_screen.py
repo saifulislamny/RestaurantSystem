@@ -107,11 +107,24 @@ class RegisterSurferWindow:
         frame.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.8)
         self.root.geometry("700x700")
 
-        registerSurferLabel = tk.Label(frame, text="You chose to view registrations!", font=('Times New Roman', 20), bg="#e6e6e6")
+        registerSurferLabel = tk.Label(frame, text="You chose to view registrations!", font=('Times New Roman', 19), bg="#e6e6e6")
         registerSurferLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
 
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
         signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.05)
+        
+        acceptCustomerRegistrations = tk.Button(frame, text="Accept Customer Registration", bg='#999999', font=('Times New Roman', 12), borderwidth=2)
+        acceptCustomerRegistrations.place(relx=0.3, rely=0.2, relwidth=0.4, relheight=0.05)
+
+        declineCustomerRegistrations = tk.Button(frame, text="Decline Customer Registration", bg='#999999', font=('Times New Roman', 12), borderwidth=2)
+        declineCustomerRegistrations.place(relx=0.3, rely=0.3, relwidth=0.4, relheight=0.05)
+
+        viewCustomerRegistrations = tk.Button(frame, text="View Customer Registration", bg='#999999', font=('Times New Roman', 12), borderwidth=2)
+        viewCustomerRegistrations.place(relx=0.3, rely=0.4, relwidth=0.4, relheight=0.05)
+
+        viewAccountDeregistrations = tk.Button(frame, text="View Customer Deregistration", bg='#999999', font=('Times New Roman', 12), borderwidth=2)
+        viewAccountDeregistrations.place(relx=0.3, rely=0.5, relwidth=0.4, relheight=0.05)
+        
 
     # function to open signout window
     def sign_out_window(self):
