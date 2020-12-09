@@ -14,7 +14,7 @@ def add_keyword(menu_item, keyword):
     # otherwise insert keyword (return true)
     cnx = connect_to_db()
     cur = get_cursor(cnx)
-    cur.execute("SELECT keywords FROM Menu WHERE item_name = 'bacon avocado burger'")
+    cur.execute("SELECT keywords FROM Menu WHERE item_name = '%s'" %menu_item)
     keywords = cur.fetchall()
     if(len(keywords)==0):
        return False
