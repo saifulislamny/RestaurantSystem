@@ -70,17 +70,26 @@ def cart_total_price(username):
                     total_cart+=(y[1]*x[1])
     close_db(cur,cnx)
     return total_cart
-    # otherwise apply no discount
-    # add the prices of all items in the cart by using information from CartItems and Menu
-    # make sure to multiply price for each item in the cart by the quantity of each item in the cart
 
-def complaints_for_customers(complainer, complained, complaint): # TODO: Daniel, implement this function
+def complaints_for_customers(complainer, complained, complaint): 
     ''' 
     complainer: username of customer who made the complaint (guaranteed to match conditions)
     complained: username of customer who the complaint was made against (not guaranteed to match conditions)
     complaint: the complaint made by the complainer (not guaranteed to match conditions)
     Output: Returns true/false if the complaint is successfully added to CustomerToCustomerComplaints table
     ''' 
+    cnx = connect_to_db()
+    cur = get_cursor(cnx)
+    cur.execute("SELECT username FROM CustomerAccounts WHERE username = '%s'" %complained)
+    cmpld = cur.fetchall()
+    if(len(cmpld)==0):
+        return False
+    if(len(complaint)>150):
+        complaint = complaint[:150]
+    cur.execute("INSERT INTO CustomerToCustomerComplaints VALUES (%s,%s,%s)", (complainer, complained, complaint))
+    save_db_changes(cur,cnx)
+    return True
+    
 
 def delete_cart_item(username, menu_item):
     '''
@@ -118,24 +127,27 @@ def feedback_for_chef(username_of_customer, username_of_chef, complaint_or_compl
         return False
     if(len(username_of_chef)>15):
         return False
-
-    # TODO (for later): Daniel, check if the customer actually ordered one of the chef's items before by taking information from the OrderedItems and Menu tables 
-    # We don't want customers falsely voting for chefs if they never had their food before (for now we can assume managers will approve/disapprove and they will take care of this)
-
+    cur.execute("SELECT cust_username FROM OrderedItems oi JOIN Menu m ON oi.item_name = m.item_name WHERE m.chef_username = %s and oi.cust_username = %s ", (username_of_chef, username_of_customer))
+    ord = cur.fetchall()
+    if (len(ord)==0):
+        return False
     cur.execute("SELECT username FROM Accounts WHERE type = 'C' AND username = '%s'" %username_of_chef)
     chef = cur.fetchall()
     if(len(chef)==0):
         return False
     else:
+        cur.execute("SELECT type FROM Accounts WHERE username = '%s'" %username_of_customer)
+        type = cur.fetchone()[0]
         if(len(feedback)>150):
             feedback = feedback[:150]
-        cur.execute("INSERT INTO ChefComplaintsAndCompliments(chef_username, cust_username, type_of_feedback, feedback) VALUES (%s,%s,%s,%s)", (username_of_chef, username_of_customer, complaint_or_compliment, feedback))
+        if(type == 'RC'):
+            cur.execute("INSERT INTO ChefComplaintsAndCompliments(chef_username, cust_username, type_of_feedback, feedback) VALUES (%s,%s,%s,%s)", (username_of_chef, username_of_customer, complaint_or_compliment, feedback))
+        else:
+            cur.execute("INSERT INTO ChefComplaintsAndCompliments(chef_username, cust_username, type_of_feedback, feedback) VALUES (%s,%s,%s,%s)", (username_of_chef, username_of_customer, complaint_or_compliment, feedback))
+            cur.execute("INSERT INTO ChefComplaintsAndCompliments(chef_username, cust_username, type_of_feedback, feedback) VALUES (%s,%s,%s,%s)", (username_of_chef, username_of_customer, complaint_or_compliment, feedback))
         save_db_changes(cur,cnx)
         return True
-    # no need to check if arguments are properly passed in for complaint_or_compliment (assume you're always given proper values for this parameter)
-    # make sure username_of_chef is actually a chef by looking at Accounts table, and return false if not
-    # shorten feedback to fit character limit in table (150 characters)
-    # otherwise perform actions and return true
+
 
 def feedback_for_delivery(username_of_customer, username_of_delivery, complaint_or_compliment, feedback):
     '''
@@ -165,16 +177,23 @@ def feedback_for_delivery(username_of_customer, username_of_delivery, complaint_
     # shorten feedback to fit character limit in table (150 characters)
     # otherwise perform actions and return true
 
-def increase_deposit(customer, increment): # TODO: Daniel, implement this function
+def increase_deposit(customer, increment):
     ''' 
     customer: username of customer (guaranteed to match conditions)
     increment: addition added to current deposit (not guaranteed to match conditions)
     Output: Returns true/false after successfully incrementing the deposit for customer by modifying row in CustomerAccounts
     '''
     # check to see if increment is a positive number
+    cnx = connect_to_db()
+    cur = get_cursor(cnx)
+    if(increment <= 0):
+        return False
+    else:
+        cur.execute("UPDATE CustomerAccounts SET amt_of_deposit = amt_of_deposit + %s WHERE username = %s", (increment, customer))
+        save_db_changes(cur,cnx)
+        return True
 
 def make_order(username, delivery_or_pickup, address): 
-    # TODO: Daniel, we forgot to reduce the deposit after the order by the cart total! (probably do this somewhere at the end or anywhere you modify CustomerAccounts table)
     '''
     username: username of customer (guaranteed to match conditions)
     delivery_or_pickup: has either of two values: "deliver" or "pickup" (guaranteed to match conditions)
@@ -234,7 +253,7 @@ def make_order(username, delivery_or_pickup, address):
     return True
     # return true
 
-def quit_account_as_customer(username, password): # TODO: Daniel, change of plan for this function so it requires a new implementation
+def quit_account_as_customer(username, password): 
     '''
     username: username of customer (not guaranteed to meet conditions)
     password: password of customer (not guaranteed to meet conditions)
@@ -249,27 +268,15 @@ def quit_account_as_customer(username, password): # TODO: Daniel, change of plan
         acc_usr = cur.fetchall()
         cur.execute("SELECT username FROM CustomerAccounts WHERE username = '%s'" %username)
         cust_acc_usr = cur.fetchall()
-
-        # TODO: Daniel, it should be OR, not AND (maybe it might be an account on the system (len(acc_user) == 1) but it is not a customer account (len(cust_acc_usr) == 0) which should return false)
-         # TODO: Daniel, I happened to see this error on accident, I don't want to give you the idea that I am going over your implementations to see if they are correct because I am not so other errors may exist
-        if(len(acc_usr)==0 and len(cust_acc_usr)==0):
+        if(len(acc_usr)==0 or len(cust_acc_usr)==0):
             return False
-
-
-    # TODO: Daniel, ...
-    # everything else above is fine to check if the username and pass exist as a customer 
-    # but we don't want to delete the account, instead we want to add a row to the AccountDeregistrations table
-    # remember, this function is for them wanting to "quit" the system, which must go through authorization by manager; they can't delete account without manager's approval (I modified this function so we can't straight up delete anymore like you do below)
-
-
-    # otherwise delete the rows in Accounts and CustomerAccounts table that matches username and password, and return true
         else:
-            cur.execute("DELETE FROM CustomerAccounts WHERE username = '%s'" %username)
-            cur.execute("DELETE FROM Accounts WHERE username = '%s'" %username)
+            cur.execute("INSERT INTO AccountDeregistrations VALUES ('%s', 'quit')" %username)
             save_db_changes(cur,cnx)
             return True
     else:
         return False
+
 
 def view_cart(username):
     '''
@@ -311,7 +318,30 @@ def vote_delivery_order(customer, delivery_order_num, vote): # TODO: Daniel, imp
     vote: vote that customer made where vote is an integer such that 1 <= vote <= 5 (not guaranteed to match conditions)
     Output: Returns true/false if the customer's vote was successfully added to the DeliveryVotes table
     '''
+    cnx = connect_to_db()
+    cur = get_cursor(cnx)
+    # remember to check that 1 <= vote <= 5, if it's not then return false
+    if(vote < 1 or vote> 5):
+        return False
+    #check if the customer actually ordered from that order_num
+    cur.execute("SELECT cust_username FROM Deliveries WHERE cust_username = %s and delivery_order_num = %s", (customer, delivery_order_num))
+    ordered = cur.fetchall()
+    if (len(ordered)==0):
+        return False
+    #get delivery username from Deliveries
+    cur.execute("SELECT delivery_username FROM Deliveries WHERE delivery_order_num = '%s' AND delivery_username IS NOT NULL" %delivery_order_num)
+    dlv = cur.fetchone()[0]
 
+    cur.execute("SELECT cust_username FROM DeliveryVotes WHERE delivery_order_num = '%s'" %delivery_order_num)
+    vot = cur.fetchone()[0]
+    if(len(vot)>0):
+        cur.execute("UPDATE DeliveryVotes SET rating = %s WHERE cust_username = %s AND delivery_order_num = %s", (vote, customer, delivery_order_num))
+    # otherwise perform operations and return true
+    else:
+        cur.execute("INSERT INTO DeliveryVotes VALUES (%s,%s,%s,%s)", (delivery_order_num, dlv, vote, customer))
+    save_db_changes(cur,cnx)
+    return True
+vote_delivery_order('barzy', 1, 4)
 def vote_menu_item(username, menu_item, vote):
     '''
     username: username of customer who voted (guaranteed to match conditions)
@@ -338,15 +368,14 @@ def vote_menu_item(username, menu_item, vote):
     order_list = []
     for [x] in order:
         order_list.append(x)
-    print(order_list)
     if(menu_item not in order_list):
         return False
-
-    # TODO: Daniel, if username already voted for menu_item before, then update the previous vote with vote (by modifying row in MenuVotes table)
-
+    cur.execute("SELECT cust_username FROM MenuVotes WHERE item_name = %s AND cust_username = %s", (menu_item, username))
+    vot = cur.fetchone()[0]
+    if(len(vot)>0):
+        cur.execute("UPDATE MenuVotes SET rating = %s WHERE item_name = %s AND cust_username = %s", (vote, menu_item, username))
     # otherwise perform operations and return true
-    print('reh')
-    cur.execute("INSERT INTO MenuVotes(item_name, cust_username, rating) VALUES (%s,%s,%s)", (menu_item, username, vote))
+    else:
+        cur.execute("INSERT INTO MenuVotes(item_name, cust_username, rating) VALUES (%s,%s,%s)", (menu_item, username, vote))
     save_db_changes(cur,cnx)
-
-make_order('biznasty','delivery','123 nbd rd.')
+    return True
