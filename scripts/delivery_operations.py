@@ -18,7 +18,6 @@ def complete_delivery(username, delivery_order_id):
         do_list.append(x)
     if(delivery_order_id not in do_list):
         return False
-    # TODO: Daniel, make sure delivery is not already completed by someone else (return false if it is)
     cur.execute("SELECT cust_username FROM Deliveries WHERE delivery_order_num = '%s' and delivery_username IS NULL" %delivery_order_id)
     deliv = cur.fetchone()[0]
     if(len(deliv)==0):
