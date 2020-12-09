@@ -45,7 +45,7 @@ def create_tables():
     cur.execute("CREATE TABLE CartItems(cust_username VARCHAR(15), item_name VARCHAR(50), quantity INT(3) DEFAULT 1, PRIMARY KEY(cust_username, item_name))")
     cur.execute("CREATE TABLE Deliveries(delivery_order_num INT AUTO_INCREMENT, cust_username VARCHAR(15), delivery_addr VARCHAR(256), items_ordered json, PRIMARY KEY(delivery_order_num))")
     cur.execute("CREATE TABLE Pickups(pickup_order_num INT AUTO_INCREMENT, cust_username VARCHAR(15), items_ordered json, PRIMARY KEY(pickup_order_num))")
-    cur.execute("CREATE TABLE DeliveryVotes(delivery_order_num INT NOT NULL PRIMARY KEY, delivery_username VARCHAR(15), rating TINYINT NOT NULL, foreign key(rating) REFERENCES AllowedVotes(vote_range))")
+    cur.execute("CREATE TABLE DeliveryVotes(delivery_order_num INT NOT NULL PRIMARY KEY, delivery_username VARCHAR(15), rating TINYINT NOT NULL, cust_username VARCHAR(15), foreign key(rating) REFERENCES AllowedVotes(vote_range))")
     cur.execute("CREATE TABLE OrderedItems(cust_username VARCHAR(15), item_name VARCHAR(50), quantity INT(3) DEFAULT 1, PRIMARY KEY(cust_username, item_name))")
     cur.execute("CREATE TABLE CustomerRegistrations(cust_username VARCHAR(15) PRIMARY KEY, password VARCHAR(64), amt_of_deposit INT(9))")
     cur.execute("CREATE TABLE AccountDeregistrations(username VARCHAR(15), reason_for_dereg VARCHAR(6) CHECK (reason_for_dereg IN ('kicked', 'quit')))")
