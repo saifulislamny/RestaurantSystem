@@ -311,7 +311,7 @@ def view_deposit(username):
         dep = cur.fetchone()[0]
         return dep
         
-def vote_delivery_order(customer, delivery_order_num, vote): # TODO: Daniel, implement this function
+def vote_delivery_order(customer, delivery_order_num, vote): 
     '''
     customer: username of customer who voted (guaranteed to match conditions)
     delivery_order_num: order number of delivery that customer is voting for (not guaranteed to match conditions)
@@ -341,7 +341,7 @@ def vote_delivery_order(customer, delivery_order_num, vote): # TODO: Daniel, imp
         cur.execute("INSERT INTO DeliveryVotes VALUES (%s,%s,%s,%s)", (delivery_order_num, dlv, vote, customer))
     save_db_changes(cur,cnx)
     return True
-vote_delivery_order('barzy', 1, 4)
+
 def vote_menu_item(username, menu_item, vote):
     '''
     username: username of customer who voted (guaranteed to match conditions)
