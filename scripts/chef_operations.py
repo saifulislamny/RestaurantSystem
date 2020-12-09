@@ -1,8 +1,7 @@
 # This file is used to handle operations which chefs are allowed to do
 ''' @authors: daniellichter, saifulislam '''
 from db_handling import connect_to_db, get_cursor, save_db_changes, close_db, insertBLOB
-# TODO: Daniel, if you have already checked to see that these functions work properly, then ignore this comment. Otherwise, check to see if these functions work properly through a separate file on your machine.
-# TODO: Daniel, remove TODOs that you have already completed (leave them if you haven't completed yet)
+
 
 def add_keyword(menu_item, keyword):
     ''' 
