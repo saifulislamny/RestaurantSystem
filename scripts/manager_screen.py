@@ -140,6 +140,17 @@ class ManageCustWindow:
 
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
         signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.07)
+        
+        customerName = tk.Label(frame, text="Enter Customer Name", font=('Times New Roman', 11), bg="#e6e6e6")
+        customerName.place(relx=0.1, rely=0.2)
+        EntercustomerName = tk.Entry (frame, font = 20)
+        EntercustomerName.place (relx=0.1, rely=0.25, relwidth=0.45, relheight=0.05 )
+        EnterButton = tk.Button(frame, text="Enter", bg='#999999', font=('Times New Roman', 10), borderwidth=2)
+        EnterButton.place(relx=0.65, rely=0.25, relwidth=0.1, relheight=0.05)
+
+        getCustomerNameButton = tk.Button(frame, text="Close Account", bg='#999999', font=('Times New Roman', 10), borderwidth=2)
+        getCustomerNameButton.place(relx=0.3, rely=0.5, relwidth=0.3, relheight=0.05)
+        
 
     # function to open signout window
     def sign_out_window(self):
