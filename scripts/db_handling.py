@@ -5,8 +5,7 @@ import io
 from PIL import Image, ImageTk
 
 #Daniel - get the insert photos working
-# TODO: Daniel, if you have already checked to see that these functions work properly, then ignore this comment. Otherwise, check to see if these functions work properly through a separate file on your machine.
-# TODO: Daniel, remove TODOs that you have already completed (leave them if you haven't completed yet)
+#It works! -Daniel
 
 def connect_to_db():
     cnx = mysql.connector.connect(host = '35.193.212.231', user = 'root', password = '322f20TuTh', database = 'fooddeliverysystem')
@@ -36,45 +35,26 @@ def create_tables():
     cnx = connect_to_db()
     cur = get_cursor(cnx)
     cur.execute("CREATE TABLE Accounts(username VARCHAR(15) PRIMARY KEY, password VARCHAR(15), full_name varchar(64), type CHAR(2))")
-    cur.execute("CREATE TABLE CustomerAccounts(username VARCHAR(15) PRIMARY KEY, amt_of_deposit INT(9), num_of_warnings INT(3) DEFAULT 0, total_spents CHAR(5) DEFAULT 0, total_num_orders INT(5) DEFAULT 0)")
-
-    # TODO (for later, not so important): Daniel, shouldn't num_of_warnings be an INT here like the table in the previous line? Saw this error on accident, so make sure the other tables makes sense as well for their column datatypes.
-    cur.execute("CREATE TABLE EmployeeAccounts(username VARCHAR(15) PRIMARY KEY, emp_type CHAR(2), pay INT(10), num_of_warnings CHAR(5) DEFAULT 0)")
-
-    # TODO: Daniel, modify the Menu table to include a column that specifies the keywords for the menu item (last column is fine) in an array/JSON (whichever you prefer)
+    cur.execute("CREATE TABLE CustomerAccounts(username VARCHAR(15) PRIMARY KEY, amt_of_deposit INT(9), num_of_warnings INT(3) DEFAULT 0, total_spents INT(9) DEFAULT 0, total_num_orders INT(5) DEFAULT 0)")
+    cur.execute("CREATE TABLE EmployeeAccounts(username VARCHAR(15) PRIMARY KEY, emp_type CHAR(2), pay INT(10), num_of_warnings INT(3) DEFAULT 0)")
     cur.execute("CREATE TABLE Menu(item_name VARCHAR(50) PRIMARY KEY, image BLOB, chef_username VARCHAR(15), item_desc VARCHAR(150), price REAL)")
     cur.execute("CREATE TABLE AllowedVotes(vote_range TINYINT NOT NULL, PRIMARY KEY(vote_range))")
     cur.execute("INSERT INTO AllowedVotes VALUES (0),(1),(2),(3),(4),(5)")
     cur.execute("CREATE TABLE MenuVotes(item_name VARCHAR(50), cust_username VARCHAR(15), rating TINYINT NOT NULL, foreign key(rating) REFERENCES AllowedVotes(vote_range))")
     cur.execute("CREATE TABLE MenuForVC(item_name VARCHAR(50), item_desc VARCHAR(150), price REAL)")
     cur.execute("CREATE TABLE CartItems(cust_username VARCHAR(15), item_name VARCHAR(50), quantity INT(3) DEFAULT 1, PRIMARY KEY(cust_username, item_name))")
-
-    # TODO: Daniel, modify the Deliveries table to include a column that specifies the username of the delivery person who fulfilled the order (this can be NULL; once the delivery person chooses to deliver this order, then their username gets inserted into the column)
-    # remember the 15 character limit
-    # the column can be immediately after the items_ordered column
-    # make sure to change the values of the rows already in the table since the table has changed
     cur.execute("CREATE TABLE Deliveries(delivery_order_num INT AUTO_INCREMENT, cust_username VARCHAR(15), delivery_addr VARCHAR(256), items_ordered json, PRIMARY KEY(delivery_order_num))")
-
     cur.execute("CREATE TABLE Pickups(pickup_order_num INT AUTO_INCREMENT, cust_username VARCHAR(15), items_ordered json, PRIMARY KEY(pickup_order_num))")
     cur.execute("CREATE TABLE DeliveryVotes(delivery_order_num INT NOT NULL PRIMARY KEY, delivery_username VARCHAR(15), rating TINYINT NOT NULL, foreign key(rating) REFERENCES AllowedVotes(vote_range))")
     cur.execute("CREATE TABLE OrderedItems(cust_username VARCHAR(15), item_name VARCHAR(50), quantity INT(3) DEFAULT 1, PRIMARY KEY(cust_username, item_name))")
     cur.execute("CREATE TABLE CustomerRegistrations(cust_username VARCHAR(15) PRIMARY KEY, password VARCHAR(64), amt_of_deposit INT(9))")
-
-    # TODO: Daniel, create table AccountDeregistrations which stores the username of those who applied to quit the system or got kicked out of the system, which the manager will later will review and approve
-    # the table has columns which specify the username and the reason for their deregistration (kicked or quit)
-   
+    cur.execute("CREATE TABLE AccountDeregistrations(username VARCHAR(15), reason_for_dereg VARCHAR(6) CHECK (reason_for_dereg IN ('kicked', 'quit')))")
     cur.execute("CREATE TABLE ChefComplaintsAndCompliments(chef_username VARCHAR(15) PRIMARY KEY, cust_username VARCHAR(15), type_of_feedback VARCHAR(10), feedback VARCHAR(150))")
-
-    # TODO: Daniel, create table CustomerToCustomerComplaints which stores the complaints made by customers against other customers for inappropriate behavior in the Discussion Forums
-    # the table has columns which specify the username of the complainer, the username of the complained, and the complaint itself (limit to 150 characters)
-    
+    cur.execute("CREATE TABLE CustomerToCustomerComplaints(complainer_username VARCHAR(15), complainee_username VARCHAR(15), complaint VARCHAR(150))")
     cur.execute("CREATE TABLE DeliveryComplaintsAndCompliments(delivery_username VARCHAR(15) PRIMARY KEY, cust_username VARCHAR(15), type_of_feedback VARCHAR(10), feedback VARCHAR(150))")
     cur.execute("CREATE TABLE DiscussionBoardForChefs(discussion_topic_num INT PRIMARY KEY, cust_username VARCHAR(15), chef_name VARCHAR(15), message VARCHAR(150))")
     cur.execute("CREATE TABLE DiscussionBoardForDishes(discussion_topic_num INT PRIMARY KEY, cust_username VARCHAR(15), menu_item VARCHAR(50), message VARCHAR(150))")
     cur.execute("CREATE TABLE DiscussionBoardForDelivery(discussion_topic_num INT PRIMARY KEY, cust_username VARCHAR(15), delivery_username VARCHAR(15), message VARCHAR(150))")
-
-    # TODO (for later, not so important): Daniel, make sure column datatypes for each table make sense
-
     save_db_changes(cur,cnx)
 
 
@@ -135,7 +115,8 @@ def convertToBinaryData(filename):
         binary_data = file.read()
     return binary_data
 
-def insertBLOB(item_name, photo, chef_username, item_desc, price): # TODO: Daniel, what is this function supposed to do? Was this your test file?
+def insertBLOB(item_name, photo, chef_username, item_desc, price):
+    '''Used to insert a row into a menu with an image'''
     cnx = connect_to_db()
     cur = get_cursor(cnx)
     sql_insert_blob_query = """ INSERT INTO Menu(item_name, image, chef_username, item_desc, price) VALUES (%s,%s,%s,%s,%s)"""
