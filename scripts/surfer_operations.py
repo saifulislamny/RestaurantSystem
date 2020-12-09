@@ -1,6 +1,5 @@
 ''' @authors: daniellichter, saifulislam '''
 from db_handling import connect_to_db, get_cursor, save_db_changes, close_db
-# TODO: Daniel, if you have already checked to see that these functions work properly, then ignore this comment. Otherwise, check to see if these functions work properly through a separate file on your machine.
 
 def surfer_apply_for_registered_customer(username, password, deposit):
     '''
