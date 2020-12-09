@@ -4,7 +4,7 @@ from db_handling import connect_to_db, get_cursor, save_db_changes, close_db, in
 # TODO: Daniel, if you have already checked to see that these functions work properly, then ignore this comment. Otherwise, check to see if these functions work properly through a separate file on your machine.
 # TODO: Daniel, remove TODOs that you have already completed (leave them if you haven't completed yet)
 
-def add_keyword(menu_item, keyword): # TODO: Daniel, implement this function
+def add_keyword(menu_item, keyword):
     ''' 
     menu_item: menu item that keyword is going to get added to (not guaranteed to match conditions)
     keyword: keyword to be added in the last column of menu_item (not guaranteed to match conditions)
@@ -13,6 +13,26 @@ def add_keyword(menu_item, keyword): # TODO: Daniel, implement this function
     # check if menu_item exists in the table (return false if not)
     # check if keyword is already a keyword for menu_item (return false if so)
     # otherwise insert keyword (return true)
+    cnx = connect_to_db()
+    cur = get_cursor(cnx)
+    cur.execute("SELECT keywords FROM Menu WHERE item_name = 'bacon avocado burger'")
+    keywords = cur.fetchall()
+    if(len(keywords)==0):
+       return False
+    key_list = []
+    for [x] in keywords:
+        key_list.append(x)    
+    key = key_list[0]
+    get_rid = ['[',']',' ','"']
+    for x in get_rid:
+        key = key.replace(x, '')
+    key = key.split(',')
+    if(keyword in key):
+        return False
+    else:
+        cur.execute("UPDATE Menu SET keywords = JSON_ARRAY_APPEND(keywords,'$',%s) WHERE item_name = %s", (keyword, menu_item))
+        save_db_changes(cur,cnx)
+        return True
     
 def create_menu_item(item_name, username_of_chef, description, price): 
     '''
@@ -46,7 +66,7 @@ def create_menu_item(item_name, username_of_chef, description, price):
         return False
     # if price cannot be converted to a float or error arises when converting to float, return false
     # otherwise create the menu item and return true
-    cur.execute("INSERT INTO Menu(item_name, chef_username, item_desc, price) VALUES (%s,%s,%s,%s)", (item_name, username_of_chef, description, price))
+    cur.execute("INSERT INTO Menu(item_name, chef_username, item_desc, price, keywords) VALUES (%s,%s,%s,%s, JSON_ARRAY())", (item_name, username_of_chef, description, price))
     save_db_changes(cur,cnx)
     return True
 
@@ -68,7 +88,7 @@ def delete_menu_item(item_name):
     # if item_name does not exist on the menu, then return false
     # otherwise delete the menu item and return true
 
-def update_menu_item(item_name, new_item_name, new_username_of_chef, new_description, new_price): # TODO: Daniel, implement this function
+def update_menu_item(item_name, new_item_name, new_username_of_chef, new_description, new_price): 
     '''
     item_name: name of menu item (not guaranteed to match conditions)
     new_item_name: updated name of menu item (not guaranteed to match conditions)
@@ -123,4 +143,4 @@ def view_menu_ratings_of_chef(username):
     for x in mr_list:
         mr_str += (x[0]+" "+str(x[1])+"\n")
     return mr_str
-    # use MenuVotes and Menu tables 
+
