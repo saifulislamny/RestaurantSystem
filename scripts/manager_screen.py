@@ -176,33 +176,33 @@ class ManageStaffWindow:
         
         staffName = tk.Label(frame, text="Enter Staff Name", font=('Times New Roman', 11), bg="#e6e6e6")
         staffName.place(relx=0.1, rely=0.2)
-        EnterStaffName = tk.Entry (frame, font = 20)
-        EnterStaffName.place (relx=0.1, rely=0.25, relwidth=0.45, relheight=0.05 )
-        EnterButton = tk.Button(frame, text="Enter", bg='#999999', font=('Times New Roman', 10), borderwidth=2)
-        EnterButton.place(relx=0.65, rely=0.25, relwidth=0.1, relheight=0.05)
+        enterStaffName = tk.Entry (frame, font = 20)
+        enterStaffName.place (relx=0.1, rely=0.25, relwidth=0.45, relheight=0.05 )
+        enterButton = tk.Button(frame, text="Enter", bg='#999999', font=('Times New Roman', 10), borderwidth=2)
+        enterButton.place(relx=0.65, rely=0.25, relwidth=0.1, relheight=0.05)
 
         staffPayCut = tk.Label(frame, text="Enter Amount to Cut Pay", font=('Times New Roman', 11), bg="#e6e6e6")
         staffPayCut.place(relx=0.1, rely=0.4)
-        EnterPayCut = tk.Entry (frame, font = 20)
-        EnterPayCut.place (relx=0.1, rely=0.45, relwidth=0.3, relheight=0.05 )
+        enterPayCut = tk.Entry (frame, font = 20)
+        enterPayCut.place (relx=0.1, rely=0.45, relwidth=0.3, relheight=0.05 )
 
-        CutPayButton = tk.Button(frame, text="Cut Pay", bg='#999999', font=('Times New Roman', 10), borderwidth=2)
-        CutPayButton.place(relx=0.5, rely=0.45, relwidth=0.1, relheight=0.05)
+        cutPayButton = tk.Button(frame, text="Cut Pay", bg='#999999', font=('Times New Roman', 10), borderwidth=2)
+        cutPayButton.place(relx=0.5, rely=0.45, relwidth=0.1, relheight=0.05)
         dollarSign = tk.Label (frame, text = '$', font= ('Times New Roman', 12 ), bg="#e6e6e6")
         dollarSign.place(relx=0.0, rely= .45, relwidth=0.1, relheight=0.05 )
 
         staffPayRaiseField = tk.Label(frame, text="Enter Amount to Raise Pay", font=('Times New Roman', 11), bg="#e6e6e6")
         staffPayRaiseField.place(relx=0.1, rely=0.55)
-        EnterPayRaiseField = tk.Entry (frame, font = 10)
-        EnterPayRaiseField.place (relx=0.1, rely=0.6, relwidth=0.3, relheight=0.05 )
+        enterPayRaiseField = tk.Entry (frame, font = 10)
+        enterPayRaiseField.place (relx=0.1, rely=0.6, relwidth=0.3, relheight=0.05 )
 
-        RaisePayButton = tk.Button(frame, text="Raise Pay", bg='#999999', font=('Times New Roman', 10), borderwidth=2)
-        RaisePayButton.place(relx=0.5, rely=0.6, relwidth=0.1, relheight=0.05)
+        raisePayButton = tk.Button(frame, text="Raise Pay", bg='#999999', font=('Times New Roman', 10), borderwidth=2)
+        raisePayButton.place(relx=0.5, rely=0.6, relwidth=0.1, relheight=0.05)
         dollarSign = tk.Label (frame, text = '$', font= ('Times New Roman', 12 ), bg="#e6e6e6")
         dollarSign.place(relx=0.0, rely=.6, relwidth=0.1, relheight=0.05 )
 
-        CloseStaffAccountButton= tk.Button(frame, text = "Close Staff Account" ,bg='#999999',font=('Times New Roman', 13))
-        CloseStaffAccountButton.place(relx=0.3, rely=0.8, relwidth=0.4, relheight=0.05)
+        closeStaffAccountButton= tk.Button(frame, text = "Close Staff Account" ,bg='#999999',font=('Times New Roman', 13))
+        closeStaffAccountButton.place(relx=0.3, rely=0.8, relwidth=0.4, relheight=0.05)
         
 
     # function to open signout window
