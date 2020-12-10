@@ -2,6 +2,7 @@
 import tkinter as tk
 from tkinter import font
 from startup import login_screen
+from delivery_operations import view_deliveries
 #from discussion_board_screen import DiscussionBoardScreen
 #NOTE: Ignore Discussion Board for now (Do not click on button) because it seems to be causing problems. Will try to fix ASAP.
 
