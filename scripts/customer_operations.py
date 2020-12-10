@@ -37,6 +37,52 @@ def add_to_cart(username, menu_item):
         save_db_changes(cur,cnx)
         return True
 
+def add_to_chef_discussion_board(customer, chef, message): # TODO: Daniel, implement this function
+    '''
+    customer: username of customer (guaranteed to match conditions)
+    chef: username of chef that customer wants to talk about in the message (not guaranteed to match conditions)
+    message: message that customer wants to add (not guaranteed to match conditions)
+    Output: Returns true/false if discussion is successfully added to DiscussionBoardForChefs
+    '''
+    # check stuff that is not guaranteed to match conditions (return False)
+
+    # if taboo words appear in the message...
+    # if taboo words appear more than 3 times (can be the same or different taboo words), increment number of warnings for customer by 1 using give_warning() from manager_operations, mark whole string with ***, add to table, and return True
+    # if taboo words appear 1 <= and <=3 (can be the same or different taboo words), increment number of warnings for customer by 1 using give_warning() from manager_operations, mark each taboo word as ***, add to table, and return True
+
+    # otherwise add to table and return True
+
+def add_to_menu_discussion_board(customer, menu_item, message): # TODO: Daniel, implement this function
+    '''
+    customer: username of customer (guaranteed to match conditions)
+    menu_item: menu item that customer wants to talk about in the message (not guaranteed to match conditions)
+    message: message that customer wants to add (not guaranteed to match conditions)
+    Output: Returns true/false if discussion is successfully added to DiscussionBoardForDishes
+    '''
+    # check stuff that is not guaranteed to match conditions (return False)
+
+    # if taboo words appear in the message...
+    # if taboo words appear more than 3 times (can be the same or different taboo words), increment number of warnings for customer by 1 using give_warning() from manager_operations, mark whole string with ***, add to table, and return True
+    # if taboo words appear 1 <= and <=3 (can be the same or different taboo words), increment number of warnings for customer by 1 using give_warning() from manager_operations, mark each taboo word as ***, add to table, and return True
+
+    # otherwise add to table and return True
+
+def add_to_delivery_discussion_board(customer, delivery_person, message): # TODO: Daniel, implement this function
+    '''
+    customer: username of customer (guaranteed to match conditions)
+    delivery_person: username of delivery person that customer wants to talk about in the message (not guaranteed to match conditions)
+    message: message that customer wants to add (not guaranteed to match conditions)
+    Output: Returns true/false if discussions is successfully added to DiscussionBoardForDelivery
+    '''
+
+    # check stuff that is not guaranteed to match conditions (return False)
+
+    # if taboo words appear in the message...
+    # if taboo words appear more than 3 times (can be the same or different taboo words), increment number of warnings for customer by 1 using give_warning() from manager_operations, mark whole string with ***, add to table, and return True
+    # if taboo words appear 1 <= and <=3 (can be the same or different taboo words), increment number of warnings for customer by 1 using give_warning() from manager_operations, mark each taboo word as ***, add to table, and return True
+
+    # otherwise add to table and return True
+
 def cart_total_price(username):
     '''
     username: username of customer
@@ -379,3 +425,11 @@ def vote_menu_item(username, menu_item, vote):
         cur.execute("INSERT INTO MenuVotes(item_name, cust_username, rating) VALUES (%s,%s,%s)", (menu_item, username, vote))
     save_db_changes(cur,cnx)
     return True
+
+def view_top_3_personal_dishes(username): # TODO: Daniel, implement this function
+    '''
+    username: username of customer (guaranteed to match conditions)
+    Output: Returns an array of the username's top 3 dishes using the OrderedItems table 
+    '''
+    # take first 3 entries that appear when selecting username from the table and ordering by the quantity descending
+    # if less than 3 entries appear then return as many entries as you can

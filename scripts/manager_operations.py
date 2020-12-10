@@ -253,3 +253,6 @@ def view_account_deregistrations():
     for x in acc_dereg:
         ad_str += (x[0]+" "+x[1]+"\n")
     return ad_str
+
+def view_taboo_words(): # TODO: Daniel, implement this function
+    ''' Output: Returns a string of all rows in the TabooWords table '''

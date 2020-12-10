@@ -17,7 +17,6 @@ from db_handling import connect_to_db, get_cursor, save_db_changes, close_db, by
 #         menu_list.append([x[0],imagefile, x[2], x[3], x[4]])
 #     return menu_list
 
-
 def search_menu(keyword): # TODO: Daniel, implement this function (use previous function to help you but delete it after you're done, we don't need it anymore)
     ''' Returns a string of name, image (using Tkinter syntax to include images), chef name, description, and price for all menu items on system that match the keyword '''
     # essentially: visually show all rows in the Menu DB where the keyword is in the array/JSON of the last column of Menu 
@@ -108,3 +107,16 @@ def view_my_complaints(username):
     # first you have to figure out what type of user they are by looking at Accounts table
     # once you figure out what type of user they are look in the respective tables (CustomerToCustomerComplaints, ChefComplaintsAndCompliments, DeliveryComplaintsAndCompliments, and other complaint tables that may exist)
     # TODO (for later): we might add more complaint tables in the future so deal with them here as well
+
+def view_menu_ratings(): # TODO: Daniel, implement this function
+    ''' Output: Returns a string of average ratings for each menu item using the MenuVotes table'''
+    ratings_str = 'Ratings for each menu item:\n'
+    return ratings_str
+
+def view_my_warnings(username): # TODO: Daniel, implement this function
+    ''' 
+    username: username of an RC, VC, chef, or delivery person (guaranteed to match conditions)
+    Output: Returns the number of warnings that the username has using the Accounts, CustomerAccounts, and EmployeeAccounts tables
+    '''
+    # have to check what type of user they are by looking at Accounts table
+    # based on the type of user they are look at the respective CustomerAccounts or EmployeeAccounts table and return the number of warnings they have

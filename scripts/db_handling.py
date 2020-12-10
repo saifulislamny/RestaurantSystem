@@ -41,7 +41,7 @@ def create_tables():
     cur.execute("CREATE TABLE AllowedVotes(vote_range TINYINT NOT NULL, PRIMARY KEY(vote_range))")
     cur.execute("INSERT INTO AllowedVotes VALUES (0),(1),(2),(3),(4),(5)")
     cur.execute("CREATE TABLE MenuVotes(item_name VARCHAR(50), cust_username VARCHAR(15), rating TINYINT NOT NULL, foreign key(rating) REFERENCES AllowedVotes(vote_range))")
-    cur.execute("CREATE TABLE MenuForVC(item_name VARCHAR(50), item_desc VARCHAR(150), price REAL)")
+    cur.execute("CREATE TABLE MenuForVC(item_name VARCHAR(50), item_desc VARCHAR(150), price REAL)") # TODO: Daniel, where is the chef name?
     cur.execute("CREATE TABLE CartItems(cust_username VARCHAR(15), item_name VARCHAR(50), quantity INT(3) DEFAULT 1, PRIMARY KEY(cust_username, item_name))")
     cur.execute("CREATE TABLE Deliveries(delivery_order_num INT AUTO_INCREMENT, cust_username VARCHAR(15), delivery_addr VARCHAR(256), items_ordered json, PRIMARY KEY(delivery_order_num))")
     cur.execute("CREATE TABLE Pickups(pickup_order_num INT AUTO_INCREMENT, cust_username VARCHAR(15), items_ordered json, PRIMARY KEY(pickup_order_num))")
@@ -55,10 +55,17 @@ def create_tables():
     cur.execute("CREATE TABLE DiscussionBoardForChefs(discussion_topic_num INT PRIMARY KEY, cust_username VARCHAR(15), chef_name VARCHAR(15), message VARCHAR(150))")
     cur.execute("CREATE TABLE DiscussionBoardForDishes(discussion_topic_num INT PRIMARY KEY, cust_username VARCHAR(15), menu_item VARCHAR(50), message VARCHAR(150))")
     cur.execute("CREATE TABLE DiscussionBoardForDelivery(discussion_topic_num INT PRIMARY KEY, cust_username VARCHAR(15), delivery_username VARCHAR(15), message VARCHAR(150))")
+
+    # TODO: Daniel, create a table TabooWords which stores all the taboo words in the system (make sure to add example taboo words in insert_random_table_entries() like BS, stupid, frick, and butt)
+    # the table has only one column with all the taboo words
+
     save_db_changes(cur,cnx)
 
 
 def insert_random_table_entries():
+
+    # TODO: Daniel, make sure that each table has a relevant number of entries
+
     cnx = connect_to_db()
     cur = get_cursor(cnx)
     cur.execute("INSERT INTO Accounts(username, password, full_name, type) VALUES ('barzy13', 'LGIbelmont4', 'Mat Barzal', 'RC')")
