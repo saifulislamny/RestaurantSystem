@@ -122,7 +122,7 @@ class ViewDeliveriesWindow:
         self.openIncompleteDelivWindow = tk.Toplevel(self.root)
         self.app = IncompleteDelivWindow(self.openIncompleteDelivWindow)
         
- class CompleteDelivWindow:
+class CompleteDelivWindow:
     # needs to be completed (return T or F if modifies row in Deliveries table)
     #def modifyRow(sefl, username, delivery_order_i)
 
