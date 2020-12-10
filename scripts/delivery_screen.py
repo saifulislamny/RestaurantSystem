@@ -256,6 +256,9 @@ class FileComplaintWindow:
 
         fileCompLabel = tk.Label(frame, text="You chose to file a complaint!", font=('Times New Roman', 16), bg="#e6e6e6")
         fileCompLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
+        
+        textBox = tk.Text(frame)
+        textBox.place(relx=0.05, rely=0.2, relwidth=0.9, relheight=0.7)
 
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
         signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.05)
@@ -277,6 +280,9 @@ class WriteComplimentWindow:
 
         writeComplimentLabel = tk.Label(frame, text="You chose to write a compliment!", font=('Times New Roman', 16), bg="#e6e6e6")
         writeComplimentLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
+        
+        textBox = tk.Text(frame)
+        textBox.place(relx=0.05, rely=0.2, relwidth=0.9, relheight=0.7)
 
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
         signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.05)
