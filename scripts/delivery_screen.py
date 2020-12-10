@@ -100,6 +100,26 @@ class ViewDeliveriesWindow:
 
         # TODO: Dante, "Find Customer" is not a feature. Did you mean "View Deliveries In Progress" or something similar? If so, use complete_delivery() and view_deliveries() from delivery_operations.py to fulfill this window (if they are already implemented)
 
+        
+     # relating to view deliveries   
+    def view_deliv_window(self):
+        self.openViewDelivWindow = tk.Toplevel(self.root)
+        self.app = ViewDelivWindow(self.openViewDelivWindow)
+        
+ class ViewDelivWindow:
+    def __init__(self, master):
+        self.root = master
+        canvas = tk.Canvas(self.root, height=700, width=800)
+        canvas.pack()
+
+        frame = tk.Frame(self.root, bg='#e6e6e6')
+        frame.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.8)
+        self.root.geometry("700x700")
+
+        #deliveries = ''.join(view_deliveries())
+        viewDeliveries_label = tk.Label(frame, text=str(view_deliveries()), font=('Times New Roman', 16), bg="#e6e6e6")
+        viewDeliveries_label.place(rely=0.45)
+        
 #class to show what appears after "View Personal Ratings" button pressed
 class ViewOwnRatingsWindow:
     def __init__(self, master,user):
