@@ -2,7 +2,7 @@
 import tkinter as tk
 from tkinter import font
 from startup import login_screen
-from delivery_operations import view_deliveries
+from delivery_operations import complete_delivery, view_deliveries, view_incomplete_deliveries
 #from discussion_board_screen import DiscussionBoardScreen
 #NOTE: Ignore Discussion Board for now (Do not click on button) because it seems to be causing problems. Will try to fix ASAP.
 
@@ -87,9 +87,14 @@ class ViewDeliveriesWindow:
         viewDeliveriesLabel = tk.Label(frame, text="You chose to view deliveries!", font=('Times New Roman', 16), bg="#e6e6e6")
         viewDeliveriesLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
         
+        completeDelivButton = tk.Button(frame, text="Complete delivery", bg='white', font=('Times New Roman', 14), borderwidth=2, command=self.complete_deliv_window)
+        completeDelivButton.place(relx=0.30, rely=0.3, relwidth=0.4, relheight=0.1)
         
         viewDelivButton = tk.Button(frame, text="View deliveries", bg='white', font=('Times New Roman', 14), borderwidth=2, command=self.view_deliv_window)
         viewDelivButton.place(relx=0.30, rely=0.5, relwidth=0.4, relheight=0.1)
+        
+        incompleteDelivButton = tk.Button(frame, text="View incomplete deliveries", bg='white', font=('Times New Roman', 14), borderwidth=2, command=self.incomplete_deliv_window)
+        incompleteDelivButton.place(relx=0.30, rely=0.7, relwidth=0.4, relheight=0.1)
 
 
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
@@ -102,12 +107,47 @@ class ViewDeliveriesWindow:
         # TODO: Dante, "Find Customer" is not a feature. Did you mean "View Deliveries In Progress" or something similar? If so, use complete_delivery() and view_deliveries() from delivery_operations.py to fulfill this window (if they are already implemented)
 
         
+     def complete_deliv_window(self):
+        self.openCompleteDelivWindow = tk.Toplevel(self.root)
+        self.app = CompleteDelivWindow(self.openCompleteDelivWindow)
+        
+        
      # relating to view deliveries   
     def view_deliv_window(self):
         self.openViewDelivWindow = tk.Toplevel(self.root)
         self.app = ViewDelivWindow(self.openViewDelivWindow)
         
- class ViewDelivWindow:
+    
+    def incomplete_deliv_window(self):
+        self.openIncompleteDelivWindow = tk.Toplevel(self.root)
+        self.app = IncompleteDelivWindow(self.openIncompleteDelivWindow)
+        
+ class CompleteDelivWindow:
+    # needs to be completed (return T or F if modifies row in Deliveries table)
+    #def modifyRow(sefl, username, delivery_order_i)
+
+    def __init__(self, master):
+        self.root = master
+        canvas = tk.Canvas(self.root, height=700, width=800)
+        canvas.pack()
+
+        frame = tk.Frame(self.root, bg='#e6e6e6')
+        frame.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.8)
+        self.root.geometry("700x700")
+
+
+        enter_delorderid_label = tk.Label(frame, text="Enter delivery order id:", font=('Times New Roman', 16), bg="#e6e6e6")
+        enter_delorderid_label.place(rely=0.2)
+
+        enter_delorderid_entry = tk.Entry(frame)
+        enter_delorderid_entry.place(relx=0.25, rely=0.2)
+        enter_delorderid_entry.focus_set()
+        
+        #submit button
+        #submit_delivIDbutton = tk.Button(frame, text="Add menu item", command=lambda: self.modifyRow((enter_delorderid_entry.get(), frame), font=('Times New Roman', 16), bg="#e6e6e6")
+        #submit_delivID_button.place(rely=0.6)
+        
+class ViewDelivWindow:
     def __init__(self, master):
         self.root = master
         canvas = tk.Canvas(self.root, height=700, width=800)
@@ -120,6 +160,27 @@ class ViewDeliveriesWindow:
         #deliveries = ''.join(view_deliveries())
         viewDeliveries_label = tk.Label(frame, text=str(view_deliveries()), font=('Times New Roman', 16), bg="#e6e6e6")
         viewDeliveries_label.place(rely=0.45)
+        
+class IncompleteDelivWindow:
+    def __init__(self, master):
+        self.root = master
+        canvas = tk.Canvas(self.root, height=700, width=800)
+        canvas.pack()
+
+        frame = tk.Frame(self.root, bg='#e6e6e6')
+        frame.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.8)
+        self.root.geometry("700x700")
+
+        #deliveries = ''.join(view_incomplete_deliveries())
+        IncompleteDeliveries_label = tk.Label(frame, text=str(view_incomplete_deliveries()), font=('Times New Roman', 16), bg="#e6e6e6")
+        IncompleteDeliveries_label.place(rely=0.45)
+
+     
+        
+        
+        
+        
+        
         
 #class to show what appears after "View Personal Ratings" button pressed
 class ViewOwnRatingsWindow:
