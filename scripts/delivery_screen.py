@@ -175,12 +175,8 @@ class IncompleteDelivWindow:
         IncompleteDeliveries_label = tk.Label(frame, text=str(view_incomplete_deliveries()), font=('Times New Roman', 16), bg="#e6e6e6")
         IncompleteDeliveries_label.place(rely=0.45)
 
-     
-        
-        
-        
-        
-        
+                           
+    
         
 #class to show what appears after "View Personal Ratings" button pressed
 class ViewOwnRatingsWindow:
@@ -196,6 +192,16 @@ class ViewOwnRatingsWindow:
 
         checkOwnRatingsLabel = tk.Label(frame, text="You chose to view own ratings!", font=('Times New Roman', 16), bg="#e6e6e6")
         checkOwnRatingsLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
+        
+        usER_Name_label = tk.Label(frame, text="Enter username:", font=('Times New Roman', 16), bg="#e6e6e6")
+        usER_Name_label.place(rely=0.2)
+
+        usER_Name_entry = tk.Entry(frame)
+        usER_Name_entry.place(relx=0.25, rely=0.2)
+        usER_Name_entry.focus_set()
+
+        
+        
 
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
         signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.05)
@@ -219,7 +225,15 @@ class ViewCompWindow:
 
         viewCompLabel = tk.Label(frame, text="You chose to view \ncompliments/complaints!", font=('Times New Roman', 16), bg="#e6e6e6")
         viewCompLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
+        
+        username_label = tk.Label(frame, text="Enter username:", font=('Times New Roman', 16), bg="#e6e6e6")
+        username_label.place(rely=0.35)
 
+        username_entry = tk.Entry(frame)
+        username_entry.place(relx=0.4, rely=0.35)
+        username_entry.focus_set()
+        
+        
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
         signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.05)
 
