@@ -85,6 +85,11 @@ class ViewDeliveriesWindow:
 
         viewDeliveriesLabel = tk.Label(frame, text="You chose to view deliveries!", font=('Times New Roman', 16), bg="#e6e6e6")
         viewDeliveriesLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
+        
+        
+        viewDelivButton = tk.Button(frame, text="View deliveries", bg='white', font=('Times New Roman', 14), borderwidth=2, command=self.view_deliv_window)
+        viewDelivButton.place(relx=0.30, rely=0.5, relwidth=0.4, relheight=0.1)
+
 
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
         signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.05)
