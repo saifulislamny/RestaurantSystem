@@ -21,6 +21,20 @@ Do this similarly for other view functions that you implemented
 
 ################################################## customer_operations.py ##################################################
 
+def complaints_for_customers(complainer, complained, complaint): 
+    # TODO: remember to check if the complainer is a VC because if they are then you should add two rows (instead of 1) since their complaints count twice as much
+
+def feedback_for_chef(username_of_customer, username_of_chef, complaint_or_compliment, feedback):
+    # TODO: remember that the TODO there that says for later can be done when everything else is done
+    # TODO: remember to check if the username_of_customer is a VC because if they are then you should add two rows (instead of 1) since their complaints count twice as much
+
 def feedback_for_delivery(username_of_customer, username_of_delivery, complaint_or_compliment, feedback):
-    # TODO (for later): Daniel, make sure delivery person actually made a delivery to customer before by checking Deliveries table (return false if no delivery was made)
+    # TODO (for later, when everything else is done): Daniel, make sure delivery person actually made a delivery to customer before by checking Deliveries table (return false if no delivery was made)
     # (for now we can assume managers will approve/disapprove and they will take care of this)
+
+    # TODO: remember to check if the complainer is a VC because if they are then you should add two rows (instead of 1) since their complaints count twice as much
+
+def make_order(username, delivery_or_pickup, address):
+    # TODO: you pass in strings into the update statements, will SQL be able to recognize that they are actually numbers and not strings? if not, then it will try to add a number with a string
+    # TODO: Daniel, you check if the total in the cart is more than $500 when you should actually be checking the total spent so far (found in the table)
+    # TODO: Daniel, you never check to see if they made more than 50 orders (if they have spent more than $500 so far OR have made 50 orders so far, then they are promoted to VC)

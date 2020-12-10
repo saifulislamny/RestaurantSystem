@@ -71,15 +71,16 @@ def view_menu():
     cur.execute("SELECT * FROM Menu")
     menu = cur.fetchall()
     menu_list = []
-    #menu_str = ''
+    # menu_str = ''
+    menu_str = 'Item name, chef name, description, and price\n'
     for x in menu:
-        imagefile = byte_to_imagefile(x[1])
-        menu_list.append([x[0],imagefile, x[2], x[3], x[4]])
-    return menu_list
+        # imagefile = byte_to_imagefile(x[1]) # insert later
+        menu_list.append([x[0], x[2], x[3], x[4]]) # image was taken away here
+    # return menu_list
     #all images are ready to be outputted using tkinter, their values are in x[1] 
-    #for x in menu_list:
-     #   menu_str += (x[0]+x[1]+x[2]+x[3]+x[4]+'\n\n')
-    #return menu_str
+    for x in menu_list:
+       menu_str += ("Item name: " + str(x[0])+ ", Chef name: " + str(x[1])+ ", Description:" + str(x[2])+ ", Price: " + str(x[3])+'\n\n')
+    return menu_str
 
 def view_my_complaints(username):
     '''

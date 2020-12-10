@@ -1,0 +1,9 @@
+1. Anytime you guys get stuck, refer to the example we did for "Add keyword" in Chef Screen. (look at AddDescWindow and especially keyword_add_successful function)
+
+2. Each function, should have only one submit button.
+
+3. user is passed in the __init__ function for each class (so you don't have to ask user for their own username 
+
+4. In db_handling.py, there are sample login info you can use in the first 11 lines of insert_random_table_entries()
+
+5. You have to import functions that you use from other files
