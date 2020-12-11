@@ -4,12 +4,12 @@ from tkinter import font
 from startup import login_screen
 from all_user_operations import view_menu
 from chef_operations import add_keyword, create_menu_item, delete_menu_item, view_menu_ratings_of_chef
-from scripts.discussion_board_operations import view_discussion_boards
+from discussion_board_operations import view_discussion_boards
 
 
-def main():
-    root = tk.Tk()
-    app = ChefScreen(root,"byrdeman")
+# def main():
+#     root = tk.Tk()
+#     app = ChefScreen(root,"byrdeman")
 
 #class to show what appears on the main screen of "Chef"
 class ChefScreen:
@@ -313,4 +313,4 @@ class DiscussionBoardScreen:
 
 # you can run the chef screen by running $ python3 chef_screen.py
 
-main()
+# main()

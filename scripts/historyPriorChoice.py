@@ -8,9 +8,9 @@ from tkinter import font
 # TODO: Dante, check these errors that I get with VSCode
 # TODO: Dante, add in-line documentation to show what each class/function does where it may not be immediately understood
 
-def main():
-    root = tk.Tk()
-    app = Window_History_Prior_Screen(root)
+# def main():
+#     root = tk.Tk()
+#     app = Window_History_Prior_Screen(root)
 
 class Window_History_Prior_Screen:
     def __init__(self,master):
@@ -48,6 +48,6 @@ class Window_History_Prior_Screen:
         self.openSignOutWindow = tk.Toplevel(self.root)
         self.app = signOutWindow(self.openSignOutWindow) # TODO: Dante, modify this
 
-main()
+# main()
 
 

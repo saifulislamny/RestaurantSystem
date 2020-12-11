@@ -27,7 +27,7 @@ def find_user_type(username):
 
     # function to open surfer window
 def surfer_window(root):
-    from scripts.surfer_screen import SurferScreen
+    from surfer_screen import SurferScreen
     canvas = tk.Canvas(root, height=700, width=800)
     canvas.pack()
 

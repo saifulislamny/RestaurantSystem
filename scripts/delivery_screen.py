@@ -8,9 +8,9 @@ from discussion_board_operations import view_discussion_boards
 
 
 
-def main():
-    root = tk.Tk()
-    app = DeliveryScreen(root,"littleCub18")
+# def main():
+#     root = tk.Tk()
+#     app = DeliveryScreen(root,"littleCub18")
 
 #class to show what appears on the main screen for "Delivery" people
 class DeliveryScreen:
@@ -399,4 +399,4 @@ class DiscussionBoardScreen:
 
 # you can run the Delivery Person screen by running $ python3 delivery_screen.py
 
-main()
+# main()

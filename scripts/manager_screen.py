@@ -5,9 +5,9 @@ from startup import login_screen
 from manager_operations import accept_customer_registrations, decline_customer_registrations, view_customer_registrations, view_account_deregistrations,view_customer_complaints_by_customers, view_chef_complaints_and_compliments, view_delivery_complaints_and_compliments, raise_employee_pay, cut_employee_pay, delete_account_as_manager, delete_account_as_manager, give_warning, view_taboo_words
 
 
-def main() :
-   root = tk.Tk()
-   app = ManagerScreen(root,"BrotherChicken")
+# def main() :
+#    root = tk.Tk()
+#    app = ManagerScreen(root,"BrotherChicken")
 
 #class to show what appears on the main screen of "Manager"
 class ManagerScreen:
@@ -676,4 +676,4 @@ class ViewCustDeregistrations:
       
 # you can run the Manager screen by running $ python3 manager_screen.py
 
-main()
+# main()
