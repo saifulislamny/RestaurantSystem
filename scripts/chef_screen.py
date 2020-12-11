@@ -312,9 +312,6 @@ class DiscussionBoardScreen:
     def sign_out_window(self):
         self.app = login_screen(self.root)
 
-        # TODO: Dante, this is part of a feature where chefs create menu items. Create menu items should be the box, not what you have right now.
-        # TODO: Dante, fulfill this window by using create_menu_item(), delete_menu_item(), update_menu_item() from chef_operations.py (if they are already implemented)
-
 
 
 # you can run the chef screen by running $ python3 chef_screen.py
