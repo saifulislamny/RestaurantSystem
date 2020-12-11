@@ -32,7 +32,7 @@ def view_top_3_rated_dishes():
     # in view_menu_ratings() you take the average ratings for all menu items so you can bring some of that implementation over here and take top 3 ratings
     cnx = connect_to_db()
     cur = get_cursor(cnx)
-    cur.execute("SELECT item_name FROM MenuVotes ORDER BY rating desc LIMIT 3")
+    cur.execute("SELECT item_name FROM MenuVotes GROUP BY (item_name) ORDER BY AVG(rating) desc LIMIT 3")
     top_3 = cur.fetchall()
     top_3_str = 'Top 3 highest rated dishes are:\n'
     for [x] in top_3:
