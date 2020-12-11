@@ -140,11 +140,20 @@ class CompleteDelivWindow:
         self.root.geometry("700x700")
 
 
+        enter_usernamee_label = tk.Label(frame, text="Enter username:", font=('Times New Roman', 16), bg="#e6e6e6")
+        enter_usernamee_label.place(rely=0.2)
+
+        enter_usernamee_entry = tk.Entry(frame)
+        enter_usernamee_entry.place(relx=0.25, rely=0.2)
+        enter_usernamee_entry.focus_set()
+        
+
+
         enter_delorderid_label = tk.Label(frame, text="Enter delivery order id:", font=('Times New Roman', 16), bg="#e6e6e6")
-        enter_delorderid_label.place(rely=0.2)
+        enter_delorderid_label.place(rely=0.4)
 
         enter_delorderid_entry = tk.Entry(frame)
-        enter_delorderid_entry.place(relx=0.25, rely=0.2)
+        enter_delorderid_entry.place(relx=0.25, rely=0.4)
         enter_delorderid_entry.focus_set()
         
         #submit button
