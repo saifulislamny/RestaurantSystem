@@ -101,8 +101,7 @@ class DishRatingWindow:
     def sign_out_window(self):
         self.app = login_screen(self.root)
 
-        # TODO: Dante, fulfill this window by using view_menu_ratings_of_chef() from chef_operations.py (if it's already implemented)
-#class to show what appears after "View Personal Dish Ratings" button pressed
+        
 class ViewCompWindow:
     def __init__(self, master,user):
         self.root = master
@@ -137,8 +136,7 @@ class ViewCompWindow:
     def sign_out_window(self):
         self.app = login_screen(self.root)
 
-        # TODO: Dante, fulfill this window by using view_menu_ratings_of_chef() from chef_operations.py (if it's already implemented)
-#class to show what appears after "View Menu" button pressed
+    
 class MenuWindow:
     
     def menu_add_successful(self, item_name, description, price, frame):
@@ -228,8 +226,7 @@ class MenuWindow:
     def sign_out_window(self):
         self.app = login_screen(self.root)
 
-        # TODO: Dante, fulfill this window by using view_menu() from all_user_operations.py (if it's already implemented)
-#class to show what appears after "Add food description/keyword" button pressed
+        
 class AddDescWindow:
     def keyword_add_successful(self, menu_item, keyword, frame):
         if add_keyword(menu_item, keyword) == True:
