@@ -9,7 +9,7 @@ from scripts.discussion_board_operations import view_discussion_boards
 
 def main():
     root = tk.Tk()
-    app = ChefScreen(root,"test2")
+    app = ChefScreen(root,"byrdeman")
 
 #class to show what appears on the main screen of "Chef"
 class ChefScreen:
