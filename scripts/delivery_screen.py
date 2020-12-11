@@ -147,6 +147,13 @@ class CompleteDelivWindow:
         #submit_delivIDbutton = tk.Button(frame, text="Add menu item", command=lambda: self.modifyRow((enter_delorderid_entry.get(), frame), font=('Times New Roman', 16), bg="#e6e6e6")
         #submit_delivID_button.place(rely=0.6)
         
+        signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
+        signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.05)
+
+    # function to open signout window
+    def sign_out_window(self):
+        self.app = login_screen(self.root)
+        
 class ViewDelivWindow:
     def __init__(self, master):
         self.root = master
