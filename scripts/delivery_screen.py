@@ -110,7 +110,7 @@ class ViewDeliveriesWindow:
     def sign_out_window(self):
         self.app = login_screen(self.root)
 
-        # TODO: Dante, "Find Customer" is not a feature. Did you mean "View Deliveries In Progress" or something similar? If so, use complete_delivery() and view_deliveries() from delivery_operations.py to fulfill this window (if they are already implemented)
+        
 
         
     def complete_deliv_window(self):
