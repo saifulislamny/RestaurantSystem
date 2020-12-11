@@ -631,8 +631,8 @@ class ViewCustDeregistrations:
         frame = tk.Frame(self.root, bg='#e6e6e6')
         frame.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.8)
 
-        viewDeregistration = tk.Label (frame, text = "View Customer Deregistration",font=('Times New Roman', 18),  bg="#e6e6e6")
-        viewDeregistration.place(relx=.25, rely=.05, relwidth=0.6, relheight=0.05)
+        viewDeregistration = tk.Label (frame, text = "View Customer Deregistration",font=('Times New Roman', 16),  bg="#e6e6e6")
+        viewDeregistration.place(relx=.20, rely=.05, relwidth=0.5, relheight=0.05)
 
         usernameEnter = tk.Label (frame, text = "Username", font=('Times New Roman', 12), bg="#e6e6e6")
         usernameEnter.place(relx=0.1, rely=0.20, relwidth=0.25, relheight=0.05)
