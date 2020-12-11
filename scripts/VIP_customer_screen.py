@@ -30,7 +30,7 @@ class VIPCustScreen:
         forVIPLabel = tk.Label(frame, text="VIP Customer", font=('Times New Roman', 20), bg="white")
         forVIPLabel.place(relx=0.05, rely=0.05, relwidth=0.6, relheight=0.1)
 
-        warningLabel = tk.Label(frame, text="Warnings: " + view_my_warnings(user),font=('Times New Roman', 16), bg="white")
+        warningLabel = tk.Label(frame, text="Warnings: " + str(view_my_warnings(user)),font=('Times New Roman', 16), bg="white")
         warningLabel.place(relx=0.05, rely=0.2, relwidth=0.3, relheight=0.07)
 
         orderButton = tk.Button(frame, text="Order Food", bg='white', font=('Times New Roman', 14), borderwidth=2, command=self.order_food_window)
