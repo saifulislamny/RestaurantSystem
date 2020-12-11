@@ -168,6 +168,14 @@ class ViewDelivWindow:
         viewDeliveries_label = tk.Label(frame, text=str(view_deliveries()), font=('Times New Roman', 16), bg="#e6e6e6")
         viewDeliveries_label.place(rely=0.45)
         
+        signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
+        signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.05)
+
+    # function to open signout window
+    def sign_out_window(self):
+        self.app = login_screen(self.root)
+                           
+        
 class IncompleteDelivWindow:
     def __init__(self, master):
         self.root = master
@@ -181,9 +189,14 @@ class IncompleteDelivWindow:
         #deliveries = ''.join(view_incomplete_deliveries())
         IncompleteDeliveries_label = tk.Label(frame, text=str(view_incomplete_deliveries()), font=('Times New Roman', 16), bg="#e6e6e6")
         IncompleteDeliveries_label.place(rely=0.45)
+        
+        signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
+        signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.05)
 
+    # function to open signout window
+    def sign_out_window(self):
+        self.app = login_screen(self.root)
                            
-    
         
 #class to show what appears after "View Personal Ratings" button pressed
 class ViewOwnRatingsWindow:
