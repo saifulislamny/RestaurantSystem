@@ -10,7 +10,7 @@ from discussion_board_operations import view_discussion_boards
 
 def main():
     root = tk.Tk()
-    app = DeliveryScreen(root,"test5")
+    app = DeliveryScreen(root,"littleCub18")
 
 #class to show what appears on the main screen for "Delivery" people
 class DeliveryScreen:
@@ -129,8 +129,14 @@ class ViewDeliveriesWindow:
         self.app = IncompleteDelivWindow(self.openIncompleteDelivWindow)
         
 class CompleteDelivWindow:
-    # needs to be completed (return T or F if modifies row in Deliveries table)
-    #def modifyRow(sefl, username, delivery_order_i)
+# needs to be completed (return T or F if modifies row in Deliveries table)
+    def completeDeliver(self, username, delivery_order_id, frame):
+        if complete_delivery(username, delivery_order_id) == True:
+            completeSucess = tk.Label(frame, text="Successful", font=('Times New Roman', 16), bg="#e6e6e6")
+            completeSucess.place(relx=0.3, rely=0.7)
+        else:
+            completeUnsucess = tk.Label(frame, text="Unsuccessful", font=('Times New Roman', 16), bg="#e6e6e6")
+            completeUnsucess.place(relx=0.3, rely=0.7)
 
     def __init__(self, master):
         self.root = master
@@ -141,35 +147,32 @@ class CompleteDelivWindow:
         frame.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.8)
         self.root.geometry("700x700")
 
+        enterUsernamelabel = tk.Label(frame,text ="Enter Username",font=('Times New Roman', 16) )
+        enterUsernamelabel.place(relx=0.1, rely=0.2)
 
-        enter_usernamee_label = tk.Label(frame, text="Enter username:", font=('Times New Roman', 16), bg="#e6e6e6")
-        enter_usernamee_label.place(rely=0.2)
 
-        enter_usernamee_entry = tk.Entry(frame)
-        enter_usernamee_entry.place(relx=0.25, rely=0.2)
-        enter_usernamee_entry.focus_set()
-        
+        enterUsernameEntry = tk.Entry(frame, font=('Times New Roman', 16)  )
+        enterUsernameEntry.place (relx = 0.1, rely= 0.25, relwidth = 0.5, relheight= 0.05)
 
 
         enter_delorderid_label = tk.Label(frame, text="Enter delivery order id:", font=('Times New Roman', 16), bg="#e6e6e6")
-        enter_delorderid_label.place(rely=0.4)
+        enter_delorderid_label.place(relx=0.1, rely=0.4)
 
-        enter_delorderid_entry = tk.Entry(frame)
-        enter_delorderid_entry.place(relx=0.25, rely=0.4)
+        enter_delorderid_entry = tk.Entry(frame, font=('Times New Roman', 16),)
+        enter_delorderid_entry.place(relx=0.1, rely=0.45)
         enter_delorderid_entry.focus_set()
         
-        #submit button
-        #submit_delivIDbutton = tk.Button(frame, text="Add menu item", command=lambda: self.modifyRow((enter_delorderid_entry.get(), frame), font=('Times New Roman', 16), bg="#e6e6e6")
-        #submit_delivID_button.place(rely=0.6)
+        
+        submit_delivIDbutton = tk.Button(frame, text="Submit", command=lambda: self.completeDeliver(enterUsernameEntry.get(),enter_delorderid_entry.get(), frame), font=('Times New Roman', 18), bg="#52a2fe")
+        submit_delivIDbutton.place(relx=0.3,rely=0.55, relwidth= 0.2, relheight= 0.1)
         
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
         signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.05)
 
-     
-
     # function to open signout window
     def sign_out_window(self):
         self.app = login_screen(self.root)
+      
         
 class ViewDelivWindow:
     def __init__(self, master):
