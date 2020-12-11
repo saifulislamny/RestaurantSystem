@@ -32,6 +32,7 @@ def add_keyword(menu_item, keyword):
         cur.execute("UPDATE Menu SET keywords = JSON_ARRAY_APPEND(keywords,'$',%s) WHERE item_name = %s", (keyword, menu_item))
         save_db_changes(cur,cnx)
         return True
+add_keyword('Cappuccino', 'coffee')
     
 def create_menu_item(item_name, username_of_chef, description, price): 
     '''
