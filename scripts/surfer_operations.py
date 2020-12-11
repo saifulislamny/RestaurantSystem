@@ -26,3 +26,9 @@ def surfer_apply_for_registered_customer(username, password, deposit):
         save_db_changes(cur,cnx)
         return True
 surfer_apply_for_registered_customer('grogu','babyo',50)
+
+def view_top_3_rated_dishes(): # TODO: Daniel, implement this function
+    ''' Output: Returns a string of the top 3 rated dishes by using MenuVotes table '''
+    # in view_menu_ratings() you take the average ratings for all menu items so you can bring some of that implementation over here and take top 3 ratings
+    top_3_str = 'Top 3 highest rated dishes are:\n'
+    return top_3_str

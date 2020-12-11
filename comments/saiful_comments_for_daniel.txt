@@ -18,6 +18,7 @@ Do this similarly for other view functions that you implemented
 
 * For later (when you have nothing else to do): to the best of your ability, try to make sure your implementations are correct for each function
 
+* Make sure in all the files you worked with none of the functions are left unimplemented
 
 ################################################## customer_operations.py ##################################################
 
@@ -38,3 +39,4 @@ def make_order(username, delivery_or_pickup, address):
     # TODO: you pass in strings into the update statements, will SQL be able to recognize that they are actually numbers and not strings? if not, then it will try to add a number with a string
     # TODO: Daniel, you check if the total in the cart is more than $500 when you should actually be checking the total spent so far (found in the table)
     # TODO: Daniel, you never check to see if they made more than 50 orders (if they have spent more than $500 so far OR have made 50 orders so far, then they are promoted to VC)
+
