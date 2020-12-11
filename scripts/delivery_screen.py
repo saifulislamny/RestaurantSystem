@@ -223,7 +223,7 @@ class IncompleteDelivWindow:
         
 #class to show what appears after "View Personal Ratings" button pressed
 class ViewOwnRatingsWindow:
- def viewDeliveryRating(self, username ,frame):
+    def viewDeliveryRating(self, username ,frame):
         if view_ratings_of_delivery_person (username) == True:
             rateDeliverysuccess = tk.Label(frame, text="Successful", font=('Times New Roman', 16), bg="#e6e6e6")
             rateDeliverysuccess.place(relx=0.3, rely=0.7)
@@ -265,7 +265,7 @@ class ViewOwnRatingsWindow:
 
         
 class ViewCompWindow:
-def ViewComplaints(self, username, frame):
+    def ViewComplaints(self, username, frame):
         if view_my_complaints(username) == True:
             complaints_success = tk.Label(frame, text="Successful", font=('Times New Roman', 16), bg="#e6e6e6")
             complaints_success.place(relx=0.3, rely=0.7)
