@@ -254,5 +254,13 @@ def view_account_deregistrations():
         ad_str += (x[0]+" "+x[1]+"\n")
     return ad_str
 
-def view_taboo_words(): # TODO: Daniel, implement this function
+def view_taboo_words():
     ''' Output: Returns a string of all rows in the TabooWords table '''
+    cnx = connect_to_db()
+    cur = get_cursor(cnx)
+    cur.execute("SELECT * FROM TabooWords")
+    taboo = cur.fetchall()
+    tbo_str = ''
+    for [x] in taboo:
+        tbo_str += (x+"\n")
+    return tbo_str
