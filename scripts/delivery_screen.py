@@ -154,11 +154,7 @@ class CompleteDelivWindow:
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
         signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.05)
 
-        backButton = tk.Button(frame, text="Home", bg="white", font=('Times New Roman', 14), borderwidth=2, command=self.home_window)
-        backButton.place(relx=0.05, rely=0.05, relwidth=0.1, relheight=0.05)
-    # function to return to home screen
-    def home_window(self):
-        self.app = DeliveryScreen(self.root,self.user)
+     
 
     # function to open signout window
     def sign_out_window(self):
@@ -181,11 +177,7 @@ class ViewDelivWindow:
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
         signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.05)
 
-        backButton = tk.Button(frame, text="Home", bg="white", font=('Times New Roman', 14), borderwidth=2, command=self.home_window)
-        backButton.place(relx=0.05, rely=0.05, relwidth=0.1, relheight=0.05)
-    # function to return to home screen
-    def home_window(self):
-        self.app = DeliveryScreen(self.root,self.user)
+        
 
     # function to open signout window
     def sign_out_window(self):
@@ -209,11 +201,6 @@ class IncompleteDelivWindow:
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
         signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.05)
 
-        backButton = tk.Button(frame, text="Home", bg="white", font=('Times New Roman', 14), borderwidth=2, command=self.home_window)
-        backButton.place(relx=0.05, rely=0.05, relwidth=0.1, relheight=0.05)
-    # function to return to home screen
-    def home_window(self):
-        self.app = DeliveryScreen(self.root,self.user)
 
     # function to open signout window
     def sign_out_window(self):
