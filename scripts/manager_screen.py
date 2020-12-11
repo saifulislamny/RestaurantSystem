@@ -5,8 +5,6 @@ from startup import login_screen
 from manager_operations import accept_customer_registrations, decline_customer_registrations, view_customer_registrations, view_account_deregistrations,view_customer_complaints_by_customers, view_chef_complaints_and_compliments, view_delivery_complaints_and_compliments, raise_employee_pay, cut_employee_pay, delete_account_as_manager, delete_account_as_manager, give_warning, view_taboo_words
 
 
-# TODO: Dante, check these errors that I get with VSCode
-
 def main() :
    root = tk.Tk()
    app = ManagerScreen(root,"BrotherChicken")
@@ -96,8 +94,7 @@ class ManagerScreen:
     def deliveryComplainComplimentWindow(self):
         self.app = DeliveryComplainCompliment(self.root, self.user)
 
-         
-         
+                
 
 #class to show what appears after "Check Complaints/Compliments" button pressed
 class CheckReviewsWindow:
@@ -174,7 +171,6 @@ class CustComplainCust:
         self.app = ManagerScreen(self.root,self.user)
 
 
-
 class ChefComplainCompliment:
     def __init__(self, master,user):
         self.root = master
@@ -225,7 +221,6 @@ class DeliveryComplainCompliment:
     # function to return to home screen
     def home_window(self):
         self.app = ManagerScreen(self.root,self.user)
-
 
 
 class RegisterSurferWindow:
@@ -282,8 +277,7 @@ class RegisterSurferWindow:
     def sign_out_window(self):
         self.app = login_screen(self.root)
       
-     
-
+   
 
 #class to show what appears after "Manage Customers" button pressed
 class ManageCustWindow:
@@ -437,7 +431,6 @@ class ManageStaffWindow:
     # function to open signout window
     def sign_out_window(self):
         self.app = login_screen(self.root)
-
 
          
          
@@ -663,8 +656,7 @@ class ViewCustDeregistrations:
       
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
         signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.05)
-      
-     
+       
     
     # function to open signout window
     def sign_out_window(self):
@@ -675,8 +667,7 @@ class ViewCustDeregistrations:
     def home_window(self):
         self.app = ManagerScreen(self.root,self.user)
       
- 
- 
+
       
 # you can run the Manager screen by running $ python3 manager_screen.py
 
