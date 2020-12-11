@@ -223,7 +223,17 @@ class IncompleteDelivWindow:
         
 #class to show what appears after "View Personal Ratings" button pressed
 class ViewOwnRatingsWindow:
+ def viewDeliveryRating(self, username ,frame):
+        if view_ratings_of_delivery_person (username) == True:
+            rateDeliverysuccess = tk.Label(frame, text="Successful", font=('Times New Roman', 16), bg="#e6e6e6")
+            rateDeliverysuccess.place(relx=0.3, rely=0.7)
+        else:
+            rateDeliveryunsuccess = tk.Label(frame, text="Unsuccessful", font=('Times New Roman', 16), bg="#e6e6e6")
+            rateDeliveryunsuccess.place(relx=0.3, rely=0.7)
+
+            
     def __init__(self, master,user):
+
         self.root = master
         self.user = user
         canvas = tk.Canvas(self.root, height=700, width=800)
@@ -240,28 +250,30 @@ class ViewOwnRatingsWindow:
         usER_Name_label.place(rely=0.2)
 
         usER_Name_entry = tk.Entry(frame)
-        usER_Name_entry.place(relx=0.25, rely=0.2)
+        usER_Name_entry.place(relx=0.1, rely=0.25, relwidth= 0.5, relheight= 0.05)
         usER_Name_entry.focus_set()
 
-        
-        
+        user_NAME_Submit = tk.Button(frame, text =" Submit", bg='#999999', font=('Times New Roman', 10), borderwidth=2, command = lambda: self.viewDeliveryRating(usER_Name_entry.get() ,frame) )
+        user_NAME_Submit.place(relx=0.3, rely=0.4, relwidth= 0.2, relheight= 0.06) 
 
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
         signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.05)
-
-        backButton = tk.Button(frame, text="Home", bg="white", font=('Times New Roman', 14), borderwidth=2, command=self.home_window)
-        backButton.place(relx=0.05, rely=0.05, relwidth=0.1, relheight=0.05)
-    # function to return to home screen
-    def home_window(self):
-        self.app = DeliveryScreen(self.root,self.user)
 
     # function to open signout window
     def sign_out_window(self):
         self.app = login_screen(self.root)
 
-        # TODO: Dante, fulfill this window by using view_ratings_of_delivery_person() from delivery_operations.py (if it is already implemented)
-#class to show what appears after "View Compliments/Complaints" button pressed
+        
 class ViewCompWindow:
+def ViewComplaints(self, username, frame):
+        if view_my_complaints(username) == True:
+            complaints_success = tk.Label(frame, text="Successful", font=('Times New Roman', 16), bg="#e6e6e6")
+            complaints_success.place(relx=0.3, rely=0.7)
+        else:
+            complaints_unsuccess = tk.Label(frame, text="Unsuccessful", font=('Times New Roman', 16), bg="#e6e6e6")
+            complaints_unsuccess.place(relx=0.3, rely=0.7)
+
+
     def __init__(self, master,user):
         self.root = master
         self.user = user
@@ -279,22 +291,20 @@ class ViewCompWindow:
         username_label.place(rely=0.35)
 
         username_entry = tk.Entry(frame)
-        username_entry.place(relx=0.4, rely=0.35)
+        username_entry.place(relx=0.2, rely=0.4, relwidth=.5, relheight=0.05)
         username_entry.focus_set()
+
+        submit_buttonRate = tk.Button(frame, text =" Submit", bg='#999999', font=('Times New Roman', 10), borderwidth=2, command = lambda: self.ViewComplaints(username_entry.get() ,frame))
+        submit_buttonRate.place(relx=0.4, rely=0.5, relwidth=0.2, relheight=0.05)
         
         
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
         signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.05)
 
-        backButton = tk.Button(frame, text="Home", bg="white", font=('Times New Roman', 14), borderwidth=2, command=self.home_window)
-        backButton.place(relx=0.05, rely=0.05, relwidth=0.1, relheight=0.05)
-    # function to return to home screen
-    def home_window(self):
-        self.app = DeliveryScreen(self.root,self.user)
-
     # function to open signout window
     def sign_out_window(self):
         self.app = login_screen(self.root)
+
 
 
 #class to show what appears after "File Complaint" button pressed
