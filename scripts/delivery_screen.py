@@ -2,8 +2,10 @@
 import tkinter as tk
 from tkinter import font
 from startup import login_screen
-from delivery_operations import complete_delivery, view_deliveries, view_incomplete_deliveries
-from scripts.discussion_board_operations import view_discussion_boards
+from delivery_operations import complete_delivery, view_deliveries, view_incomplete_deliveries, view_ratings_of_delivery_person
+from all_user_operations import view_my_complaints
+from discussion_board_operations import view_discussion_boards
+
 
 
 def main():
