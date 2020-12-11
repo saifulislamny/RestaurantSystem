@@ -20,7 +20,7 @@ class ChefScreen:
         canvas.pack()
 
         frame = tk.Frame(self.root, bg='#e6e6e6')
-        frame.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.8)
+        frame.place(relx=0.1, rely=0.1, relwidth=0.85, relheight=0.8)
 
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2, command=self.sign_out_window)
         signOutButton.place(relx=0.7, rely=0.05, relwidth=0.25, relheight=0.1)
@@ -165,7 +165,7 @@ class MenuWindow:
         canvas.pack()
 
         frame = tk.Frame(self.root, bg='#e6e6e6')
-        frame.place(relx=0.1, rely=0.1, relwidth=0.85, relheight=0.9)
+        frame.place(relx=0.1, rely=0.1, relwidth=0.85, relheight=0.8)
         self.root.geometry("700x700")
 
         menuLabel = tk.Label(frame, text="You chose to open to view menu!", font=('Times New Roman', 16), bg="#e6e6e6")
