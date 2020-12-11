@@ -2,16 +2,16 @@
 import tkinter as tk
 from tkinter import font
 from startup import login_screen
-from scripts.all_user_operations import view_menu, view_my_complaints
-from scripts.customer_operations import view_deposit, increase_deposit, feedback_for_delivery, feedback_for_chef, \
+from all_user_operations import view_menu, view_my_complaints, view_my_warnings
+from customer_operations import view_deposit, increase_deposit, feedback_for_delivery, feedback_for_chef, \
     complaints_for_customers
-from scripts.discussion_board_operations import view_discussion_boards
-from scripts.surfer_operations import view_top_3_rated_dishes
+from discussion_board_operations import view_discussion_boards
+from surfer_operations import view_top_3_rated_dishes
 
 
-def main():
-    root = tk.Tk()
-    app = VIPCustScreen(root,"jmish51")
+# def main():
+#     root = tk.Tk()
+#     app = VIPCustScreen(root,"jmish51")
 
 #class to show what appears on the main screen of "VIP Customer"
 class VIPCustScreen:
@@ -30,7 +30,7 @@ class VIPCustScreen:
         forVIPLabel = tk.Label(frame, text="VIP Customer", font=('Times New Roman', 20), bg="white")
         forVIPLabel.place(relx=0.05, rely=0.05, relwidth=0.6, relheight=0.1)
 
-        warningLabel = tk.Label(frame, text="Warnings:",font=('Times New Roman', 16), bg="white")
+        warningLabel = tk.Label(frame, text="Warnings: " + view_my_warnings(user),font=('Times New Roman', 16), bg="white")
         warningLabel.place(relx=0.05, rely=0.2, relwidth=0.3, relheight=0.07)
 
         orderButton = tk.Button(frame, text="Order Food", bg='white', font=('Times New Roman', 14), borderwidth=2, command=self.order_food_window)
@@ -861,7 +861,7 @@ class DiscussionBoardScreen:
     def sign_out_window(self):
         self.app = login_screen(self.root)
 
-main()
+# main()
 
 
 # you can run the VIP Customer screen by running $ python3 VIP_customer_screen.py

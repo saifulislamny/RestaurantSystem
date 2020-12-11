@@ -5,9 +5,9 @@ from startup import login_screen
 from manager_operations import accept_customer_registrations, decline_customer_registrations, view_customer_registrations, view_account_deregistrations,view_customer_complaints_by_customers, view_chef_complaints_and_compliments, view_delivery_complaints_and_compliments, raise_employee_pay, cut_employee_pay, delete_account_as_manager, delete_account_as_manager, give_warning, view_taboo_words
 
 
-def main() :
-   root = tk.Tk()
-   app = ManagerScreen(root,"BrotherChicken")
+# def main() :
+#    root = tk.Tk()
+#    app = ManagerScreen(root,"BrotherChicken")
 
 #class to show what appears on the main screen of "Manager"
 class ManagerScreen:
@@ -342,7 +342,7 @@ class ManageCustWindow:
 #class to show what appears after "Manage Staffs" button pressed
 class ManageStaffWindow:
     def payDecrease(self, username, decrement,frame):
-        if cut_employee_pay(self.user,decrement) == True:
+        if cut_employee_pay(username,int(decrement)) == True:
             cutsuccess = tk.Label(frame, text="Successful", font=('Times New Roman', 16), bg="#e6e6e6")
             cutsuccess.place(relx=0.3, rely=0.7)
         else:
@@ -350,7 +350,7 @@ class ManageStaffWindow:
             cutunsuccessful.place(relx=0.3, rely=0.7)
 
     def payRaise(self, username, increment,frame):
-        if raise_employee_pay(self.user,increment) == True:
+        if raise_employee_pay(username,int(increment)) == True:
             raisesuccess = tk.Label(frame, text="Successful", font=('Times New Roman', 16), bg="#e6e6e6")
             raisesuccess.place(relx=0.3, rely=0.7)
         else:
@@ -394,11 +394,14 @@ class ManageStaffWindow:
         staffName.place(relx=0.1, rely=0.2)
         enterStaffName = tk.Entry (frame, font = 20)
         enterStaffName.place (relx=0.1, rely=0.25, relwidth=0.45, relheight=0.05 )
+        enterStaffName.focus_set()
       
         staffPayCut = tk.Label(frame, text="Enter Amount to Cut Pay", font=('Times New Roman', 11), bg="#e6e6e6")
         staffPayCut.place(relx=0.1, rely=0.4)
         enterPayCut = tk.Entry (frame, font = 20)
         enterPayCut.place (relx=0.1, rely=0.45, relwidth=0.3, relheight=0.05 )
+        enterPayCut.focus_set()
+
 
         cutPayButton = tk.Button(frame, text="Cut Pay", bg='#999999', font=('Times New Roman', 10), borderwidth=2, command = lambda: self.payDecrease(enterStaffName.get(),enterPayCut.get(),frame) )
         cutPayButton.place(relx=0.5, rely=0.45, relwidth=0.1, relheight=0.05)
@@ -409,6 +412,8 @@ class ManageStaffWindow:
         staffPayRaiseField.place(relx=0.1, rely=0.55)
         enterPayRaiseField = tk.Entry (frame, font = 10)
         enterPayRaiseField.place (relx=0.1, rely=0.6, relwidth=0.3, relheight=0.05 )
+        enterPayRaiseField.focus_set()
+
 
         raisePayButton = tk.Button(frame, text="Raise Pay", bg='#999999', font=('Times New Roman', 10), borderwidth=2, command=lambda: self.payRaise( enterStaffName.get(),enterPayRaiseField.get(), frame))
         raisePayButton.place(relx=0.5, rely=0.6, relwidth=0.1, relheight=0.05)
@@ -671,4 +676,4 @@ class ViewCustDeregistrations:
       
 # you can run the Manager screen by running $ python3 manager_screen.py
 
-main()
+# main()

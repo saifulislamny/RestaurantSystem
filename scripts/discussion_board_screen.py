@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import font
 from startup import login_screen
 
-from scripts.discussion_board_operations import view_discussion_boards
+from discussion_board_operations import view_discussion_boards
 
 # def main():
 #     root = tk.Tk()

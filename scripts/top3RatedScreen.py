@@ -7,9 +7,9 @@ from tkinter import font
 # TODO: Dante, check these errors that I get with VSCode
 # TODO: Dante, add in-line documentation to show what each class/function does where it may not be immediately understood
 
-def main():
-    root = tk.Tk()
-    app = Window_Top3_Screen(root)
+# def main():
+#     root = tk.Tk()
+#     app = Window_Top3_Screen(root)
 
 class Window_Top3_Screen: # TODO: Dante, link the buttons on Registered Customers and VIP Customers screens to this window
     def __init__(self,master):
@@ -51,4 +51,4 @@ class Window_Top3_Screen: # TODO: Dante, link the buttons on Registered Customer
         hr3.place(relx=0.05, rely=0.65, relwidth=0.1, relheight=0.05)
 
         self.root.mainloop()
-main()
+# main()

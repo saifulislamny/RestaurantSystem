@@ -3,8 +3,8 @@ import tkinter as tk
 from tkinter import font
 from startup import login_screen
 
-from scripts.all_user_operations import view_menu
-from scripts.surfer_operations import surfer_apply_for_registered_customer, view_top_3_rated_dishes
+from all_user_operations import view_menu
+from surfer_operations import surfer_apply_for_registered_customer, view_top_3_rated_dishes
 
 
 # def main():

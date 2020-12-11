@@ -8,9 +8,9 @@ from discussion_board_operations import view_discussion_boards
 
 
 
-def main():
-    root = tk.Tk()
-    app = DeliveryScreen(root,"littleCub18")
+# def main():
+#     root = tk.Tk()
+#     app = DeliveryScreen(root,"littleCub18")
 
 #class to show what appears on the main screen for "Delivery" people
 class DeliveryScreen:
@@ -110,7 +110,7 @@ class ViewDeliveriesWindow:
     def sign_out_window(self):
         self.app = login_screen(self.root)
 
-        # TODO: Dante, "Find Customer" is not a feature. Did you mean "View Deliveries In Progress" or something similar? If so, use complete_delivery() and view_deliveries() from delivery_operations.py to fulfill this window (if they are already implemented)
+        
 
         
     def complete_deliv_window(self):
@@ -434,4 +434,4 @@ class DiscussionBoardScreen:
 
 # you can run the Delivery Person screen by running $ python3 delivery_screen.py
 
-main()
+# main()
