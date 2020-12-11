@@ -128,11 +128,17 @@ def complaints_for_customers(complainer, complained, complaint):
     cur = get_cursor(cnx)
     cur.execute("SELECT username FROM CustomerAccounts WHERE username = '%s'" %complained)
     cmpld = cur.fetchall()
+    cur.exexute("SELECT type FROM Accounts WHERE username = '%s'" %complainer)
+    acc_type = cur.fetchone()[0]
     if(len(cmpld)==0):
         return False
     if(len(complaint)>150):
         complaint = complaint[:150]
-    cur.execute("INSERT INTO CustomerToCustomerComplaints VALUES (%s,%s,%s)", (complainer, complained, complaint))
+    if(acc_type=='RC'):
+        cur.execute("INSERT INTO CustomerToCustomerComplaints VALUES (%s,%s,%s)", (complainer, complained, complaint))
+    else:
+        cur.execute("INSERT INTO CustomerToCustomerComplaints VALUES (%s,%s,%s)", (complainer, complained, complaint))
+        cur.execute("INSERT INTO CustomerToCustomerComplaints VALUES (%s,%s,%s)", (complainer, complained, complaint))
     save_db_changes(cur,cnx)
     return True
     
@@ -209,13 +215,23 @@ def feedback_for_delivery(username_of_customer, username_of_delivery, complaint_
     if(len(username_of_delivery)>15):
         return False
     cur.execute("SELECT username FROM Accounts WHERE type = 'D' AND username = '%s'" %username_of_delivery)
-    chef = cur.fetchall()
-    if(len(chef)==0):
+    deliv = cur.fetchall()
+    cur.exexute("SELECT type FROM Accounts WHERE username = '%s'" %username_of_customer)
+    acc_type = cur.fetchone()[0]
+    cur.execute("SELECT cust_username FROM Deliveries WHERE cust_username = %s AND delivery_username = %s", (username_of_customer,username_of_delivery))
+    ordered = cur.fetchall()
+    if(len(deliv)==0):
+        return False
+    elif(len(ordered)==0):
         return False
     else:
         if(len(feedback)>150):
             feedback = feedback[:150]
-        cur.execute("INSERT INTO DeliveryComplaintsAndCompliments(delivery_username, cust_username, type_of_feedback, feedback) VALUES (%s,%s,%s,%s)", (username_of_delivery, username_of_customer, complaint_or_compliment, feedback))
+        if(acc_type == 'RC'):
+            cur.execute("INSERT INTO DeliveryComplaintsAndCompliments(delivery_username, cust_username, type_of_feedback, feedback) VALUES (%s,%s,%s,%s)", (username_of_delivery, username_of_customer, complaint_or_compliment, feedback))
+        else:
+            cur.execute("INSERT INTO DeliveryComplaintsAndCompliments(delivery_username, cust_username, type_of_feedback, feedback) VALUES (%s,%s,%s,%s)", (username_of_delivery, username_of_customer, complaint_or_compliment, feedback))
+            cur.execute("INSERT INTO DeliveryComplaintsAndCompliments(delivery_username, cust_username, type_of_feedback, feedback) VALUES (%s,%s,%s,%s)", (username_of_delivery, username_of_customer, complaint_or_compliment, feedback))
         save_db_changes(cur,cnx)
         return True
     # no need to check if arguments are properly passed in for complaint_or_compliment (assume you're always given proper values for this parameter)
@@ -290,7 +306,11 @@ def make_order(username, delivery_or_pickup, address):
     cur.execute("Update CustomerAccounts SET total_spents = total_spents + %s WHERE username = %s", (total_cart, username))
     cur.execute("Update CustomerAccounts SET total_num_orders = total_num_orders + 1 WHERE username = '%s'" %username)
     # to modify rows in Accounts and CustomerAccounts: if they username is an RC (check Accounts table), and have spent more than $500 or made more than 50 orders (check CustomerAccounts table), upgrade them to VC by modifying rows in Accounts and CustomerAccounts
-    if(total_cart > 500):
+    cur.execute("SELECT total_spents FROM CustomerAccount WHERE username = '%s'" %username)
+    total_spent = cur.fetchone()[0]
+    cur.execute("SELECT total_num_orders FROM CustomerAccount WHERE username = '%s'" %username)
+    num_orders = cur.fetchone()[0]
+    if(total_spent > 500 or num_orders > 50):
         cur.execute("UPDATE Accounts SET type = 'VC' WHERE username = '%s'" %username)
     # delete all rows that match username from CartItem table since all items in the cart have been dealt with accordingly and delivery order has been made
 
@@ -409,6 +429,7 @@ def vote_menu_item(username, menu_item, vote):
         return False
     # if the username has never ordered the item before, then return false (check by looking at OrderedItems table)
 
+
     cur.execute("SELECT item_name FROM OrderedItems WHERE cust_username = '%s'" %username)
     order = cur.fetchall()
     order_list = []
@@ -426,10 +447,19 @@ def vote_menu_item(username, menu_item, vote):
     save_db_changes(cur,cnx)
     return True
 
-def view_top_3_personal_dishes(username): # TODO: Daniel, implement this function
+def view_top_3_personal_dishes(username):
     '''
     username: username of customer (guaranteed to match conditions)
     Output: Returns an array of the username's top 3 dishes using the OrderedItems table 
     '''
     # take first 3 entries that appear when selecting username from the table and ordering by the quantity descending
     # if less than 3 entries appear then return as many entries as you can
+    cnx = connect_to_db()
+    cur = get_cursor(cnx)
+    cur.execute("SELECT item_name FROM OrderedItems WHERE cust_username = '%s' ORDER BY quantity desc LIMIT 3" %username)
+    top_3 = cur.fetchall()
+    top_3_list = []
+    for [x] in top_3:
+        top_3_list.append(x)
+    return top_3_list
+
