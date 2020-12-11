@@ -17,7 +17,7 @@ from db_handling import connect_to_db, get_cursor, save_db_changes, close_db, by
 #         menu_list.append([x[0],imagefile, x[2], x[3], x[4]])
 #     return menu_list
 
-def search_menu(keyword): # TODO: Daniel, implement this function (use previous function to help you but delete it after you're done, we don't need it anymore)
+def search_menu(keyword): 
     ''' Returns a string of name, image (using Tkinter syntax to include images), chef name, description, and price for all menu items on system that match the keyword '''
     # essentially: visually show all rows in the Menu DB where the keyword is in the array/JSON of the last column of Menu 
     cnx = connect_to_db()
@@ -30,6 +30,7 @@ def search_menu(keyword): # TODO: Daniel, implement this function (use previous 
     cleaned_list = []
     for x in keywords:  
         key_list.append(x)
+   # print(key_list)
     menu_list = []
     for y in range(len(key_list)):
         key = key_list[y][1]
@@ -38,16 +39,16 @@ def search_menu(keyword): # TODO: Daniel, implement this function (use previous 
            key = key.replace(x, '')
         key = key.split(',')
         cleaned_list.append([key_list[y][0],key])
-    for x in (range(len(cleaned_list))):
-        if(keyword in cleaned_list[x][1]):
+    for y in (range(len(cleaned_list))):
+        if(keyword in cleaned_list[y][1]):
+            print(keyword)
+            print(cleaned_list[y][1])
             cur.execute("SELECT * FROM Menu WHERE item_name = '%s'" %cleaned_list[y][0])
             menu = cur.fetchall()
             for x in menu:
                 imagefile = byte_to_imagefile(x[1])
                 menu_list.append([x[0],imagefile, x[2], x[3], x[4]])
     return menu_list
-
-print(search_menu('bab'))
 
 
 
@@ -108,15 +109,34 @@ def view_my_complaints(username):
     # once you figure out what type of user they are look in the respective tables (CustomerToCustomerComplaints, ChefComplaintsAndCompliments, DeliveryComplaintsAndCompliments, and other complaint tables that may exist)
     # TODO (for later): we might add more complaint tables in the future so deal with them here as well
 
-def view_menu_ratings(): # TODO: Daniel, implement this function
+def view_menu_ratings():
     ''' Output: Returns a string of average ratings for each menu item using the MenuVotes table'''
+    cnx = connect_to_db()
+    cur = get_cursor(cnx)
+    cur.execute("SELECT item_name, rating FROM MenuVotes")
+    mv = cur.fetchall()
     ratings_str = 'Ratings for each menu item:\n'
+    for x in mv:
+        ratings_str += (x[0]+" "+str(x[1])+"\n")
     return ratings_str
 
-def view_my_warnings(username): # TODO: Daniel, implement this function
+def view_my_warnings(username): 
     ''' 
     username: username of an RC, VC, chef, or delivery person (guaranteed to match conditions)
     Output: Returns the number of warnings that the username has using the Accounts, CustomerAccounts, and EmployeeAccounts tables
     '''
+    cnx = connect_to_db()
+    cur = get_cursor(cnx)
+    cur.execute("SELECT type FROM Accounts WHERE username = '%s'" %username)
+    acc_type = cur.fetchone()[0]
+    if(acc_type == 'RC' or acc_type == 'VC'):
+        cur.execute("SELECT num_of_warnings FROM CustomerAccounts WHERE username = '%s'" %username)
+        warning = cur.fetchone()[0]
+    else:
+        cur.execute("SELECT num_of_warnings FROM EmployeeAccounts WHERE username = '%s'" %username)
+        warning = cur.fetchone()[0]
+    return warning
     # have to check what type of user they are by looking at Accounts table
     # based on the type of user they are look at the respective CustomerAccounts or EmployeeAccounts table and return the number of warnings they have
+
+
