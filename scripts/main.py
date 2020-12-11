@@ -10,7 +10,7 @@ def startup():
     root = tk.Tk()
     startUpAnimation(root)
     # Play time for animation screen transition into login screen
-    root.after(3000, lambda: login_screen(root))
+    root.after(5000, lambda: login_screen(root))
     root.mainloop()
     pass
 

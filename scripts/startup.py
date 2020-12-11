@@ -25,6 +25,18 @@ def find_user_type(username):
     usrType = cur.fetchone()[0]
     return usrType
 
+    # function to open surfer window
+def surfer_window(root):
+    from scripts.surfer_screen import SurferScreen
+    canvas = tk.Canvas(root, height=700, width=800)
+    canvas.pack()
+
+    frame = tk.Frame(root, bg='#e6e6e6')
+    frame.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.8)
+    root.geometry("700x700")
+    app = SurferScreen(root)
+
+
 def login_screen(root): 
     canvas = tk.Canvas(root)
     canvas.pack()
@@ -32,19 +44,19 @@ def login_screen(root):
     frame.place(relheight=0.9, relwidth=0.9, relx=0.05, rely=0.05)
     root.geometry("500x500")
     username_label = tk.Label(frame, text="Username:")
-    username_label.pack()
+    username_label.place(relx=0.3, rely=0.25, relwidth=0.15, relheight=0.07)
     username_entry = tk.Entry(frame)
-    username_entry.pack()
+    username_entry.place(relx=0.3, rely=0.35, relwidth=0.3, relheight=0.07)
     username_entry.focus_set()
     password_label = tk.Label(frame, text="Password:")
-    password_label.pack()
+    password_label.place(relx=0.3, rely=0.45, relwidth=0.15, relheight=0.07)
     password_entry = tk.Entry(frame)
-    password_entry.pack()
+    password_entry.place(relx=0.3, rely=0.55, relwidth=0.3, relheight=0.07)
     password_entry.focus_set()
     login_button = tk.Button(frame, text="Login", bg='white',command=lambda: check_user(username_entry.get(),password_entry.get(),username_entry.get()))
-    login_button.pack()
-    surfer_button = tk.Button(frame, text="View as Surfer", bg='white') # TODO (for later): Dante, link this button the Surfer Screen
-    surfer_button.pack()
+    login_button.place(relx=0.4, rely=0.65, relwidth=0.1, relheight=0.07)
+    surfer_button = tk.Button(frame, text="View as Surfer", bg='white',command=lambda: surfer_window(root))
+    surfer_button.place(relx=0.35, rely=0.72, relwidth=0.2, relheight=0.07)
 
     # TODO: organize elements above
 

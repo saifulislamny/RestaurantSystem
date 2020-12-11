@@ -3,14 +3,12 @@ import tkinter as tk
 from tkinter import font
 from startup import login_screen
 from delivery_operations import complete_delivery, view_deliveries, view_incomplete_deliveries
-#from discussion_board_screen import DiscussionBoardScreen
-#NOTE: Ignore Discussion Board for now (Do not click on button) because it seems to be causing problems. Will try to fix ASAP.
+from scripts.discussion_board_operations import view_discussion_boards
 
-# TODO: Dante, check these errors that I get with VSCode
 
-# def main():
-#     root = tk.Tk()
-#     app = DeliveryScreen(root,"test5")
+def main():
+    root = tk.Tk()
+    app = DeliveryScreen(root,"test5")
 
 #class to show what appears on the main screen for "Delivery" people
 class DeliveryScreen:
@@ -32,10 +30,10 @@ class DeliveryScreen:
         viewDeliveriesButton = tk.Button(frame, text="View Deliveries", bg='white', font=('Times New Roman', 14), borderwidth=2, command=self.view_deliveries_window)
         viewDeliveriesButton.place(relx=0.15, rely=0.3, relwidth=0.3, relheight=0.1)
 
-        viewOwnRatingButton = tk.Button(frame, text="View Personal Ratings", bg='white', font=('Times New Roman', 14), borderwidth=2, command=self.view_own_rating_window)
+        viewOwnRatingButton = tk.Button(frame, text="View Personal Ratings", bg='white', font=('Times New Roman', 10), borderwidth=2, command=self.view_own_rating_window)
         viewOwnRatingButton.place(relx=0.15, rely=0.5, relwidth=0.3, relheight=0.1)
 
-        viewCompButton = tk.Button(frame, text="View Compliments/Complaints", bg='white', font=('Times New Roman', 12), borderwidth=2, command=self.view_comp_window)
+        viewCompButton = tk.Button(frame, text="View Compliments/Complaints", bg='white', font=('Times New Roman', 10), borderwidth=2, command=self.view_comp_window)
         viewCompButton.place(relx=0.15, rely=0.7, relwidth=0.3, relheight=0.1)
 
         fileComplaintButton = tk.Button(frame, text="File Complaint", bg='white', font=('Times New Roman', 14), borderwidth=2, command=self.file_complaint_window)
@@ -100,6 +98,12 @@ class ViewDeliveriesWindow:
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
         signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.05)
 
+        backButton = tk.Button(frame, text="Home", bg="white", font=('Times New Roman', 14), borderwidth=2, command=self.home_window)
+        backButton.place(relx=0.05, rely=0.05, relwidth=0.1, relheight=0.05)
+    # function to return to home screen
+    def home_window(self):
+        self.app = DeliveryScreen(self.root,self.user)
+
     # function to open signout window
     def sign_out_window(self):
         self.app = login_screen(self.root)
@@ -150,6 +154,12 @@ class CompleteDelivWindow:
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
         signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.05)
 
+        backButton = tk.Button(frame, text="Home", bg="white", font=('Times New Roman', 14), borderwidth=2, command=self.home_window)
+        backButton.place(relx=0.05, rely=0.05, relwidth=0.1, relheight=0.05)
+    # function to return to home screen
+    def home_window(self):
+        self.app = DeliveryScreen(self.root,self.user)
+
     # function to open signout window
     def sign_out_window(self):
         self.app = login_screen(self.root)
@@ -170,6 +180,12 @@ class ViewDelivWindow:
         
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
         signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.05)
+
+        backButton = tk.Button(frame, text="Home", bg="white", font=('Times New Roman', 14), borderwidth=2, command=self.home_window)
+        backButton.place(relx=0.05, rely=0.05, relwidth=0.1, relheight=0.05)
+    # function to return to home screen
+    def home_window(self):
+        self.app = DeliveryScreen(self.root,self.user)
 
     # function to open signout window
     def sign_out_window(self):
@@ -192,6 +208,12 @@ class IncompleteDelivWindow:
         
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
         signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.05)
+
+        backButton = tk.Button(frame, text="Home", bg="white", font=('Times New Roman', 14), borderwidth=2, command=self.home_window)
+        backButton.place(relx=0.05, rely=0.05, relwidth=0.1, relheight=0.05)
+    # function to return to home screen
+    def home_window(self):
+        self.app = DeliveryScreen(self.root,self.user)
 
     # function to open signout window
     def sign_out_window(self):
@@ -226,6 +248,12 @@ class ViewOwnRatingsWindow:
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
         signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.05)
 
+        backButton = tk.Button(frame, text="Home", bg="white", font=('Times New Roman', 14), borderwidth=2, command=self.home_window)
+        backButton.place(relx=0.05, rely=0.05, relwidth=0.1, relheight=0.05)
+    # function to return to home screen
+    def home_window(self):
+        self.app = DeliveryScreen(self.root,self.user)
+
     # function to open signout window
     def sign_out_window(self):
         self.app = login_screen(self.root)
@@ -257,6 +285,12 @@ class ViewCompWindow:
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
         signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.05)
 
+        backButton = tk.Button(frame, text="Home", bg="white", font=('Times New Roman', 14), borderwidth=2, command=self.home_window)
+        backButton.place(relx=0.05, rely=0.05, relwidth=0.1, relheight=0.05)
+    # function to return to home screen
+    def home_window(self):
+        self.app = DeliveryScreen(self.root,self.user)
+
     # function to open signout window
     def sign_out_window(self):
         self.app = login_screen(self.root)
@@ -283,6 +317,12 @@ class FileComplaintWindow:
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
         signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.05)
 
+        backButton = tk.Button(frame, text="Home", bg="white", font=('Times New Roman', 14), borderwidth=2, command=self.home_window)
+        backButton.place(relx=0.05, rely=0.05, relwidth=0.1, relheight=0.05)
+    # function to return to home screen
+    def home_window(self):
+        self.app = DeliveryScreen(self.root,self.user)
+
     # function to open signout window
     def sign_out_window(self):
         self.app = login_screen(self.root)
@@ -307,14 +347,45 @@ class WriteComplimentWindow:
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
         signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.05)
 
+        backButton = tk.Button(frame, text="Home", bg="white", font=('Times New Roman', 14), borderwidth=2, command=self.home_window)
+        backButton.place(relx=0.05, rely=0.05, relwidth=0.1, relheight=0.05)
+    # function to return to home screen
+    def home_window(self):
+        self.app = DeliveryScreen(self.root,self.user)
+
     # function to open signout window
     def sign_out_window(self):
         self.app = login_screen(self.root)
+#class to show what appears on the main screen of "Discussion Board"
+class DiscussionBoardScreen:
+    def __init__(self,master,user):
+        self.root=master
+        self.user=user
+        self.root.geometry("800x800")
+        frame = tk.Frame(self.root, bg='#e6e6e6')
+        frame.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.8)
 
+        signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2, command=self.sign_out_window)
+        signOutButton.place(relx=0.7, rely=0.05, relwidth=0.25, relheight=0.1)
+
+        discussionBoardLabel = tk.Label(frame, text="Discussion Board", font=('Times New Roman', 16), bg="white")
+        discussionBoardLabel.place(relx=0.35, rely=0.1, relwidth=0.3, relheight=0.1)
+
+        textAreaLabel = tk.Label(frame,text=view_discussion_boards(), font=('Times New Roman', 12), bg="white",wraplength=250)
+        textAreaLabel.place(relx=0.05, rely=0.2, relwidth=0.9, relheight=0.7)
+
+        backButton = tk.Button(frame, text="Home", bg="white", font=('Times New Roman', 14), borderwidth=2,command=self.home_window)
+        backButton.place(relx=0.05, rely=0.05, relwidth=0.1, relheight=0.05)
+
+    # function to return to home screen
+    def home_window(self):
+        self.app = DeliveryScreen(self.root, self.user)
+# function to open signout window
+    def sign_out_window(self):
+        self.app = login_screen(self.root)
     
 # TODO: Hafsa,
-# look through the specifications.docx (in the repo) from start to end, and identify all the buttons that Dante missed out on for the Delivery Person screen
-# let him know what buttons he has to add by specifying in the hafsa_comments_for_dante.txt file (in the repo, comments/hafsa_comments_for_dante.txt).
+
 # you can run the Delivery Person screen by running $ python3 delivery_screen.py
 
-# main()
+main()

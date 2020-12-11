@@ -15,7 +15,7 @@ def surfer_apply_for_registered_customer(username, password, deposit):
     if(len(username)>15 or len(username)<1):
         return False
     # if password does not match conditions in Accounts table, then return false
-    elif(len(password)>15 or len(password < 1)):
+    elif(len(password)>15 or len(password) < 1):
         return False
     # if deposit is not a positive number, then return false
     elif(deposit < 0):
@@ -25,7 +25,7 @@ def surfer_apply_for_registered_customer(username, password, deposit):
         cur.execute("INSERT INTO CustomerRegistrations(cust_username, password, amt_of_deposit) VALUES (%s,%s,%s)", (username, password, deposit))
         save_db_changes(cur,cnx)
         return True
-surfer_apply_for_registered_customer('grogu','babyo',50)
+#surfer_apply_for_registered_customer('grogu','babyo',50)
 
 def view_top_3_rated_dishes(): # TODO: Daniel, implement this function
     ''' Output: Returns a string of the top 3 rated dishes by using MenuVotes table '''

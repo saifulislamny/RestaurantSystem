@@ -5,9 +5,9 @@ from startup import login_screen
 
 # TODO: Dante, check these errors that I get with VSCode
 
-# def main() :
-#    root = tk.Tk()
-#    app = ManagerScreen(root,"hello321")
+def main() :
+   root = tk.Tk()
+   app = ManagerScreen(root,"BrotherChicken")
 
 #class to show what appears on the main screen of "Manager"
 class ManagerScreen:
@@ -84,11 +84,17 @@ class CheckReviewsWindow:
         frame = tk.Frame(self.root, bg='#e6e6e6')
         frame.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.8)
 
-        checkReviewsLabel = tk.Label(frame, text=self.user, font=('Times New Roman', 20), bg="#e6e6e6")
+        checkReviewsLabel = tk.Label(frame, text="Compliments/Complaints", font=('Times New Roman', 16), bg="#e6e6e6")
         checkReviewsLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
 
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
         signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.05)
+
+        backButton = tk.Button(frame, text="Home", bg="white", font=('Times New Roman', 14), borderwidth=2, command=self.home_window)
+        backButton.place(relx=0.05, rely=0.05, relwidth=0.1, relheight=0.05)
+    # function to return to home screen
+    def home_window(self):
+        self.app = ManagerScreen(self.root,self.user)
 
     # function to open signout window
     def sign_out_window(self):
@@ -107,7 +113,7 @@ class RegisterSurferWindow:
         frame.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.8)
         self.root.geometry("700x700")
 
-        registerSurferLabel = tk.Label(frame, text="You chose to view registrations!", font=('Times New Roman', 19), bg="#e6e6e6")
+        registerSurferLabel = tk.Label(frame, text="Registrations", font=('Times New Roman', 19), bg="#e6e6e6")
         registerSurferLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
 
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
@@ -124,7 +130,12 @@ class RegisterSurferWindow:
 
         viewAccountDeregistrations = tk.Button(frame, text="View Customer Deregistration", bg='#999999', font=('Times New Roman', 12), borderwidth=2)
         viewAccountDeregistrations.place(relx=0.3, rely=0.5, relwidth=0.4, relheight=0.05)
-        
+
+        backButton = tk.Button(frame, text="Home", bg="white", font=('Times New Roman', 14), borderwidth=2, command=self.home_window)
+        backButton.place(relx=0.05, rely=0.05, relwidth=0.1, relheight=0.05)
+    # function to return to home screen
+    def home_window(self):
+        self.app = ManagerScreen(self.root,self.user)
 
     # function to open signout window
     def sign_out_window(self):
@@ -142,7 +153,7 @@ class ManageCustWindow:
         frame.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.8)
         self.root.geometry("700x700")
 
-        manageCustLabel = tk.Label(frame, text="You chose to manage customers!", font=('Times New Roman', 14), bg="#e6e6e6")
+        manageCustLabel = tk.Label(frame, text="Manage Customer", font=('Times New Roman', 14), bg="#e6e6e6")
         manageCustLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
 
         #customerNameField = tk.Entry(frame)
@@ -163,7 +174,12 @@ class ManageCustWindow:
 
         getCustomerNameButton = tk.Button(frame, text="Close Account", bg='#999999', font=('Times New Roman', 10), borderwidth=2)
         getCustomerNameButton.place(relx=0.3, rely=0.5, relwidth=0.3, relheight=0.05)
-        
+
+        backButton = tk.Button(frame, text="Home", bg="white", font=('Times New Roman', 14), borderwidth=2, command=self.home_window)
+        backButton.place(relx=0.05, rely=0.05, relwidth=0.1, relheight=0.05)
+    # function to return to home screen
+    def home_window(self):
+        self.app = ManagerScreen(self.root,self.user)
 
     # function to open signout window
     def sign_out_window(self):
@@ -181,7 +197,7 @@ class ManageStaffWindow:
         frame.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.8)
         self.root.geometry("700x700")
 
-        manageStaffLabel = tk.Label(frame, text="You chose to manage staffs!", font=('Times New Roman', 14), bg="#e6e6e6")
+        manageStaffLabel = tk.Label(frame, text="Manage Staff", font=('Times New Roman', 14), bg="#e6e6e6")
         manageStaffLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
 
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
@@ -216,7 +232,12 @@ class ManageStaffWindow:
 
         closeStaffAccountButton= tk.Button(frame, text = "Close Staff Account" ,bg='#999999',font=('Times New Roman', 13))
         closeStaffAccountButton.place(relx=0.3, rely=0.8, relwidth=0.4, relheight=0.05)
-        
+
+        backButton = tk.Button(frame, text="Home", bg="white", font=('Times New Roman', 14), borderwidth=2, command=self.home_window)
+        backButton.place(relx=0.05, rely=0.05, relwidth=0.1, relheight=0.05)
+    # function to return to home screen
+    def home_window(self):
+        self.app = ManagerScreen(self.root,self.user)
 
     # function to open signout window
     def sign_out_window(self):
@@ -235,19 +256,23 @@ class TabooListWindow:
         frame.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.8)
         self.root.geometry("700x700")
 
-        tabooListLabel = tk.Label(frame, text=self.user, font=('Times New Roman', 14), bg="#e6e6e6")
+        tabooListLabel = tk.Label(frame, text="Taboo List", font=('Times New Roman', 14), bg="#e6e6e6")
         tabooListLabel.place(relx=0.2, rely=0.1, relwidth=0.6, relheight=0.1)
 
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
         signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.05)
 
+        backButton = tk.Button(frame, text="Home", bg="white", font=('Times New Roman', 14), borderwidth=2, command=self.home_window)
+        backButton.place(relx=0.05, rely=0.05, relwidth=0.1, relheight=0.05)
+    # function to return to home screen
+    def home_window(self):
+        self.app = ManagerScreen(self.root,self.user)
+
     # function to open signout window
     def sign_out_window(self):
         self.app = login_screen(self.root)
 
-# TODO: Tanzil,
-# look through the specifications.docx (in the repo) from start to end, and identify all the buttons that Dante missed out on for the Manager screen
-# let him know what buttons he has to add by specifying in the tanzil_comments_for_dante.txt file (in the repo, comments/tanzil_comments_for_dante.txt).
+
 # you can run the Manager screen by running $ python3 manager_screen.py
 
-# main()
+main()

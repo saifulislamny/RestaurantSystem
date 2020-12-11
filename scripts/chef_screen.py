@@ -4,14 +4,12 @@ from tkinter import font
 from startup import login_screen
 from all_user_operations import view_menu
 from chef_operations import add_keyword, create_menu_item, delete_menu_item, view_menu_ratings_of_chef
-#from discussion_board_screen import DiscussionBoardScreen
-#NOTE: Ignore Discussion Board for now (Do not click on button) because it seems to be causing problems. Will try to fix ASAP.
+from scripts.discussion_board_operations import view_discussion_boards
 
-# TODO: Dante, check these errors that I get with VSCode
 
-# def main():
-#     root = tk.Tk()
-#     app = ChefScreen(root,"test2")
+def main():
+    root = tk.Tk()
+    app = ChefScreen(root,"test2")
 
 #class to show what appears on the main screen of "Chef"
 class ChefScreen:
@@ -30,16 +28,16 @@ class ChefScreen:
         chefLabel = tk.Label(frame, text="Chef", font=('Times New Roman', 20), bg="white")
         chefLabel.place(relx=0.05, rely=0.05, relwidth=0.6, relheight=0.1)
 
-        dishRatingButton = tk.Button(frame, text="View Personal Dish Ratings", bg='white', font=('Times New Roman', 12), borderwidth=2, command=self.dish_rating_window)
+        dishRatingButton = tk.Button(frame, text="View Personal Dish Ratings", bg='white', font=('Times New Roman', 10), borderwidth=2, command=self.dish_rating_window)
         dishRatingButton.place(relx=0.35, rely=0.25, relwidth=0.3, relheight=0.1)
 
-        viewCompButton = tk.Button(frame, text="View Compliments/Complaints", bg='white', font=('Times New Roman', 12), borderwidth=2, command=self.view_comp_window)
+        viewCompButton = tk.Button(frame, text="View Compliments/Complaints", bg='white', font=('Times New Roman', 10), borderwidth=2, command=self.view_comp_window)
         viewCompButton.place(relx=0.35, rely=0.4, relwidth=0.3, relheight=0.1)
 
         menuButton = tk.Button(frame, text="View Menu", bg='white', font=('Times New Roman', 14), borderwidth=2, command=self.menu_window)
         menuButton.place(relx=0.35, rely=0.55, relwidth=0.3, relheight=0.1)
 
-        addDescButton = tk.Button(frame, text="Add food \ndescription/keyword", bg='white', font=('Times New Roman', 14), borderwidth=2, command=self.add_desc_window)
+        addDescButton = tk.Button(frame, text="Add food \ndescription/keyword", bg='white', font=('Times New Roman', 12), borderwidth=2, command=self.add_desc_window)
         addDescButton.place(relx=0.35, rely=0.7, relwidth=0.3, relheight=0.1)
 
         DiscussionBoardButton = tk.Button(frame, text="Discussion Board", bg='white', font=('Times New Roman', 14), borderwidth=2, command=self.disc_board_window)
@@ -93,6 +91,12 @@ class DishRatingWindow:
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
         signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.05)
 
+        backButton = tk.Button(frame, text="Home", bg="white", font=('Times New Roman', 14), borderwidth=2, command=self.home_window)
+        backButton.place(relx=0.05, rely=0.05, relwidth=0.1, relheight=0.05)
+    # function to return to home screen
+    def home_window(self):
+        self.app = ChefScreen(self.root,self.user)
+
     # function to open signout window
     def sign_out_window(self):
         self.app = login_screen(self.root)
@@ -120,9 +124,14 @@ class ViewCompWindow:
         chef_username_entry.place(relx=0.4, rely=0.35)
         chef_username_entry.focus_set()
 
-
         signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18), borderwidth=2,command=self.sign_out_window)
         signOutButton.place(relx=0.75, rely=0.05, relwidth=0.2, relheight=0.05)
+
+        backButton = tk.Button(frame, text="Home", bg="white", font=('Times New Roman', 14), borderwidth=2, command=self.home_window)
+        backButton.place(relx=0.05, rely=0.05, relwidth=0.1, relheight=0.05)
+    # function to return to home screen
+    def home_window(self):
+        self.app = ChefScreen(self.root,self.user)
 
     # function to open signout window
     def sign_out_window(self):
@@ -209,7 +218,11 @@ class MenuWindow:
         menu_label = tk.Label(frame, text=str(view_menu()), font=('Times New Roman', 16), bg="#e6e6e6")
         menu_label.place(rely=0.67)
 
-
+        backButton = tk.Button(frame, text="Home", bg="white", font=('Times New Roman', 14), borderwidth=2, command=self.home_window)
+        backButton.place(relx=0.05, rely=0.05, relwidth=0.1, relheight=0.05)
+    # function to return to home screen
+    def home_window(self):
+        self.app = ChefScreen(self.root,self.user)
 
     # function to open signout window
     def sign_out_window(self):
@@ -260,6 +273,40 @@ class AddDescWindow:
         keyword_button = tk.Button(frame, text="Submit keyword", command=lambda: self.keyword_add_successful(menu_item_entry.get(),keyword_entry.get(), frame), font=('Times New Roman', 16), bg="#e6e6e6")
         keyword_button.place(rely=0.4)
 
+        backButton = tk.Button(frame, text="Home", bg="white", font=('Times New Roman', 14), borderwidth=2, command=self.home_window)
+        backButton.place(relx=0.05, rely=0.05, relwidth=0.1, relheight=0.05)
+    # function to return to home screen
+    def home_window(self):
+        self.app = ChefScreen(self.root,self.user)
+
+    # function to open signout window
+    def sign_out_window(self):
+        self.app = login_screen(self.root)
+
+# class to show what appears on the main screen of "Discussion Board"
+class DiscussionBoardScreen:
+    def __init__(self, master, user):
+        self.root = master
+        self.user = user
+        self.root.geometry("800x800")
+        frame = tk.Frame(self.root, bg='#e6e6e6')
+        frame.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.8)
+
+        signOutButton = tk.Button(frame, text="Sign Out", bg='#999999', font=('Times New Roman', 18),borderwidth=2, command=self.sign_out_window)
+        signOutButton.place(relx=0.7, rely=0.05, relwidth=0.25, relheight=0.1)
+
+        discussionBoardLabel = tk.Label(frame, text="Discussion Board", font=('Times New Roman', 16),bg="white")
+        discussionBoardLabel.place(relx=0.35, rely=0.1, relwidth=0.3, relheight=0.1)
+
+        textAreaLabel = tk.Label(frame, text=view_discussion_boards(), font=('Times New Roman', 12), bg="white",wraplength=250)
+        textAreaLabel.place(relx=0.05, rely=0.2, relwidth=0.9, relheight=0.7)
+
+        backButton = tk.Button(frame, text="Home", bg="white", font=('Times New Roman', 14), borderwidth=2,command=self.home_window)
+        backButton.place(relx=0.05, rely=0.05, relwidth=0.1, relheight=0.05)
+
+    # function to return to home screen
+    def home_window(self):
+        self.app = ChefScreen(self.root, self.user)
 
     # function to open signout window
     def sign_out_window(self):
@@ -269,9 +316,7 @@ class AddDescWindow:
         # TODO: Dante, fulfill this window by using create_menu_item(), delete_menu_item(), update_menu_item() from chef_operations.py (if they are already implemented)
 
 
-# TODO: Hafsa,
-# look through the specifications.docx (in the repo) from start to end, and identify all the buttons that Dante missed out on for the Chef screen
-# let him know what buttons he has to add by specifying in the hafsa_comments_for_dante.txt file (in the repo, comments/hafsa_comments_for_dante.txt).
+
 # you can run the chef screen by running $ python3 chef_screen.py
 
-#main()
+main()
